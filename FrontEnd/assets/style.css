@@ -135,6 +135,7 @@ body {
   margin: auto;
   font-family: 'Work Sans', sans-serif;
   font-size: 14px;
+  background: #E5E5E5;
 }
 
 h2 {
@@ -336,46 +337,51 @@ main {
 }
 #contact > * {
   text-align: center;
-}/*
+}
+/*
 #contact h2 {
   margin-bottom: 0px;
 }*/
+
 #contact form {
-  text-align: left;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 #contact input {
   height: 50px;
-  font-size: 1.2em;
   border: none;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  font-size: 1.2em;
 }
+
 #contact label {
-  margin: 38px 0 7px 0;
   font-family: "work-sans";
   font-size: 14px;
   font-weight: 500;
+  margin: 38px 0 7px 0;
 }
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"] {
+input[type="submit"] {
+  width: 180px;
+  background-color: #1d6154;
+  border: none;
+  border-radius: 60px;
+  color: white;
+  font-size: 14px;
   font-family: "Syne";
   font-weight: 700;
-  color: white;
-  background-color: #1d6154;
   margin: 2.5em auto;
-  width: 180px;
-  text-align: center;
-  border-radius: 60px;
+  text-align: center; 
 }
+
 #contact input[type="submit"]:active {
-  color: white;
   background-color: #000000;
+  color: white;
 }
 
 
@@ -386,4 +392,52 @@ footer nav ul {
   margin: 2em;
 }
 
- /*Partie login*/
+/*Partie login*/
+
+.form {
+  background: #E5E5E5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .input {
+  display: flex;
+  flex-direction: column;
+  margin: 2px 0px 30px 0px;
+  padding: 5px;
+  
+}
+
+input[type="password"],  input[type="email"] {
+  height: 51px;
+  width: 379px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+}
+
+label {
+  background: #E5E5E5;
+  font-family: "work sans";
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 7px;
+
+}
+
+::placeholder {
+  background: #ffffff;
+}
+h3 {
+  color: #1d6154;
+  font-family: "syne";
+  font-size: 30px;
+  font-weight: 700;
+}
+
+a {
+  color: #3D3D3D;
+  text-align: center;
+}
