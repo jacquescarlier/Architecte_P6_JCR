@@ -133,16 +133,17 @@ table {
 body {
   max-width: 1140px;
   margin: auto;
-  font-family: "Work Sans";
+  font-family: 'Work Sans', sans-serif;
   font-size: 14px;
 }
 
 h2 {
-  font-family: "Syne";
+  font-family: 'Syne', sans-serif;
   font-weight: 700;
   font-size: 30px;
   color: #1d6154;
 }
+
 
 /* header */
 header {
@@ -154,16 +155,20 @@ header {
 h1 {
   display: flex;
   flex-direction: column;
-  font-family: "Syne";
+  font-family: "Syne", sans-serif;
   font-size: 22px;
   font-weight: 800;
   color: #b1663c;
+  
 }
 
 h1 > span {
-  font-family: "Work Sans";
+  font-family: "Work Sans", sans-serif;
   font-size: 10px;
-  letter-spacing: 0.1em;
+  font-weight: 400;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  letter-spacing: 0.05em;
 }
 
 nav ul {
@@ -172,8 +177,16 @@ nav ul {
   list-style-type: none;
 }
 nav li {
-  padding: 0 10px;
-  font-size: 1.2em;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 40px;
+}
+
+li img {
+  height: 16px;
+  width: 16px;
+  margin-left: 14px;
+  padding-top: 14px;
 }
 
 li:hover {
@@ -181,38 +194,58 @@ li:hover {
 }
 nav a {
   text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 10px;
 }
 /* Main */
-section {
-  margin: 50px 0;
+main {
+  width: 90%;
+text-align: center;
+margin: auto;
 }
-
-/* Section Idrotuction */
+/* Section Indrotuction */
 #introduction {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin: 139px 0px;
 }
+
+.introduction {
+  margin-left: 6%;
+
+}
+
 #introduction figure {
   flex: 1;
 }
 #introduction img {
-  display: block;
-  margin: auto;
-  width: 80%;
+  display: flex;
+  justify-content: left;
+  margin: 0 auto;
+  width: 92.5%;
 }
 
 #introduction article {
   flex: 1;
+  padding: 0, 0%;
 }
 #introduction h2 {
-  margin-bottom: 1em;
+  text-align: left;
+  margin-bottom: 0.6em;
 }
 
 #introduction p {
+  text-align: left;
   margin-bottom: 0.5em;
+  font-size: 14px;
+  font-weight: 400;
+  width: 85%;
 }
 
 /* section Portfolio with filter buttons*/
+
 #portfolio h2 {
   text-align: center;
   margin-bottom: 1em;
@@ -222,20 +255,24 @@ section {
   display: flex;
   justify-content: center;
   gap: 10px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  width: 100%;
+}
+.btn-filter {
+  font-family: "Syne", sans-serif;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
   background-color: #ffffff;
   color: #1d6154;
-  padding-top: 20px;
-  padding-bottom: 50px;
 }
 #btn-all {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 9px 30px 9px 28px;
   height: 37px;
-  width: 100px;
+  /*width: 100px;*/
 }
 
 #btn-all:active,
@@ -250,7 +287,7 @@ section {
   border-radius: 60px;
   padding: 9px 22px 9px 20px;
   height: 37px;
-  width: 100px;
+  /*width: 100px;*/
 }
 
 #btn-appartment {
@@ -258,7 +295,7 @@ section {
   border-radius: 60px;
   padding: 9px 14px 9px 15px;
   height: 37px;
-  width: 157px;
+  /*width: 157px;*/
 }
 
 #btn-hotel {
@@ -266,14 +303,15 @@ section {
   border-radius: 60px;
   padding: 9px 11px 9px 9px;
   height: 37px;
-  width: 198px;
+  /*width: 198px;*/
 }
 
 /* div gallery */
 .gallery {
-  width: 100%;
+  margin-left: 1%;
+  width: 92%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr ;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
@@ -331,4 +369,16 @@ footer nav ul {
   justify-content: flex-end;
   margin: 2em;
 }
-/* login window */
+/* Modal login window */
+.modal-login-Window {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
