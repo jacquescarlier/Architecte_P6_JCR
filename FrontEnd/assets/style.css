@@ -180,20 +180,21 @@ nav li {
   font-size: 16px;
   font-weight: 400;
   margin-left: 40px;
+  padding-bottom: 14px;
 }
 
 li img {
   height: 16px;
   width: 16px;
   margin-left: 14px;
-  padding-top: 14px;
 }
 
-li:hover {
-  color: #b1663c;
+li:hover, nav a:hover {
+  font-weight: 700;
 }
 nav a {
   text-decoration: none;
+  color:#000000 ;
   font-size: 16px;
   font-weight: 400;
   margin-left: 10px;
@@ -201,8 +202,7 @@ nav a {
 /* Main */
 main {
   width: 90%;
-text-align: center;
-margin: auto;
+  margin: auto;
 }
 /* Section Indrotuction */
 #introduction {
@@ -214,7 +214,6 @@ margin: auto;
 
 .introduction {
   margin-left: 6%;
-
 }
 
 #introduction figure {
@@ -319,21 +318,27 @@ margin: auto;
 .gallery img {
   width: 100%;
 }
+.gallery figcaption {
+  font-family: "work sans";
+  font-size: 13px;
+  font-weight: 400;
+  text-align: left;
+}
 
 /* Form  section contact*/
 #contact {
   width: 50%;
   margin: auto;
+  margin-top: 57px;
 }
 #contact > * {
   text-align: center;
-}
+}/*
 #contact h2 {
-  margin-bottom: 20px;
-}
+  margin-bottom: 0px;
+}*/
 #contact form {
   text-align: left;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
@@ -345,7 +350,10 @@ margin: auto;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #contact label {
-  margin: 2em 0 1em 0;
+  margin: 38px 0 7px 0;
+  font-family: "work-sans";
+  font-size: 14px;
+  font-weight: 500;
 }
 #contact textarea {
   border: none;
@@ -357,7 +365,7 @@ margin: auto;
   font-weight: 700;
   color: white;
   background-color: #1d6154;
-  margin: 2em auto;
+  margin: 2.5em auto;
   width: 180px;
   text-align: center;
   border-radius: 60px;
@@ -368,17 +376,4 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
-}
-/* Modal login window */
-.modal-login-Window {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }

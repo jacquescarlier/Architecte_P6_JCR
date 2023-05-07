@@ -25,6 +25,6 @@ sendIn.addEventListener("click", () => {
 
     //fonction autorisation
 
-   }
+   })
 
 })
