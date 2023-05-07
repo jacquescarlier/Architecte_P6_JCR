@@ -409,6 +409,12 @@ footer nav ul {
   padding: 5px;
   
 }
+.input input[type="submit"] {
+  padding: 10px 38px 9px 39px;
+}
+.input input[type="submit"]:hover {
+  background: #000000;
+}
 
 input[type="password"],  input[type="email"] {
   height: 51px;
