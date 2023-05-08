@@ -96,7 +96,7 @@ fetch(url).then(response => response.json())
                 // constantes des boutons de l'id 'btn-xxx'
                 const btnObject = document.getElementById('btn-object'); 
                 //constante du filtre à appliquer (nom dans la catégorie) category.name
-                //Possibilité de passé par categoryId
+                //Possibilité de passé par categoryId qui est lui un chiffre
                 const filterAppartments = data.filter(obj =>obj.category.name === "Appartements")
                 const btnAppartments = document.getElementById('btn-appartment');   
                 const filterHotels = data.filter(obj => obj.category.name === 'Hotels & restaurants')
@@ -110,27 +110,29 @@ fetch(url).then(response => response.json())
                 btnObject.addEventListener("click", function() {
                     // constante du résultat du filtre fait en amont
                     filterObjets;
-                   //filterChoice est égale à filterObjets
+                   //Initialisation de la variable filterChoice en lui onnant la valeur de filterObjets
                     let filterChoice = filterObjets;
-                    console.log("objets", filterChoice);
+                                                        console.log("objets", filterChoice);
                     filterbutton(filterChoice);
                  })
 
+                 //Ajout de l'écoute des évennements sur bouton Appartments
                 btnAppartments.addEventListener("click", function() {
                     filterAppartments;
-                    console.log("appartements", filterAppartments);
+                                                        console.log("appartements", filterAppartments);
                     let filterChoice = filterAppartments;
                     filterbutton(filterChoice);
                 })       
                             
-                    
+                //Ajout de l'écoute des évennements sur bouton Hotels   
                 btnHotels.addEventListener("click", function() {
                     filterHotels;
-                    console.log("Hotel", filterHotels);
+                                                        console.log("Hotel", filterHotels);
                     let filterChoice = filterHotels;
                     filterbutton(filterChoice);
                 })   
-                            
+                  
+                //Ajout de l'écoute des évennements sur bouton All
                 btnAll.addEventListener("click", function() {
                     displayAll;
                     let filterChoice = displayAll;
