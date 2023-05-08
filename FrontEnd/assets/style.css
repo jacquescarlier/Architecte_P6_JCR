@@ -190,7 +190,7 @@ li img {
   margin-left: 14px;
 }
 
-li:hover, nav a:hover {
+li:active, nav a:active {
   font-weight: 700;
 }
 nav a {
@@ -277,7 +277,7 @@ main {
   height: 37px;
   /*width: 100px;*/
 }
-
+/* hover ou active  idem  */
 #btn-all:active,
 #btn-object:active,
 #btn-appartment:active,
@@ -413,7 +413,7 @@ footer nav ul {
 .input input[type="submit"] {
   padding: 10px 38px 9px 39px;
 }
-.input input[type="submit"]:hover {
+.input input[type="submit"]:active {
   background: #000000;
 }
 

@@ -18,13 +18,19 @@ sendIn.addEventListener("click", () => {
        //fin de la fonction submit
        return;
    }
+// connexion à l'API par fetch
+fetch("http://localhost:5678/api/users/login", {
+//method "post pour envoie des données "
+    method: 'POST',
+    //type de contenu accepté dans notre cas pour un json 'application/json
+    //json est un format texte de représentations structurées basé sur js
+    Headers : {
+         Accept: 'application/json',
+        'Content-Type': 'applicationjson'
+    },
+    // transforme l'objet litteral en une chaîne json, dans notre cas user et password
+    body: JSON.strintify({email: email, password: password}),
+})
 
-   fetch("http://localhost:5678/api/users/login", {
-    //method "post pour envoie des données "
-
-
-    //fonction autorisation
-
-   })
-
+   //fonction autorisation
 })
