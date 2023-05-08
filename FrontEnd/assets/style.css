@@ -217,7 +217,7 @@ main {
 }
 
 .introduction {
-  margin-left: 6%;
+  margin-left: 8%;
 }
 
 #introduction figure {
@@ -244,7 +244,7 @@ main {
   margin-bottom: 0.5em;
   font-size: 14px;
   font-weight: 400;
-  width: 85%;
+  width: 92%;
 }
 
 /* section Portfolio with filter buttons*/
@@ -312,7 +312,7 @@ main {
 /* div gallery */
 .gallery {
   /*margin-left: 1%;*/
-  width: 92%;
+  width: 95%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ;
   grid-column-gap: 20px;

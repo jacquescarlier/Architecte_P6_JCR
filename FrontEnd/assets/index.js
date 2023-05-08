@@ -139,7 +139,5 @@ fetch(url).then(response => response.json())
                     filterbutton(filterChoice);
                 })  
 
-        })             
-                            
-
+        })
 
