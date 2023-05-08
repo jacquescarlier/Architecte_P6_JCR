@@ -439,7 +439,7 @@ label {
 ::placeholder {
   background: #ffffff;
 }
-h3 {
+.input h2 {
   color: #1d6154;
   font-family: "syne";
   font-size: 30px;
