@@ -14,7 +14,6 @@ function filterbutton(filterChoice) {
                             console.log("filterButtonFilterChoise", filterChoice)
     for (let nombreDeTravaux = 0; nombreDeTravaux < filterChoice.length; nombreDeTravaux++) {
         let filter = filterChoice[nombreDeTravaux];
-                            console.log("all", filterChoice)
         let figure = document.createElement("figure");
         let img = document.createElement("img");
         img.src = filter.imageUrl;
@@ -78,7 +77,7 @@ fetch(url)
                 //variable figcaption pour créer l'élément correspondant <figcaption>
                 let figcaption = document.createElement("figcaption");
                 figcaption.innerHTML = project.title;
-                                                        console.log("innerTitle", project.title)
+                                                        
                 //figcaption est un enfant de figure, création du noeud <figcaption>
                 figure.appendChild(figcaption);
     
@@ -113,7 +112,7 @@ fetch(url).then(response => response.json())
                     filterObjets;
                    //filterChoice est égale à filterObjets
                     let filterChoice = filterObjets;
-                    console.log("choice", filterChoice);
+                    console.log("objets", filterChoice);
                     filterbutton(filterChoice);
                  })
 
