@@ -5,13 +5,14 @@ let urlCategories = 'http://localhost:5678/api/categories';
 const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");   
 
-//fonction pour le filtre
+//fonction pour le filtre changer le nom de la fonction
 function filterbutton(filterChoice) {
     //appel de la constante gallery (querySelector)
-    gallery 
+    //gallery 
     //reset de la galerie
     gallery.innerHTML = '';
                             console.log("filterButtonFilterChoise", filterChoice)
+                            //for (filter of filterChoice)
     for (let nombreDeTravaux = 0; nombreDeTravaux < filterChoice.length; nombreDeTravaux++) {
         let filter = filterChoice[nombreDeTravaux];
         let figure = document.createElement("figure");
@@ -36,32 +37,30 @@ function filterbutton(filterChoice) {
 // fin de code
 
 /* display filter function */
-
-fetch(url)
+async function getWorks (url) {
+    const response = await fetch(url);
+    if (response.ok) return await response.json();
+    else return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`)
+}
 //posibilté de mettre rep à la place de reponse ?
-.then(async(response) => 
-    {
-        /*Contient un booléen statuant s'il s'agit d'une réponse indiquant un succès (statut HTTP entre 200 et 299) ou non.*/
-        if (response.ok === true) return response.json();
-        /*La Promise.reject()méthode statique renvoie un Promiseobjet qui est rejeté avec une raison donnée.*/
-        //  https://developer.mozilla.org/fr/docs/Web/HTTP/Status
-        else return Promise.reject(`Erreur HTTP fetch 1 => ${rep.status}`)
-    }
-)
-// capture l'échec de connexion à l'API et affiche un message d'alerte
-.catch(err => alert("Pas de connexion avec l\'API_" + err))
 
-.then(works => 
-    {
+
+// capture l'échec de connexion à l'API et affiche un message d'alerte
+
+ 
+
+async function buildWorks ()   {
+        let works = await getWorks(url);
         // data dans const works
-                                                        console.log("works", works) 
+                                                        //console.log("works", works) 
         // constante pour créer le lien entre le dom et "figure"
         /*const gallery = document.querySelector(".gallery");*/
         gallery
         /*const portfolio = document.getElementById("#portfolio");  */ 
         portfolio
-                                                        console.log("length-works", works.length)
+                                                       // console.log("length-works", works.length)
         //boucle pour générer autant de balise "figure" que la longueur du tableau dans works
+        //for of
             for (let i = 0; i < works.length; i++) {
                 let project = works[i];
                 //variable "figure" pour créer l'élément correspondant
@@ -85,7 +84,7 @@ fetch(url)
                 gallery.appendChild(figure);
             }
     }
-)
+buildWorks();
 
 //buttons filters
 fetch(url).then(response => response.json())
@@ -105,7 +104,7 @@ fetch(url).then(response => response.json())
                 const btnAll = document.getElementById('btn-all');  
                 let filterChoice = '';
 
-
+//for each e target
                 // Ajout de l'écoute des évennements sur bouton Objets
                 btnObject.addEventListener("click", function() {
                     // constante du résultat du filtre fait en amont
