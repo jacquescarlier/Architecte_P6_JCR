@@ -2,9 +2,10 @@
 // constante bouton  submit 
 const sendIn = document.getElementById("submit");
 //constante <p id="errorInformation">
+console.log(sendIn);
 const errorInformation = document.getElementById("errorInformation");
-
-sendIn.addEventListener("click", () => {
+console.log(errorInformation);
+sendIn.addEventListener("click", (e) => {
 
     const email = document.getElementById("emailUser").value;
    // constante password 
@@ -41,8 +42,8 @@ sendIn.addEventListener("click", () => {
    Il est à noter que les données stockées dans sessionStorage ou localStorage sont spécifiques au protocole de la page.
                 window.sessionStorage.setItem("userInformation", JSON.stringify(userInformation));*/
                
-          // function respose ok
-           //function window.sessionStorage
+          // function response ok
+           //function window.sessionStorage avec token
           // .then(function(){
 
           // })*/

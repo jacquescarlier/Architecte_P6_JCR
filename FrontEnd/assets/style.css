@@ -132,19 +132,21 @@ table {
 /* Général */
 body {
   max-width: 1140px;
-  margin: auto;
-  font-family: 'Work Sans', sans-serif;
+  height: 100vh;
+  background: #e5e5e5;
+  font-family: "Work Sans", sans-serif;
   font-size: 14px;
-  background: #E5E5E5;
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: "Syne", sans-serif;
   font-weight: 700;
   font-size: 30px;
   color: #1d6154;
 }
-
 
 /* header */
 header {
@@ -160,7 +162,6 @@ h1 {
   font-size: 22px;
   font-weight: 800;
   color: #b1663c;
-  
 }
 
 h1 > span {
@@ -190,12 +191,13 @@ li img {
   margin-left: 14px;
 }
 
-li:active, nav a:active {
+li:active,
+nav a:active {
   font-weight: 700;
 }
 nav a {
   text-decoration: none;
-  color:#000000 ;
+  color: #000000;
   font-size: 16px;
   font-weight: 400;
   margin-left: 10px;
@@ -267,7 +269,7 @@ main {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
   color: #1d6154;
 }
 #btn-all {
@@ -314,7 +316,7 @@ main {
   /*margin-left: 1%;*/
   width: 95%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 }
@@ -376,14 +378,13 @@ input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
   margin: 2.5em auto;
-  text-align: center; 
+  text-align: center;
 }
 
 #contact input[type="submit"]:active {
   background-color: #000000;
   color: white;
 }
-
 
 /* Footer*/
 
@@ -396,7 +397,7 @@ footer nav ul {
 /*Partie login*/
 
 .form {
-  background: #E5E5E5;
+  background: #e5e5e5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -408,7 +409,6 @@ footer nav ul {
   flex-direction: column;
   margin: 2px 0px 30px 0px;
   padding: 5px;
-  
 }
 .input input[type="submit"] {
   padding: 10px 38px 9px 39px;
@@ -417,7 +417,8 @@ footer nav ul {
   background: #000000;
 }
 
-.input input[type="password"], .input input[type="email"] {
+.input input[type="password"],
+.input input[type="email"] {
   height: 51px;
   width: 379px;
   border: none;
@@ -425,13 +426,14 @@ footer nav ul {
 }
 
 label {
-  background: #E5E5E5;
+  width: 100%;
+  background: #e5e5e5;
   font-family: "work sans";
   font-size: 14px;
   font-weight: 500;
   margin-top: 30px;
   margin-bottom: 7px;
-
+  text-align: left;
 }
 
 ::placeholder {
@@ -442,17 +444,15 @@ h3 {
   font-family: "syne";
   font-size: 30px;
   font-weight: 700;
+  text-align: center;
 }
 
 a {
-  color: #3D3D3D;
+  color: #3d3d3d;
   text-align: center;
 }
 
 .footer-login {
-  max-width: 1140px;
-  position: fixed;
-  bottom: 0;
-  right: 10%;
-  }
-  
+  width: 100%;
+  position: relative;
+}
