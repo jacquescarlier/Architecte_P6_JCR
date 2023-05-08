@@ -28,9 +28,30 @@ fetch("http://localhost:5678/api/users/login", {
          Accept: 'application/json',
         'Content-Type': 'applicationjson'
     },
-    // transforme l'objet litteral en une chaîne json, dans notre cas user et password
+    // transforme l'objet litteral en une chaîne json, dans notre cas email et password
     body: JSON.strintify({email: email, password: password}),
 })
 
    //fonction autorisation
-})
+   // contrôle du status de la repose de l'api
+   // il faut une réponse égale à 200 
+   // allowResponse
+   //Gestion des erreurs et ne pas oublier window.sessionStorage
+   /* La propriété sessionStorage permet d'utiliser un objet Storage valable pour la session de navigation en cours et pour les pages du même domaine que la page actuelle. L'objet global sessionStorage est similaire à Window.localStorage, à la différence que les données enregistrées dans sessionStorage ont une durée vie limitée et expirent à la fin de la session de navigation actuelle. Une session de navigation dure aussi longtemps que le navigateur est ouvert et s'étend sur plusieurs chargements, rechargements et restaurations de pages. En revanche, une session de navigation n'est valable que pour le contexte de navigation actuel, c'est-à-dire que le fait d'ouvrir une page dans un nouvel onglet ou dans une nouvelle fenêtre provoquera l'initialisation d'une nouvelle session de navigation, ce qui diffère du comportement des sessions utilisant des cookies. 
+   Il est à noter que les données stockées dans sessionStorage ou localStorage sont spécifiques au protocole de la page.
+                window.sessionStorage.setItem("userInformation", JSON.stringify(userInformation));
+               
+           .then(function (allowResponse){
+           CONTROLE DU STATUS
+           if   (allowResponse.status === 20O){
+            SI ALLOWRESPONSE.STATUS === 200 ALORS CONNEXION OK
+            return allowResponse.json();
+            FIN DE L'INSTRUCTION
+           } else {
+            SINON AJOUT DU MESSAGE DANS ERRORINFORMATION et affichage dans la page html 
+            errorInformation.innerHTML = "Erreur d'identifiant ou de mot de passe";
+            return Promise.reject
+           }
+           })
+   */
+});
