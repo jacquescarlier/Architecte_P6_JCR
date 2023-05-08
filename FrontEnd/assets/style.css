@@ -386,6 +386,7 @@ input[type="submit"] {
 
 
 /* Footer*/
+
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -416,7 +417,7 @@ footer nav ul {
   background: #000000;
 }
 
-input[type="password"],  input[type="email"] {
+.input input[type="password"], .input input[type="email"] {
   height: 51px;
   width: 379px;
   border: none;
@@ -447,3 +448,11 @@ a {
   color: #3D3D3D;
   text-align: center;
 }
+
+.footer-login {
+  max-width: 1140px;
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  }
+  
