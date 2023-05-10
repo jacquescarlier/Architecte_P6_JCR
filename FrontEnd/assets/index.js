@@ -6,13 +6,13 @@ const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");   
 
 //fonction pour le filtre changer le nom de la fonction
-function filterbutton(filterChoice) {
+function applyFilter(filterChoice) {
     //reset de la galerie
     gallery.innerHTML = '';
-                            console.log("filterButtonFilterChoise", filterChoice)
+                                        console.log("applyFilterFilterChoise", filterChoice)
                             //for  of(filter of filterChoice)
-    for (let nombreDeTravaux = 0; nombreDeTravaux < filterChoice.length; nombreDeTravaux++) {
-        let filter = filterChoice[nombreDeTravaux];
+    for (const filter of filterChoice)  {        
+                                        console.log("filter", filter)
         let figure = document.createElement("figure");
         let img = document.createElement("img");
         img.src = filter.imageUrl;
@@ -47,6 +47,7 @@ async function buildWorks ()   {
         for (const project of works) {
                 let figure = document.createElement("figure");
                 // crée une balise <figure> avec image et titre
+                                                        console.log("project", project);
                                                         console.log("figure",figure);
                 //variable img pour créer l'élément image <img src>
                 let img = document.createElement("img");
@@ -73,46 +74,65 @@ fetch(url).then(response => response.json())
         .then(data => { console.log("data-button", data);
                 gallery   
                 //déclaration constante et choix de l'ID du tableau, category.name
-                const filterObjets = data.filter(obj => obj.category.name === "Objets");
+                //const filterObjets = data.filter(obj => obj.category.name === "Objets");
                 // constantes des boutons de l'id 'btn-xxx'
-                const btnObject = document.getElementById('btn-object'); 
+                 // const  btnObject = 
                 //constante du filtre à appliquer (nom dans la catégorie) category.name
                 //Possibilité de passé par categoryId qui est lui un chiffre
-                const filterAppartments = data.filter(obj =>obj.category.name === "Appartements")
-                const btnAppartments = document.getElementById('btn-appartment');   
-                const filterHotels = data.filter(obj => obj.category.name === 'Hotels & restaurants')
-                const btnHotels = document.getElementById('btn-hotel');   
+               // const filterAppartments = data.filter(obj =>obj.category.name === "Appartements")
+               // const btnAppartments = document.getElementById('btn-appartment');   
+              //  const filterHotels = data.filter(obj => obj.category.name === 'Hotels & restaurants')
+               // const btnHotels = document.getElementById('btn-hotel');   
                 const displayAll = data
                 const btnAll = document.getElementById('btn-all');  
                 let filterChoice = '';
 
 //for each e target
-//const btnFilter = document.querySelector(".btn-filter");
+const btnFilter = document.querySelectorAll(".btn-filter");
+btnFilter.forEach (function(btn){
+    btn.addEventListener("click", function(e){
+       
+        console.log("click", e.target.name);
+        if (e.target.name === "All") {
+                filterChoice = data;
+                applyFilter(filterChoice);
+        }else {
+        //const btntriage = document.getElementById('e.target.id');
+                filterChoice = data.filter(obj => obj.category.name === e.target.name)
+                   //Initialisation de la variable filterChoice en lui onnant la valeur de filterObjets
+                    //let filterChoice = filterTriage;
+                    console.log("filterChoiceTriage", filterChoice)
+                    applyFilter(filterChoice);
+        }
+    })
+})
+
+
 //console.log("btnfilter", btnFilter)
 //btnFilter.addEventListener("click", function(e)
 //{
     //let filterChoice = e.value
     //console.log ("target", filterChoice);
-    //filterbutton(filterChoice);
+    //applyFilter(filterChoice);
 //})
 
 // for each 
                 // Ajout de l'écoute des évennements sur bouton Objets
-                btnObject.addEventListener("click", function() {
+               /* btnObject.addEventListener("click", function() {
                     // constante du résultat du filtre fait en amont
                     filterObjets;
                    //Initialisation de la variable filterChoice en lui onnant la valeur de filterObjets
                     let filterChoice = filterObjets;
                  //                                       console.log("objets", filterChoice);
-                    filterbutton(filterChoice);
-                })
+                 applyFilter(filterChoice);
+                })*/
 
                  //Ajout de l'écoute des évennements sur bouton Appartments
-                btnAppartments.addEventListener("click", function() {
+              /*  btnAppartments.addEventListener("click", function() {
                     filterAppartments;
                                                         console.log("appartements", filterAppartments);
                     let filterChoice = filterAppartments;
-                    filterbutton(filterChoice);
+                    applyFilter(filterChoice);
                 })       
                             
                 //Ajout de l'écoute des évennements sur bouton Hotels   
@@ -120,7 +140,7 @@ fetch(url).then(response => response.json())
                     filterHotels;
                                                         console.log("Hotel", filterHotels);
                     let filterChoice = filterHotels;
-                    filterbutton(filterChoice);
+                    applyFilter(filterChoice);
                 })   
                   
                 //Ajout de l'écoute des évennements sur bouton All
@@ -128,8 +148,8 @@ fetch(url).then(response => response.json())
                     displayAll;
                     let filterChoice = displayAll;
                     gallery.innerHTML = '';
-                    filterbutton(filterChoice);
+                    applyFilter(filterChoice);
                 })  
-
+*/
         })
 
