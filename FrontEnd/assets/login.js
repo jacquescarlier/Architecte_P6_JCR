@@ -11,7 +11,7 @@ submit.addEventListener("click", (e) => {
    const email = document.getElementById("emailUser").value;
    const password = document.getElementById("password").value;
    /* Si pas d'email ou de password, affichage du message dans errorInformation */
-   if (!email || !password) {
+    if (!email || !password) {
        document.getElementById("errorInformation").innerHTML = "Entrer un identifiant ou un mot de passe valide";
        //fin d'instruction pour le bouton "se connecter"
        return;
