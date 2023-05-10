@@ -18,11 +18,16 @@ submit.addEventListener("click", (e) => {
    }
    //connexion à l'API
    fetch("http://localhost:5678/api/users/login", {
+    // method post 
            method: "POST",
+           //entête de requête
            headers: {
+            //option pour envoyer du json
                accept: "application/json",
+               //type de contenu json
                "Content-type": "application/json",
            },
+           //on soumet les objet email & password en json
            body: JSON.stringify({email: email, password: password}),
        })
        .then(function (authResponse) {
