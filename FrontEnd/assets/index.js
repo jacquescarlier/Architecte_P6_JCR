@@ -9,10 +9,10 @@ function applyFilter(filterChoice) {
     //reset de la galerie
     gallery.innerHTML = '';
                                         console.log("applyFilterFilterChoise", filterChoice)
-    
+    // Pour chaque constante "filter" (element) de "filterChoice" nous effectuons les opérations suivantes
     for (const filter of filterChoice)  {        
                                         console.log("filter", filter)
-        //// variable pour créer une balise <figure> avec image et titre                                
+        // variable pour créer une balise <figure> avec image et titre                                
         let figure = document.createElement("figure");
         //variable img pour créer l'élément image <img src>
         let img = document.createElement("img");
@@ -29,7 +29,7 @@ function applyFilter(filterChoice) {
         }
    }  
 
-//fuction check fetch
+//function connection control and import the work
 async function getWorks (url) {
     const response = await fetch(url);
     //lancement de la requête, avec un "await" pour suspendre la fonction en attendant la réponse
@@ -40,50 +40,51 @@ async function getWorks (url) {
     else return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);  
 }
 
-//function build data 
+//function create gallery
 async function buildWorks ()   {
         let works = await getWorks(url);
-        // data dans const works
+        // data dans const works avec un "await pour attendre la réponse"
+        //Récupération du tableau des données
                                                         console.log("works", works) 
                                                         console.log("length-works", works.length)
-        //boucle pour générer autant de balise "figure" que la longueur du tableau dans works for of
+        //boucle pour générer autant de balise "figure" que d'éléments dans works
         for (const project of works) {
                 let figure = document.createElement("figure");
                 // crée une balise <figure> avec image et titre
-                                                        console.log("project", project);
-                                                        console.log("figure",figure);
-                //variable img pour créer l'élément image <img src>
+                // le constante project est égale à chaque ligne du tableau qui est séparé en plusieurs éléments différents
+                                                        //console.log("project", project);
+                //variable img pour créer l'élément image <img src = "">
                 let img = document.createElement("img");
-                // récupère l'url de l'image pour l'insérer dans img.src
+                console.log("img",img)
+                // récupère l'url de l'image>
                 img.src = project.imageUrl;
-                //img est un enfant de figure, création du noeud <img src>
+                //img est un enfant de figure, création du noeud <img src> dans <figure>
                 figure.appendChild(img);
                 //variable figcaption pour créer l'élément correspondant <figcaption>
                 let figcaption = document.createElement("figcaption");
                 figcaption.innerHTML = project.title;                                        
-                //figcaption est un enfant de figure, création du noeud <figcaption>
+                //figcaption est un enfant de figure, création du noeud <figcaption> dans <figure>
                 figure.appendChild(figcaption);
-                //figure est un enfant de gallery, création du noeud <figure>
+                //figure est un enfant de gallery, création du noeud <figure> dans .gallery
                 gallery.appendChild(figure);
             }
     }
     //appel de la fonction buildWorks
     buildWorks();
 
-//buttons filters
+//filter buttons
 fetch(url).then(response => response.json())
-        .then(data => { console.log("data-button", data);
-            // 
-            //gallery   
+        .then(data => {   
+            //async function buildFilter ()   {
             //variable ou sera stocké le filtre 
             let filterChoice = '';
             //constante du sélécteur des boutons
             const btnFilter = document.querySelectorAll(".btn-filter");
             //pour chaque btnFilter (bouton)
             btnFilter.forEach (function(btn){
-                //on ajoute une écoute sur btn
+                //on ajoute une écoute d'événement sur btn
             btn.addEventListener("click", function(e){
-                //on va récupérer l'objet event qui est transmis par le gestionnaire d'évennement
+                //on va récupérer l'objet event  qui est transmis par le gestionnaire d'évennement
                                         console.log("click", e.target.name);
             // si target.name === "All" alors filterChoice est égale à data, cad tout le tableau
             if (e.target.name === "All") {
@@ -93,7 +94,7 @@ fetch(url).then(response => response.json())
                 //appel de la fonction filterChoice
                 applyFilter(filterChoice);
             }else {
-                // sinon filterChoice est égale au filtre effectué sur nom de la catégorie
+                // sinon filterChoice est égale à l'event de l'objet avec la cible category.name
                 filterChoice = data.filter(obj => obj.category.name === e.target.name)
                                         console.log("filterChoiceTriage", filterChoice)
                  //appel de la fonction filterChoice       
