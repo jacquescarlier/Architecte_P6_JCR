@@ -42,12 +42,16 @@
 			<section id="introduction">
 				<figure>
 					<img src="./assets/images/sophie-bluel.png" alt="">
-					<i class="first fa-regular fa-pen-to-square"></i><button class="edit1"><a href="#" role="button"
-							data-target="#modal2" data-toggle="modal">Modifier</a></button>
+					<div class="modifier" id="bouton-modifier-photo">
+						<i class="first fa-regular fa-pen-to-square"></i>
+						<button class="edit1" data-target="#modal1" data-toggle="modal">Modifier</button>
+					</div>
 				</figure>
 				<article class="introduction">
-					<i class="two fa-regular fa-pen-to-square"></i><button class="edit"><a href="#" role="button"
-							data-target="#modal1" data-toggle="modal">Modifier</a></button>
+					<div class="modifier" id="bouton-modifier-introduction">
+						<i class="first fa-regular fa-pen-to-square"></i>
+						<button class="edit1" data-target="#modal2" data-toggle="modal">Modifier</button>
+					</div>
 					<h2>Designer d'espace</h2>
 					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
 						livraison
@@ -60,9 +64,13 @@
 				</article>
 			</section>
 			<section id="portfolio">
-				<h2>Mes Projets</h2>
-				<i class="three fa-regular fa-pen-to-square"></i><button class="edit2"><a href="#" role="button"
-						data-target="#modal3" data-toggle="modal">Modifier</a></button>
+				<div class="mes-projets">
+					<h2>Mes Projets</h2>
+					<div class="modifier" id="bouton-modifier-projets">
+						<i class="first fa-regular fa-pen-to-square"></i>
+						<button class="edit1" data-target="#modal3" data-toggle="modal">Modifier</button>
+					</div>
+				</div>
 				<div class="btns-filter">
 					<button name="All" id="btn-all" class="btn-filter">Tous</button>
 					<button name="Objets" id="btn-object" class="btn-filter">Objets</button>

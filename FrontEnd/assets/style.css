@@ -137,15 +137,21 @@ body {
   background: #e5e5e5;
   font-family: "Work Sans", sans-serif;
   font-size: 14px;
-  
-}
-.container-general {
-  max-width: 1140px;
-  height: 100vh;
   margin: auto;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
+
+.container-general {
+  max-width: 1140px;
+  width: 100%;
+ 
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  
+}
+
 
 h2 {
   font-family: "Syne", sans-serif;
@@ -153,20 +159,20 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
-/*barre de navigation pour mode admin*/
+/*barre de navigation et boutons pour mode admin*/
 
 .admin-nav {
-  display: none;
   height: 59px;
-  width: 126.3%;
+  width: 100%;
   background: #000000;
   color: #ffffff;
-  margin-left:-13.2%;
-  margin-right: 13.2%;
+  /*margin-left:-13.2%;
+  margin-right: 13.2%;*/
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
+  /*display: none;*/
 }
 
 .edition {
@@ -186,6 +192,16 @@ h2 {
   width: 216px;
   height: 38px;
 }
+
+.modifier {
+  /*display: none;*/
+}
+.modifier button {
+  background: #E5E5E5;
+  border: none;
+  cursor: pointer;
+}
+
 /* header */
 header {
   display: flex;
@@ -253,11 +269,16 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 139px 0px;
+  margin: 42px 0px 139px 0px;
+  position: relative;
 }
 
 .introduction {
   margin-left: 8%;
+}
+
+#introduction  #bouton-modifier-photo {
+  margin-top: 15px;
 }
 
 #introduction figure {
@@ -287,11 +308,24 @@ main {
   width: 92%;
 }
 
+ #bouton-modifier-introduction {
+  position: absolute;
+  top: 30px;
+
+ }
 /* section Portfolio with filter buttons*/
 
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
+}
+
+.mes-projets {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 31px;
+  margin-bottom: 30px;
 }
 
 .btns-filter {
@@ -427,9 +461,9 @@ input[type="submit"] {
 /* Footer*/
 
 footer nav ul {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 7.4%;
+margin-right: 7.4%; 
+display: flex;
+justify-content: end;
 }
 
 /*Partie login*/
@@ -492,5 +526,6 @@ a {
 
 .footer-login {
   width: 100%;
-  position: relative;
+  position: absolute;
+  bottom: 0;
 }
