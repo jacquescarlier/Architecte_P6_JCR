@@ -8,10 +8,8 @@ const portfolio = document.getElementById("#portfolio");
 function applyFilter(filterChoice) {
     //reset de la galerie
     gallery.innerHTML = '';
-                                        console.log("applyFilterFilterChoise", filterChoice)
     // Pour chaque constante "filter" (element) de "filterChoice" nous effectuons les opérations suivantes
     for (const filter of filterChoice)  {        
-                                        console.log("filter", filter)
         // variable pour créer une balise <figure> avec image et titre                                
         let figure = document.createElement("figure");
         //variable img pour créer l'élément image <img src>
@@ -32,14 +30,19 @@ function applyFilter(filterChoice) {
 //function connection control and import the work
 async function getWorks (url) {
     const response = await fetch(url);
+    console.log(response.status)
+    console.error(response.status)
+    
     //lancement de la requête, avec un "await" pour suspendre la fonction en attendant la réponse
     // quand la demande est terminé response est affecté à l'objet de réponse de la demande
-    if (response.ok) return await response.json();
+    if (response.ok) return await response.json(); 
     /*si la réponse est O.K, récupération de l'objet JSON, méthode response.ok qui permet de savoir si la connexion est faite ou pas*/
     // sinon promesse rejetée
-    else return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);  
+    else {
+    alert ("api pb");
+    return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);  }
 }
-
+//.catch let connexionApi = response.okconsole.log("connexionApi", connexionApi)
 //function create gallery
 async function buildWorks ()   {
         let works = await getWorks(url);
@@ -55,7 +58,6 @@ async function buildWorks ()   {
                                                         //console.log("project", project);
                 //variable img pour créer l'élément image <img src = "">
                 let img = document.createElement("img");
-                console.log("img",img)
                 // récupère l'url de l'image>
                 img.src = project.imageUrl;
                 //img est un enfant de figure, création du noeud <img src> dans <figure>
@@ -84,20 +86,19 @@ fetch(url).then(response => response.json())
             btnFilter.forEach (function(btn){
                 //on ajoute une écoute d'événement sur btn
             btn.addEventListener("click", function(e){
-                //on va récupérer l'objet event  qui est transmis par le gestionnaire d'évennement
-                                        console.log("click", e.target.name);
+                //on va récupérer l'objet event  qui est transmis par le gestionnaire d'évenement du bouton correspondant
             // si target.name === "All" alors filterChoice est égale à data, cad tout le tableau
             if (e.target.name === "All") {
                 //la valeur de filterChoice prends la valeur data
                 filterChoice = data;
-                                        console.log("All", filterChoice)
+                                        console.log("length filterChoice for filter all_",filterChoice.length)
                 //appel de la fonction filterChoice
                 applyFilter(filterChoice);
             }else {
                 // sinon filterChoice est égale à l'event de l'objet avec la cible category.name
                 filterChoice = data.filter(obj => obj.category.name === e.target.name)
-                                        console.log("filterChoiceTriage", filterChoice)
-                 //appel de la fonction filterChoice       
+                                        console.log("click_button =>", e.target.name, "// filterChoice_length =>", filterChoice.length)
+                //appel de la fonction filterChoice       
                 applyFilter(filterChoice);
             }
             })

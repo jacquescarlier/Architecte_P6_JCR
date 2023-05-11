@@ -130,12 +130,18 @@ table {
 /** end reset css**/
 
 /* Général */
+
 body {
-  max-width: 1140px;
+  width: 100vw;
   height: 100vh;
   background: #e5e5e5;
   font-family: "Work Sans", sans-serif;
   font-size: 14px;
+  
+}
+.container-general {
+  max-width: 1140px;
+  height: 100vh;
   margin: auto;
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -147,7 +153,39 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+/*barre de navigation pour mode admin*/
 
+.admin-nav {
+  display: none;
+  height: 59px;
+  width: 126.3%;
+  background: #000000;
+  color: #ffffff;
+  margin-left:-13.2%;
+  margin-right: 13.2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.edition {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.publish{
+  color: #000000;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 60px;
+  width: 216px;
+  height: 38px;
+}
 /* header */
 header {
   display: flex;
@@ -391,7 +429,7 @@ input[type="submit"] {
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  margin: 2em;
+  margin-right: 7.4%;
 }
 
 /*Partie login*/
