@@ -199,6 +199,9 @@ h2 {
   border: none;
   cursor: pointer;
 }
+.modifier .fa-reguler {
+  border: none;
+}
 
 /* header */
 header {
