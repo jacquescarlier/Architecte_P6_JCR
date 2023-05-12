@@ -1,10 +1,13 @@
+//--------------------------------------------
+// declaration of constants and variables
+//--------------------------------------------
 let url = 'http://localhost:5678/api/works';
 // let urlCategories = 'http://localhost:5678/api/categories';
-// constante gallery et portfolio 
 const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");   
-
-//fonction d'application du filtre
+//--------------------------------
+// Apply filter
+//--------------------------------
 function applyFilter(filterChoice) {
     //reset de la galerie
     gallery.innerHTML = '';
@@ -15,24 +18,25 @@ function applyFilter(filterChoice) {
         //variable img pour créer l'élément image <img src>
         let img = document.createElement("img");
         img.src = filter.imageUrl;
-        // mise en place de <img src>  dans <figure>
+        // mise en place de <img src>  dans <figure>, img étant l'enfant de figure
         figure.appendChild(img);
         //variable pour créer l'élément <figcaption>
         let figcaption = document.createElement("figcaption");
         figcaption.innerHTML = filter.title;
-        // mise en place de l'élément >figcaption dans <figure>
+        // mise en place de l'élément <figcaption> dans <figure>, figcaption étant l'enfant de figure
         figure.appendChild(figcaption);
-        //mise en plce de l'élément <figure> dans .gallery
+        //mise en place de l'élément <figure> dans .gallery.
         gallery.appendChild(figure);                                      
         }
    }  
-
-//function connection control and import the work
+//-----------------------------------------------
+// Check the connection with the API
+//-----------------------------------------------
 async function getWorks (url) {
+    // constante response qui est le réponse du fetch avec un "await" pour attendre la réponse
     const response = await fetch(url);
-    console.log(response.status)
-    console.error(response.status)
-    
+    console.log(response)
+    console.log("response.status  ", response.status)
     //lancement de la requête, avec un "await" pour suspendre la fonction en attendant la réponse
     // quand la demande est terminé response est affecté à l'objet de réponse de la demande
     if (response.ok) return await response.json(); 
@@ -43,7 +47,9 @@ async function getWorks (url) {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);  }
 }
 //.catch let connexionApi = response.okconsole.log("connexionApi", connexionApi)
-//function create gallery
+//-----------------------
+// Creation of the gallery
+//-----------------------
 async function buildWorks ()   {
         let works = await getWorks(url);
         // data dans const works avec un "await pour attendre la réponse"
@@ -60,12 +66,12 @@ async function buildWorks ()   {
                 let img = document.createElement("img");
                 // récupère l'url de l'image>
                 img.src = project.imageUrl;
-                //img est un enfant de figure, création du noeud <img src> dans <figure>
+                // mise en place de <img src>  dans <figure>, img étant l'enfant de figure
                 figure.appendChild(img);
                 //variable figcaption pour créer l'élément correspondant <figcaption>
                 let figcaption = document.createElement("figcaption");
                 figcaption.innerHTML = project.title;                                        
-                //figcaption est un enfant de figure, création du noeud <figcaption> dans <figure>
+                // mise en place de l'élément <figcaption> dans <figure>, figcaption étant l'enfant de figure
                 figure.appendChild(figcaption);
                 //figure est un enfant de gallery, création du noeud <figure> dans .gallery
                 gallery.appendChild(figure);
@@ -73,8 +79,9 @@ async function buildWorks ()   {
     }
     //appel de la fonction buildWorks
     buildWorks();
-
-//filter buttons
+//--------------   
+// Creation of filter according to the clicked button
+//--------------
 fetch(url).then(response => response.json())
         .then(data => {   
             //async function buildFilter ()   {
@@ -86,12 +93,13 @@ fetch(url).then(response => response.json())
             btnFilter.forEach (function(btn){
                 //on ajoute une écoute d'événement sur btn
             btn.addEventListener("click", function(e){
-                //on va récupérer l'objet event  qui est transmis par le gestionnaire d'évenement du bouton correspondant
+                //on va récupérer l'objet event  qui est transmis par le gestionnaire d'évenement du bouton correspondant.
+                //nous récupérons le nom du bouton
             // si target.name === "All" alors filterChoice est égale à data, cad tout le tableau
             if (e.target.name === "All") {
                 //la valeur de filterChoice prends la valeur data
                 filterChoice = data;
-                                        console.log("length filterChoice for filter all_",filterChoice.length)
+                                        console.log("click_button =>", e.target.name, "// filterChoice_length =>", filterChoice.length)
                 //appel de la fonction filterChoice
                 applyFilter(filterChoice);
             }else {
@@ -105,3 +113,7 @@ fetch(url).then(response => response.json())
             })
 })
 
+//controle si logger 
+//affichage de la barre de navigation admin
+/* const adminNav = getElementById("admin-nav");
+                adminNav.style["display"]= "flex";*/

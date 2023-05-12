@@ -44,7 +44,7 @@ submit.addEventListener("click", (e) => {
             if (userInformation) {
                 window.sessionStorage.setItem("userInformation", JSON.stringify(userInformation));
                 window.sessionStorage.setItem("token", userInformation.token);
-                window.location.replace("./index.html");
+                window.location.replace("./index.html");   
             }
         })
         .catch((error) => console.error(error));

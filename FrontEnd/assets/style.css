@@ -166,13 +166,11 @@ h2 {
   width: 100%;
   background: #000000;
   color: #ffffff;
-  /*margin-left:-13.2%;
-  margin-right: 13.2%;*/
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
-  /*display: none;*/
+  display: none;
 }
 
 .edition {
