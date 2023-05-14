@@ -41,17 +41,24 @@
 		<main>
 			<section id="introduction">
 				<figure>
-					<img src="./assets/images/sophie-bluel.png" alt="">
-					<div class="modifier" id="bouton-modifier-photo">
-						<i class="fa-regular fa-pen-to-square"></i>
-						<button class="edit1" data-target="#modal1" data-toggle="modal">Modifier</button>
-					</div>
+					<img src="./assets/images/sophie-bluel.png" alt="photos de Sophie Buel">
+					<a href="#modal-portrait" class="modifier" id="bouton-modifier-photo">
+						<span class="span-modifier-portrait"><i class="fa-regular fa-pen-to-square"></i>
+						Modifier</span>
+					</a>
 				</figure>
-				<article class="introduction">
-					<div class="modifier" id="bouton-modifier-introduction">
-						<i class="fa-regular fa-pen-to-square"></i>
-						<button class="edit1" data-target="#modal2" data-toggle="modal">Modifier</button>
+				<!--structure pour Modal-->
+				<aside  id="modal-portrait" class="modal" aria-hidden="true" role="dialog" aria-labelleby="title-modal" style="display:none">
+					<div class="modal-portrait-content">
+						<h1 id=""title-modal>modal portrait</h1>
 					</div>
+				</aside>
+		<!--fin de modal-->
+				<article class="introduction">
+					<a href="#modal-introduction" class="modifier" id="bouton-modifier-introduction">
+						<i class="fa-regular fa-pen-to-square"></i>
+						<span>Modifier</span>
+					</a>
 					<h2>Designer d'espace</h2>
 					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
 						livraison
@@ -66,10 +73,10 @@
 			<section id="portfolio">
 				<div class="mes-projets">
 					<h2>Mes Projets</h2>
-					<div class="modifier" id="bouton-modifier-projets">
+					<a href=" " class="modifier" id="bouton-modifier-projets">
 						<i class="fa-regular fa-pen-to-square"></i>
 						<button class="edit1" data-target="#modal3" data-toggle="modal">Modifier</button>
-					</div>
+					</a>
 				</div>
 				<div class="btns-filter">
 					<button name="All" id="btn-all" class="btn-filter">Tous</button>
@@ -93,6 +100,7 @@
 				</form>
 			</section>
 		</main>
+		
 	</div>
 	<footer>
 		<nav>

@@ -130,6 +130,7 @@ table {
 /** end reset css**/
 
 /* Général */
+* { box-sizing: border-box;}
 
 body {
   width: 100vw;
@@ -145,13 +146,16 @@ body {
 .container-general {
   max-width: 1140px;
   width: 100%;
- 
   margin: auto;
   display: grid;
   grid-template-rows: auto 1fr auto;
   
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+}
 
 h2 {
   font-family: "Syne", sans-serif;
@@ -278,12 +282,11 @@ main {
   margin-left: 8%;
 }
 
-#introduction  #bouton-modifier-photo {
-  margin-top: 15px;
-}
-
 #introduction figure {
   flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
 }
 #introduction img {
   display: flex;
@@ -520,7 +523,7 @@ label {
   text-align: center;
 }
 
-a {
+form a {
   color: #3d3d3d;
   text-align: center;
 }
@@ -529,4 +532,28 @@ a {
   width: 100%;
   position: absolute;
   bottom: 0;
+}
+
+/* fenêtres modal */
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-portrait-content {
+  overflow: auto;
+  width: 40%;
+  height: 50%;
+  padding: 20px;
+  max-width: calc(50vw - 20px);
+  max-height: calc(50vh - 20px);
+  background: #FFFFFF;
+
 }
