@@ -7,7 +7,7 @@ const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");
 
 //tableau ['entitled','suffix for button ID', 'category name]
-let arrayCreateButton = [['Tous', 'Tous', 'All'], ['Objets', 'Objets', 'Objets'], ['Appartements', 'Appartements', 'Appartements'], ['Hôtels & restaurants', 'Hotels', 'Hotels & restaurants']];
+let arrayCreateButton = [['Tous', 'Tous', 'Tous'], ['Objets', 'Objets', 'Objets'], ['Appartements', 'Appartements', 'Appartements'], ['Hôtels & restaurants', 'Hotels', 'Hotels & restaurants']];
 
 //   --------------------
 //  |   Create Button   |
@@ -19,10 +19,12 @@ function createButton() {
         console.log("bb", newButton);
         //newButton.type = 'button';
         newButton.name = [item[2]]
+        
         newButton.innerHTML = [item[0]];
         newButton.id = 'btn-' + [item[1]];
         newButton.className = 'btn-filter';
         let portfolio = document.getElementById("filterButton");
+        console.log("id button", newButton.id)
         console.log("portfolio", portfolio);
         portfolio.appendChild(newButton);
     }
@@ -51,7 +53,7 @@ async function buildWorks() {
     console.log("works", works)
     
     //job creation function
-    function working() {
+    function createWork() {
         for (const project of works) {
             let figure = document.createElement("figure");
             let img = document.createElement("img");
@@ -63,7 +65,7 @@ async function buildWorks() {
             gallery.appendChild(figure);
         }
     }
-    working()
+    createWork()
    
     //filter creation function
     async function createFilter() {
@@ -72,7 +74,7 @@ async function buildWorks() {
         console.log("rere", btnFilter)
         btnFilter.forEach(function (btn) {
             btn.addEventListener("click", function (e) {
-                if (e.target.name === "All") {
+                if (e.target.name === "Tous") {
                     console.log("target-e", e.target)
                     filterChoice = works;
                     console.log("filterChoice", filterChoice)
@@ -107,30 +109,15 @@ function applyFilter(filterChoice) {
         gallery.appendChild(figure);
     }
 }
-//--------------   
-// Creation of filter according to the clicked button
-//--------------
-/*fetch(url).then(response => response.json())
-        .then(data => {   
-            let filterChoice = '';
-            const btnFilter = document.querySelectorAll(".btn-filter");
-            btnFilter.forEach (function(btn){
-            btn.addEventListener("click", function(e){
-            if (e.target.name === "All") {
-                filterChoice = data;                       
-                applyFilter(filterChoice);
-            }else {
-                filterChoice = data.filter(obj => obj.category.name === e.target.name)       
-                applyFilter(filterChoice);
-            }
-            })
-            })
-})*/
 
+//tokenList.toggle(token)
 //controle si logger 
 //affichage de la barre de navigation admin
 /* const adminNav = getElementById("admin-nav");
                 adminNav.style["display"]= "flex";*/
+// réduire margin-top header à 38px(50px)
+// faire apparaître les boutons "modifier" x3
+// changer login per logout voir toggle
 //---------------------
 //parts of the modals |
 //--------------------

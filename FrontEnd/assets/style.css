@@ -356,10 +356,10 @@ main {
   /*width: 100px;*/
 }
 /* hover ou active  idem  */
-#btn-all:active,
-#btn-object:active,
-#btn-appartment:active,
-#btn-hotel:active {
+#btn-Tous:active,
+#btn-Objets:active,
+#btn-Appartements:active,
+#btn-Hotels:active {
   background-color: #1d6154;
   color: #ffffff;
 }
