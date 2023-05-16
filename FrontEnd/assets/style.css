@@ -348,7 +348,7 @@ main {
   background-color: #e5e5e5;
   color: #1d6154;
 }
-#btn-all {
+#btn-Tous {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 9px 30px 9px 28px;
@@ -363,7 +363,7 @@ main {
   background-color: #1d6154;
   color: #ffffff;
 }
-#btn-object {
+#btn-Objets {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 9px 22px 9px 20px;
@@ -371,7 +371,7 @@ main {
   /*width: 100px;*/
 }
 
-#btn-appartment {
+#btn-Appartements {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 9px 14px 9px 15px;
@@ -379,7 +379,7 @@ main {
   /*width: 157px;*/
 }
 
-#btn-hotel {
+#btn-Hotels {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 9px 11px 9px 9px;

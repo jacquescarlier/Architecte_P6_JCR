@@ -7,7 +7,7 @@ const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");
 
 //tableau ['entitled','suffix for button ID', 'category name]
-let arrayCreateButton = [['Tous', 'all', 'All'], ['Objets', 'object', 'Objets'], ['Appartements', 'appartment', 'Appartements'], ['Hôtels & restaurants', 'hotel', 'Hotels & restaurants']];
+let arrayCreateButton = [['Tous', 'Tous', 'All'], ['Objets', 'Objets', 'Objets'], ['Appartements', 'Appartements', 'Appartements'], ['Hôtels & restaurants', 'Hotels', 'Hotels & restaurants']];
 
 //   --------------------
 //  |   Create Button   |
