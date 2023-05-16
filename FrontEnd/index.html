@@ -42,20 +42,13 @@
 			<section id="introduction">
 				<figure>
 					<img src="./assets/images/sophie-bluel.png" alt="photos de Sophie Buel">
-					<a href="#modal-portrait" class="modifier" id="bouton-modifier-photo">
+					<a href="#modal-galerie" class="modifier" id="bouton-modifier-photo">
 						<span class="span-modifier-portrait"><i class="fa-regular fa-pen-to-square"></i>
 						Modifier</span>
 					</a>
 				</figure>
-				<!--structure pour Modal-->
-				<aside  id="modal-portrait" class="modal" aria-hidden="true" role="dialog" aria-labelleby="title-modal" style="display:none">
-					<div class="modal-portrait-content">
-						<h1 id=""title-modal>modal portrait</h1>
-					</div>
-				</aside>
-		<!--fin de modal-->
 				<article class="introduction">
-					<a href="#modal-introduction" class="modifier" id="bouton-modifier-introduction">
+					<a href="#modal-galerie" class="modifier" id="bouton-modifier-introduction">
 						<i class="fa-regular fa-pen-to-square"></i>
 						<span>Modifier</span>
 					</a>
@@ -78,6 +71,7 @@
 						<button class="edit1" data-target="#modal3" data-toggle="modal">Modifier</button>
 					</a>
 				</div>
+				<div class="btns-filter" id = "filterButton"></div>
 				<div class="btns-filter">
 					<button name="All" id="btn-all" class="btn-filter">Tous</button>
 					<button name="Objets" id="btn-object" class="btn-filter">Objets</button>
@@ -100,7 +94,6 @@
 				</form>
 			</section>
 		</main>
-		
 	</div>
 	<footer>
 		<nav>
@@ -109,6 +102,13 @@
 			</ul>
 		</nav>
 	</footer>
+	<!--structure pour Modal-->
+	<aside  id="modal-galerie" class="modal" aria-hidden="true" role="dialog" aria-labelleby="title-modal" style="display:none">
+		<div class="modal-portrait-content">
+			<h1 id=""title-modal>modal portrait</h1>
+		</div>
+	</aside>
+<!--fin de modal-->
 </body>
 
 </html>
