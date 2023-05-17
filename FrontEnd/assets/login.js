@@ -41,6 +41,8 @@ fetch("http://localhost:5678/api/users/login", {
         } else {
              errorInformation.innerHTML =
                 "Erreur dans l'identifiant ou le mot de passe";
+                errorInformation.style.background = "#F0CCD8";
+                errorInformation.style.border = "solid 1px #FF0000";   
             return Promise.reject();
         }
     })
