@@ -7,29 +7,7 @@ const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");
 
 //tableau ['entitled','suffix for button ID', 'category name]
-let arrayCreateButton = [['Tous', 'Tous', 'Tous'], ['Objets', 'Objets', 'Objets'], ['Appartements', 'Appartements', 'Appartements'], ['Hôtels & restaurants', 'Hotels', 'Hotels & restaurants']];
-
-//   --------------------
-//  |   Create Button   |
-//  --------------------
-
-function createButton() {
-    for (item of arrayCreateButton) {
-        let newButton = document.createElement("button");
-        console.log("bb", newButton);
-        //newButton.type = 'button';
-        newButton.name = [item[2]]
-        
-        newButton.innerHTML = [item[0]];
-        newButton.id = 'btn-' + [item[1]];
-        newButton.className = 'btn-filter';
-        let portfolio = document.getElementById("filterButton");
-        console.log("id button", newButton.id)
-        console.log("portfolio", portfolio);
-        portfolio.appendChild(newButton);
-    }
-}
-createButton();
+let arrayCreateButton = [['Tous', '0', 'Tous'], ['Objets', '1', 'Objets'], ['Appartements', '2', 'Appartements'], ['Hôtels & restaurants', '3', 'Hotels & restaurants']];
 
 //  -------------------------------------
 // | Check the connection with the API  |
@@ -43,6 +21,82 @@ async function getWorks(url) {
     }
 }
 
+//   --------------------------------------------------------
+//  |   data recovery through the api url for categories    | 
+//  -------------------------------------------------------- 
+
+async function getCategories(urlCategories) {
+    const response = await fetch(urlCategories);
+    if (response.ok) return await response.json();
+}
+
+//   --------------------------------------------
+//  | Create buttons dynamically whith the API  |
+//  --------------------------------------------
+async function getAllCategories() {
+   
+    let categ = await getCategories(urlCategories);
+
+    // creation of the all category button
+
+    let newButton = document.createElement("button");
+        newButton.type = 'button';
+        newButton.name = "Tous";
+        newButton.innerHTML = "Tous";
+        newButton.id = 'btn-' + 0;
+        newButton.className = 'btn-filter';
+        let portfolio = document.getElementById("filterButton");
+        portfolio.appendChild(newButton);
+
+    categLength = categ.length
+    console.log("cartelength", categ.length)
+
+    //creation of buttons for each category
+
+    for (let i = 0; i < categLength ; i++) {
+        buttonId = i + 1
+        let newButton = document.createElement("button");
+        console.log("i", i)
+        console.log("getc", newButton);
+        newButton.type = 'button';
+        newButton.name = categ[i].name;
+        console.log("inner", categ[i].name)
+        newButton.innerHTML = categ[i].name;
+        newButton.id = 'btn-' + buttonId;
+        newButton.className = 'btn-filter';
+        let portfolio = document.getElementById("filterButton");
+        portfolio.appendChild(newButton);
+    }
+    
+    }
+
+
+getAllCategories()
+//   --------------------
+//  |   Create Button   |
+//  --------------------
+//fonction avec tableau perso pour corriger la faute sur Hôtels (ô)
+//désactivé pour l'instant
+/*function createButton() {
+
+    for (item of arrayCreateButton) {
+        let newButton = document.createElement("button");
+        console.log("newbutton", newButton);
+        newButton.type = 'button';
+        newButton.name = [item[2]]
+        newButton.innerHTML = [item[0]];
+        newButton.id = 'btn-' + [item[1]];
+        newButton.className = 'btn-filter';
+        let portfolio = document.getElementById("filterButton");
+        console.log("id button", newButton.id)
+        console.log("portfolio", portfolio);
+        portfolio.appendChild(newButton);
+    }
+}
+createButton();
+
+*/
+
 //   -------------------------------------------
 //  |    Creation of the gallery & the filter  |
 //  -------------------------------------------
@@ -51,8 +105,9 @@ async function buildWorks() {
     // array constant
     let works = await getWorks(url);
     console.log("works", works)
-    
-    //job creation function
+
+    // job creation function
+
     function createWork() {
         for (const project of works) {
             let figure = document.createElement("figure");
@@ -66,8 +121,8 @@ async function buildWorks() {
         }
     }
     createWork()
-   
-    //filter creation function
+
+    // filter creation function
     async function createFilter() {
         let filterChoice = '';
         const btnFilter = document.querySelectorAll(".btn-filter");
@@ -118,9 +173,9 @@ function applyFilter(filterChoice) {
 // réduire margin-top header à 38px(50px)
 // faire apparaître les boutons "modifier" x3
 // changer login per logout voir toggle
-//---------------------
-//parts of the modals |
-//--------------------
+// ---------------------
+// parts of the modals |
+// --------------------
 let modal = null
 const openModal = function (e) {
     console.log("e", e)
