@@ -130,6 +130,7 @@ table {
 /** end reset css**/
 
 /* Général */
+
 * { box-sizing: border-box;}
 
 body {
@@ -163,6 +164,7 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+
 /*barre de navigation et boutons pour mode admin*/
 
 .admin-nav {
@@ -174,7 +176,7 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 30px;
- /* display: none;*/
+  display: none;
 }
 
 .edition {
@@ -196,7 +198,7 @@ h2 {
 }
 
 .modifier {
-  /*display: none;*/
+  display: none;
 }
 .modifier button {
   background: #E5E5E5;
@@ -208,6 +210,7 @@ h2 {
 }
 
 /* header */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -261,7 +264,9 @@ nav a {
   font-weight: 400;
   margin-left: 10px;
 }
+
 /* Main */
+
 main {
   width: 85%;
   margin: 0 12.5%;
@@ -269,7 +274,9 @@ main {
   justify-content: center;
   flex-flow: row wrap;
 }
+
 /* Section Indrotuction */
+
 #introduction {
   display: flex;
   justify-content: space-between;
@@ -317,6 +324,7 @@ main {
   top: 30px;
 
  }
+
 /* section Portfolio with filter buttons*/
 
 #portfolio h2 {
@@ -355,11 +363,11 @@ main {
   height: 37px;
   /*width: 100px;*/
 }
-/* hover ou active  idem  */
-#btn-Tous:active,
-#btn-Objets:active,
-#btn-Appartements:active,
-#btn-Hotels:active {
+
+#btn-0:active,
+#btn-1:active,
+#btn-2:active,
+#btn-3:active {
   background-color: #1d6154;
   color: #ffffff;
 }
@@ -388,6 +396,7 @@ main {
 }
 
 /* div gallery */
+
 .gallery {
   /*margin-left: 1%;*/
   width: 95%;
@@ -408,6 +417,7 @@ main {
 }
 
 /* Form  section contact*/
+
 #contact {
   width: 50%;
   margin: auto;

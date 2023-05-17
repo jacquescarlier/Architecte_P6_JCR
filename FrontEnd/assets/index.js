@@ -184,7 +184,7 @@ const openModal = function (e) {
   console.log("e", e);
   e.preventDefault();
   const target = document.querySelector(e.target.getAttribute("href"));
-  console.log("target href", target);
+                                            console.log("target href", target);
   target.style.display = null;
   target.removeAttribute("aria-hidden");
   target.setAttribute("aria-modal", "true");
