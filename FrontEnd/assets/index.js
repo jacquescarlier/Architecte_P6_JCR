@@ -1,6 +1,6 @@
-//   ------------------------------------------
+//  -------------------------------------------
 //  |  declaration of constants and variables |
-//  ------------------------------------------
+//  -------------------------------------------
 let url = "http://localhost:5678/api/works";
 let urlCategories = "http://localhost:5678/api/categories";
 const gallery = document.querySelector(".gallery");
@@ -8,16 +8,16 @@ const portfolio = document.getElementById("#portfolio");
 
 //tableau ['entitled','suffix for button ID', 'category name]
 // tableau pourr fonction "createe button sans passer par l'API"
-/*let arrayCreateButton = [
-  ["Tous", "0", "Tous"],
-  ["Objets", "1", "Objets"],
-  ["Appartements", "2", "Appartements"],
-  ["Hôtels & restaurants", "3", "Hotels & restaurants"],
-];*/
+let arrayCreateButton = [
+  ["Tous", "Tous", "Tous"],
+  ["Objets", "Objets", "Objets"],
+  ["Appartements", "Appartements", "Appartements"],
+  ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"],
+];
 
-//  -------------------------------------
+// --------------------------------------
 // | Check the connection with the API  |
-// -------------------------------------
+// --------------------------------------
 
 async function getWorks(url) {
   const response = await fetch(url);
@@ -27,33 +27,31 @@ async function getWorks(url) {
   }
 }
 
-//   --------------------------------------------------------
+//  ---------------------------------------------------------
 //  |   data recovery through the api url for categories    |
-//  --------------------------------------------------------
+//  ---------------------------------------------------------
 
 async function getCategories(urlCategories) {
   const response = await fetch(urlCategories);
   if (response.ok) return await response.json();
 }
 
-//   --------------------------------------------
+//  ---------------------------------------------
 //  | Create buttons dynamically whith the API  |
-//  --------------------------------------------
+//  ---------------------------------------------
 async function createButtons() {
   let category = await getCategories(urlCategories);
 
   // creation of the all category button
 
-  let newButton = document.createElement("button");
-  newButton.type = "button";
-  newButton.name = "Tous";
-  newButton.innerHTML = "Tous";
-  newButton.id = "btn-" + 0;
-  newButton.className = "btn-filter";
-                                                console.log("newButton", newButton)
-                                                console.log("inner", newButton.innerHTML)
+  let newFilterButton = document.createElement("button");
+  newFilterButton.type = "button";
+  newFilterButton.name = "Tous";
+  newFilterButton.innerHTML = "Tous";
+  newFilterButton.id = "btn-" + "Tous";
+  newFilterButton.className = "btn-filter";
   let portfolio = document.getElementById("filterButton");
-  portfolio.appendChild(newButton);
+  portfolio.appendChild(newFilterButton);
 
   categoryLength = category.length;
                                                 console.log("cartelength", category.length);
@@ -61,24 +59,25 @@ async function createButtons() {
   //creation of buttons for each category
 
   for (let i = 0; i < categoryLength; i++) {
+    
     buttonId = i + 1;
-    let newButton = document.createElement("button");
+    let newFilterButton = document.createElement("button");
                                                  console.log("i", i);
-                                                 console.log("newButton", newButton);
-    newButton.type = "button";
-    newButton.name = category[i].name;
-    newButton.innerHTML = category[i].name;
+                                                 console.log("newButton", newFilterButton);
+    newFilterButton.type = "button";
+    newFilterButton.name = category[i].name;
+    newFilterButton.innerHTML = category[i].name;
                                                 console.log("inner", category[i].name);
-    newButton.id = "btn-" + buttonId;
-    newButton.className = "btn-filter";
+    newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
+    newFilterButton.className = "btn-filter";
     let portfolio = document.getElementById("filterButton");
-    portfolio.appendChild(newButton);
+    portfolio.appendChild(newFilterButton);
   }
 }
 createButtons();
-//   ------------------------------
+//  -------------------------------
 //  |   Create Button with Array  |
-//  ------------------------------
+//  -------------------------------
 
 //fonction avec tableau perso pour corriger la faute sur Hôtels (ô)
 //désactivé pour l'instant
@@ -99,9 +98,9 @@ createButtons();
 }
 createButton();
 */
-//   -------------------------------------------
+//  --------------------------------------------
 //  |    Creation of the gallery & the filter  |
-//  -------------------------------------------
+//  --------------------------------------------
 
 async function buildWorks() {
   // array constant
@@ -151,9 +150,9 @@ async function buildWorks() {
 
 buildWorks();
 
-//  -----------------
+// ------------------
 // |  Apply filter  |
-// -----------------
+// ------------------
 function applyFilter(filterChoice) {
   gallery.innerHTML = "";
   for (const filter of filterChoice) {
@@ -169,6 +168,12 @@ function applyFilter(filterChoice) {
 }
 
 //tokenList.toggle(token)
+/*if (sessionStorage.getItem("token", userInformation.token) ) {
+  console.log("token");
+  getElementById("admin-nav").style.display="flex";
+} else {console.log("pas token")
+
+}*/
 //controle si logger
 //affichage de la barre de navigation admin
 /* const adminNav = getElementById("admin-nav");
