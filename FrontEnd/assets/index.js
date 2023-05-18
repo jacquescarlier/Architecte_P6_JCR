@@ -172,8 +172,9 @@ function applyFilter(filterChoice) {
     gallery.appendChild(figure);
   }
 }
-
-//Login admin
+//  ---------------------------------------------
+//  | setting up element according to the token |
+//  ---------------------------------------------
 
 let controlToken = sessionStorage.getItem('token')
 console.log("token", controlToken)
@@ -188,8 +189,11 @@ modalCallButtons.forEach(function (item) {
   controlToken === null ? item.style["display"] = "none" : item.style["display"] = "flex";
 })
 
-//login logout admin
-// écoute sur le bouton de login/logout de la page index.html
+//  ---------------------------------------------------------
+//  | Management of the action of the "login/logout" button |
+//  ---------------------------------------------------------
+
+// add event listening on the  "login/logout" button
 loginLogout.addEventListener("click", function () {
   logInLogOut()
 })
@@ -206,9 +210,6 @@ function logInLogOut() {
   }
 }
 
-
-
-// réduire margin-top header à 38px(50px)
 // ---------------------
 // parts of the modals |
 // --------------------
