@@ -2,17 +2,17 @@
 //  |  declaration of constants and variables |
 //  -------------------------------------------
 
-//url de la base  de données de l'API
+//url to access the api database
 let url = "http://localhost:5678/api/works";
-// url ne donnant accès qu'à la partie catégorie
+// url for the category part
 let urlCategories = "http://localhost:5678/api/categories";
 const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");
-//const barre navigation admin
+//const admin navigation bar
 const adminNav = document.getElementById("admin-nav");
-// boutons modifier dans partie admin
+// "edit" buttons for the admin part
 const modalCallButtons = document.querySelectorAll(".modifier")
-//bouton login ou logout en fonction de la connexion
+//login or logout button depending on the token
 const loginLogout = document.getElementById("login")
 
 //tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
@@ -69,8 +69,6 @@ async function createButtons() {
   for (let i = 0; i < category.length; i++) {
     buttonId = i + 1;
     let newFilterButton = document.createElement("button");
-                                                 console.log("i", i);
-                                                 console.log("newButton", newFilterButton);
     newFilterButton.type = "button";
     newFilterButton.name = category[i].name;
     newFilterButton.innerHTML = category[i].name;
@@ -179,11 +177,9 @@ function applyFilter(filterChoice) {
 
 let controlToken = sessionStorage.getItem('token')
 console.log("token", controlToken)
-
+// Make the admin navigation bar and "edit" buttons visible
 controlToken===null? (adminNav.style["display"]= "none"): (adminNav.style["display"]= "flex");
 controlToken ===null? document.getElementById("login").innerHTML = "login": document.getElementById("login").innerHTML ="logout"
- 
-
 
 modalCallButtons.forEach(function(item){
   controlToken ===null? item.style["display"]= "none":  item.style["display"]= "flex";
@@ -198,16 +194,13 @@ loginLogout.addEventListener("click",function(){
   if (controlToken ===null){
 
   }else{
-
+sessionStorage.clear();
+console.log("token", controlToken)
   }
  }
 //controle si logger
-//affichage de la barre de navigation admin
-/* const adminNav = getElementById("admin-nav");
-                adminNav.style["display"]= "flex";*/
+
 // réduire margin-top header à 38px(50px)
-// faire apparaître les boutons "modifier" x3
-// changer login per logout voir toggle
 // ---------------------
 // parts of the modals |
 // --------------------
