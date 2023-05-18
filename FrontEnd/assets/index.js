@@ -213,19 +213,17 @@ function logInLogOut() {
 // ---------------------
 // parts of the modals |
 // --------------------
-let modal = null;
-const openModal = function (e) {
-  console.log("e", e);
-  e.preventDefault();
-  const target = document.querySelector(e.target.getAttribute("href"));
-  console.log("target href", target);
-  target.style.display = null;
-  target.removeAttribute("aria-hidden");
-  target.setAttribute("aria-modal", "true");
-  modal = target;
-  modal.addEventListener("click", close);
-};
-document.querySelectorAll(".modifier").forEach((a) => {
-  a.addEventListener("click", openModal);
-  console.log("a", a);
-});
+const modalContainer = document.querySelector(".modal-container");
+
+const modalTrigger =document.querySelectorAll(".modal-trigger");
+
+modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
+
+function toggleModal() {
+  modalContainer.classList.toggle("active")
+}
+
+
+
+
+
