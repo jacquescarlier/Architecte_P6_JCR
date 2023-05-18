@@ -19,7 +19,7 @@
 </head>
 
 <body>
-	<div class="admin-nav" #id="admin-nav">
+	<div class="admin-nav" id="admin-nav">
 		<div class="edition">
 			<i class="fa-regular fa-pen-to-square"></i>
 			<span class="edition-view">Mode édition</span>
@@ -33,7 +33,7 @@
 				<ul>
 					<li>projets</li>
 					<li>contact</li>
-					<li> <a id="login" id="logout" href="./login.html">login</a> </li>
+					<li> <a id="login" href="./login.html">login</a> </li>
 					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
@@ -44,7 +44,7 @@
 					<img src="./assets/images/sophie-bluel.png" alt="photos de Sophie Buel">
 					<a href="#modal-galerie" class="modifier" id="bouton-modifier-photo">
 						<span class="span-modifier-portrait"><i class="fa-regular fa-pen-to-square"></i>
-						Modifier</span>
+							Modifier</span>
 					</a>
 				</figure>
 				<article class="introduction">
@@ -68,10 +68,10 @@
 					<h2>Mes Projets</h2>
 					<a href=" " class="modifier" id="bouton-modifier-projets">
 						<i class="fa-regular fa-pen-to-square"></i>
-						<button class="edit1" data-target="#modal3" data-toggle="modal">Modifier</button>
+						<span class="edit1" data-target="#modal3" data-toggle="modal">Modifier</span>
 					</a>
 				</div>
-				<div class="btns-filter" id = "filterButton"></div>
+				<div class="btns-filter" id="filterButton"></div>
 				<div class="gallery"></div>
 			</section>
 			<section id="contact">
@@ -97,9 +97,9 @@
 		</nav>
 	</footer>
 	<!--structure pour Modal-->
-	<aside  id="modal-galerie" class="modal" aria-hidden="true" role="dialog" aria-labelleby="title-modal">
+	<aside id="modal-galerie" class="modal" aria-hidden="true" role="dialog" aria-labelleby="title-modal">
 		<div class="modal-portrait-content">
-			<h1 id="title-modal">modal portrait</h1>
+			<h2 id="title-modal">modal portrait</h2>
 		</div>
 	</aside>
 	<!--fin de modal-->

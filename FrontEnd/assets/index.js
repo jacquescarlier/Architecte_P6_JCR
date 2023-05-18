@@ -1,19 +1,29 @@
 //  -------------------------------------------
 //  |  declaration of constants and variables |
 //  -------------------------------------------
+
+//url de la base  de données de l'API
 let url = "http://localhost:5678/api/works";
+// url ne donnant accès qu'à la partie catégorie
 let urlCategories = "http://localhost:5678/api/categories";
 const gallery = document.querySelector(".gallery");
 const portfolio = document.getElementById("#portfolio");
+//const barre navigation admin
+const adminNav = document.getElementById("admin-nav");
+// boutons modifier dans partie admin
+const modalCallButtons = document.querySelectorAll(".modifier")
+//bouton login ou logout en fonction de la connexion
+const loginLogout = document.getElementById("login")
 
-//tableau ['entitled','suffix for button ID', 'category name]
-// tableau pourr fonction "createe button sans passer par l'API"
-let arrayCreateButton = [
-  ["Tous", "Tous", "Tous"],
+//tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
+// tableau pour fonction "create button sans passer par l'API"
+//Faute d'orthographe dans un nom de catégorie Hotel => Hôtel
+//let arrayCreateButton = [
+/*  ["Tous", "Tous", "Tous"],
   ["Objets", "Objets", "Objets"],
   ["Appartements", "Appartements", "Appartements"],
   ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"],
-];
+];*/
 
 // --------------------------------------
 // | Check the connection with the API  |
@@ -39,6 +49,7 @@ async function getCategories(urlCategories) {
 //  ---------------------------------------------
 //  | Create buttons dynamically whith the API  |
 //  ---------------------------------------------
+
 async function createButtons() {
   let category = await getCategories(urlCategories);
 
@@ -53,13 +64,9 @@ async function createButtons() {
   let portfolio = document.getElementById("filterButton");
   portfolio.appendChild(newFilterButton);
 
-  categoryLength = category.length;
-                                                console.log("cartelength", category.length);
-
   //creation of buttons for each category
 
-  for (let i = 0; i < categoryLength; i++) {
-    
+  for (let i = 0; i < category.length; i++) {
     buttonId = i + 1;
     let newFilterButton = document.createElement("button");
                                                  console.log("i", i);
@@ -89,6 +96,7 @@ createButtons();
         newButton.name = [item[2]]
         newButton.innerHTML = [item[0]];
         newButton.id = 'btn-' + [item[1]];
+        console.log("id",newButton)
         newButton.className = 'btn-filter';
         let portfolio = document.getElementById("filterButton");
         console.log("id button", newButton.id)
@@ -96,8 +104,8 @@ createButtons();
         portfolio.appendChild(newButton);
     }
 }
-createButton();
-*/
+createButton();*/
+
 //  --------------------------------------------
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
@@ -167,13 +175,32 @@ function applyFilter(filterChoice) {
   }
 }
 
-//tokenList.toggle(token)
-/*if (sessionStorage.getItem("token", userInformation.token) ) {
-  console.log("token");
-  getElementById("admin-nav").style.display="flex";
-} else {console.log("pas token")
+//Login admin
 
-}*/
+let controlToken = sessionStorage.getItem('token')
+console.log("token", controlToken)
+
+controlToken===null? (adminNav.style["display"]= "none"): (adminNav.style["display"]= "flex");
+controlToken ===null? document.getElementById("login").innerHTML = "login": document.getElementById("login").innerHTML ="logout"
+ 
+
+
+modalCallButtons.forEach(function(item){
+  controlToken ===null? item.style["display"]= "none":  item.style["display"]= "flex";
+})
+
+//logout admin
+loginLogout.addEventListener("click",function(){
+  console.log("appuie login", loginLogout)
+  logInLogOut()
+})
+ function logInLogOut() {
+  if (controlToken ===null){
+
+  }else{
+
+  }
+ }
 //controle si logger
 //affichage de la barre de navigation admin
 /* const adminNav = getElementById("admin-nav");
