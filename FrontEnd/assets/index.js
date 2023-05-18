@@ -14,7 +14,7 @@ const adminNav = document.getElementById("admin-nav");
 const modalCallButtons = document.querySelectorAll(".modifier")
 //login or logout button depending on the token
 const loginLogout = document.getElementById("login")
-
+console.log("log", loginLogout)
 //tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 // tableau pour fonction "create button sans passer par l'API"
 //Faute d'orthographe dans un nom de catégorie Hotel => Hôtel
@@ -72,7 +72,7 @@ async function createButtons() {
     newFilterButton.type = "button";
     newFilterButton.name = category[i].name;
     newFilterButton.innerHTML = category[i].name;
-                                                console.log("inner", category[i].name);
+    console.log("inner", category[i].name);
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
     newFilterButton.className = "btn-filter";
     let portfolio = document.getElementById("filterButton");
@@ -111,7 +111,7 @@ createButton();*/
 async function buildWorks() {
   // array constant
   let works = await getWorks(url);
-                                                 console.log("works", works);
+  console.log("works", works);
 
   // job creation function
 
@@ -136,16 +136,16 @@ async function buildWorks() {
     btnFilter.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
-                                                console.log("target-e", e.target);
+          console.log("target-e", e.target);
           filterChoice = works;
-                                                console.log("filterChoice", filterChoice);
+          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         } else {
           filterChoice = works.filter(
             (obj) => obj.category.name === e.target.name
           );
-                                                console.log("target-e", e.target);
-                                                console.log("filterChoice", filterChoice);
+          console.log("target-e", e.target);
+          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         }
       });
@@ -178,27 +178,35 @@ function applyFilter(filterChoice) {
 let controlToken = sessionStorage.getItem('token')
 console.log("token", controlToken)
 // Make the admin navigation bar and "edit" buttons visible
-controlToken===null? (adminNav.style["display"]= "none"): (adminNav.style["display"]= "flex");
-controlToken ===null? document.getElementById("login").innerHTML = "login": document.getElementById("login").innerHTML ="logout"
-
-modalCallButtons.forEach(function(item){
-  controlToken ===null? item.style["display"]= "none":  item.style["display"]= "flex";
+controlToken === null ? (adminNav.style["display"] = "none") : (adminNav.style["display"] = "flex");
+//Change the name of the button according to the token
+controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
+//change header margin-top
+controlToken === null ? (header.style.marginTop = "50px"):(header.style.marginTop = "38px");
+//make the "edit" buttons appear or disappear
+modalCallButtons.forEach(function (item) {
+  controlToken === null ? item.style["display"] = "none" : item.style["display"] = "flex";
 })
 
-//logout admin
-loginLogout.addEventListener("click",function(){
-  console.log("appuie login", loginLogout)
+//login logout admin
+// écoute sur le bouton de login/logout de la page index.html
+loginLogout.addEventListener("click", function () {
   logInLogOut()
 })
- function logInLogOut() {
-  if (controlToken ===null){
 
-  }else{
-sessionStorage.clear();
-console.log("token", controlToken)
+// redirect function to a page according to the token
+function logInLogOut() {
+  if (controlToken === null) {
+    window.location.replace("./login.html");
+
+  } else {
+    console.log("token", controlToken)
+    sessionStorage.clear();
+    window.location.replace("./index.html");
   }
- }
-//controle si logger
+}
+
+
 
 // réduire margin-top header à 38px(50px)
 // ---------------------
@@ -209,7 +217,7 @@ const openModal = function (e) {
   console.log("e", e);
   e.preventDefault();
   const target = document.querySelector(e.target.getAttribute("href"));
-                                            console.log("target href", target);
+  console.log("target href", target);
   target.style.display = null;
   target.removeAttribute("aria-hidden");
   target.setAttribute("aria-modal", "true");

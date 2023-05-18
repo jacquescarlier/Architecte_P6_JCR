@@ -245,6 +245,13 @@ nav li {
   margin-left: 40px;
   padding-bottom: 14px;
 }
+li button {
+  border: none;
+  background: #e5e5e5;
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
 
 li img {
   height: 16px;
