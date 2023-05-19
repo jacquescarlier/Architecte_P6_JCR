@@ -561,10 +561,10 @@ form #errorInformation {
 /* fenêtres modal */
 
 .close-modal {
-  /*padding:20px*/
+  padding: 6px;
   height: 12px;
   width: 12px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   border-radius: 5px;
   border: none;
@@ -575,6 +575,7 @@ form #errorInformation {
   background: #FFFFFF;
   color: #000000;
 }
+
 .modal-container {
   visibility: hidden;
   position: fixed;
@@ -615,7 +616,7 @@ form #errorInformation {
   min-width: 500px;*/
   /*overflow: auto;*/
   width: 630px;
-  height: 670px;
+  height: 731px;
   background: #FFFFFF;
   border: 2px solid #1d6154;
   border-radius: 10px;
@@ -625,6 +626,7 @@ form #errorInformation {
   text-align: center;
   transform: translateX(-50%);
   transform: opacity 0.3s ease-out;
+  z-index: -1;
 }
 
 .modal-container.active .modal-galerie {
@@ -640,7 +642,7 @@ form #errorInformation {
   line-height: 30px;
   text-align: center;
   margin-top: 60px;
-  z-index: -1;
+  z-index: 1;
 }
 
 .button-add-photo {

@@ -6,8 +6,8 @@
 let url = "http://localhost:5678/api/works";
 // url for the category part
 let urlCategories = "http://localhost:5678/api/categories";
+
 const gallery = document.querySelector(".gallery");
-const portfolio = document.getElementById("#portfolio");
 //const admin navigation bar
 const adminNav = document.getElementById("admin-nav");
 // "edit" buttons for the admin part
@@ -17,8 +17,8 @@ const loginLogout = document.getElementById("login")
 console.log("log", loginLogout)
 //tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 // tableau pour fonction "create button sans passer par l'API"
-//Faute d'orthographe dans un nom de catégorie Hotel => Hôtel
-let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"],];
+//Faute d'orthographe dans un nom de catégorie Hotel => Hôtel, désactivé pour l'instant
+/*let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"]];*/
 
 // --------------------------------------
 // | Check the connection with the API  |
@@ -26,7 +26,7 @@ let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"]
 
 async function getWorks(url) {
   const response = await fetch(url);
-  if (response.ok) return await response.json();
+  if (response.ok) return await response.json(); 
   else {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
@@ -62,15 +62,23 @@ async function createButtons() {
   //creation of buttons for each category
 
   for (let i = 0; i < category.length; i++) {
-    buttonId = i + 1;
+    //variable pour la création d'un bouton
     let newFilterButton = document.createElement("button");
+    //attribut type du bouton
     newFilterButton.type = "button";
+    // attibut nom du bouton
     newFilterButton.name = category[i].name;
+    // Texte entre les balises button
     newFilterButton.innerHTML = category[i].name;
     console.log("inner", category[i].name);
+    // id du bouton "btn-"" + premier mot récupéré
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
+    console.log("newFilterButton.id => ", newFilterButton.id)
+    // class ajouté au bouton
     newFilterButton.className = "btn-filter";
+    //variable portfolio
     let portfolio = document.getElementById("filterButton");
+    // ajout de "newFilterButton" à la div "#portfolio" 
     portfolio.appendChild(newFilterButton);
   }
 }
@@ -212,15 +220,19 @@ function logInLogOut() {
 // --------------------
 
 const modalContainer = document.querySelector(".modal-container");
-
+const modalStop = document.querySelector(".js-modal-stop")
 const modalTrigger =document.querySelectorAll(".modal-trigger");
 
-modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
+modalStop.addEventListener ("click", function(){toggleModal})
+console.log("modal.stop", modalStop)
 
+
+modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
+console.log("modalTrigger", modalTrigger)
 function toggleModal() {
   modalContainer.classList.toggle("active")
+  console.log("toggle", modalContainer)
 }
-
 
 
 
