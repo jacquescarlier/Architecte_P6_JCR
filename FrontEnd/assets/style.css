@@ -633,7 +633,7 @@ form #errorInformation {
   transition: opacity 0.3s 0.2s ease-out;
 }
 
-.modal-galerie h1{
+.modal-galerie h1, .add-photo h1{
   color: #000000;
   font-family: 'work sans';
   font-weight: 400;
@@ -722,4 +722,10 @@ form #errorInformation {
   font-weight: 400;
   text-align: center;
   transform: translateX(-50%);
+}
+
+#button-add-photo {
+  background: #A7A7A7;
+  position: absolute;
+  bottom: 55px;
 }

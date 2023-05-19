@@ -16,7 +16,6 @@ const modalCallButtons = document.querySelectorAll(".modifier")
 const loginLogout = document.getElementById("login")
 console.log("log", loginLogout)
 
-var worksTwin;
 /*tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 tableau pour fonction "create button sans passer par l'API"
 Faute d'orthographe dans un nom de catégorie Hotel => Hôtel, désactivé pour l'instant
@@ -116,9 +115,7 @@ createButton();*/
 async function buildWorks() {
   // array constant
   let works = await getWorks(url);
-   worksTwin = works;
-  console.log("works", works);
-console.log("twintwin", worksTwin)
+
   // job creation function
 
   function createWork() {
@@ -200,29 +197,25 @@ modalCallButtons.forEach(function (item) {
 //  ---------------------------------------------------------
 
 // add event listening on the  "login/logout" button
-loginLogout.addEventListener("click", function () {
-  logInLogOut()
-})
+loginLogout.addEventListener("click", function () {logInLogOut()})
 
 // redirect function to a page according to the token
 function logInLogOut() {
   if (controlToken === null) {
     window.location.replace("./login.html");
-
   } else {
                                             console.log("token", controlToken)
     sessionStorage.clear();
     window.location.replace("./index.html");
   }
 }
-console.log("twin", worksTwin)
+
 // ---------------------
 // parts of the modals |
 // --------------------
 
 const modalContainer = document.querySelector(".modal-container");
 const modal2Container = document.querySelector(".modal2-container")
-//const modalStop = document.querySelector(".js-modal-stop");
 const modalTrigger = document.querySelectorAll(".modal-trigger");
 const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
 const addPhotos = document.getElementById("button-add-modal");
@@ -240,6 +233,7 @@ function toggleModal2(){
   modal2Container.classList.toggle("active");
                                       console.log("toggle", modal2Container);
 }
+
 
 addPhotos.addEventListener("click", function() {
   toggleModal();

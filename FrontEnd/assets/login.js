@@ -1,3 +1,5 @@
+// constante url login
+let urlLogin = "http://localhost:5678/api/users/login";
 //constante pour le message d'erreur
 const errorInformation = document.getElementById("errorInformation");
 //style reset for errorInformation
@@ -25,7 +27,7 @@ submit.addEventListener("click", (e) => {
 //  ------------------
 //  | API connection |
 //  ------------------
-fetch("http://localhost:5678/api/users/login", {
+fetch(urlLogin, {
         
     method: "POST",
     headers: {
@@ -54,11 +56,11 @@ fetch("http://localhost:5678/api/users/login", {
     //  | save token in sessionStorage |
     //  --------------------------------
     .then(function (userInformation) {
-        if (userInformation) {
-            window.sessionStorage.setItem("userInformation", JSON.stringify(userInformation));
-            window.sessionStorage.setItem("token", userInformation.token);
+        //if (userInformation) {
+            sessionStorage.setItem("userInformation", JSON.stringify(userInformation));
+            sessionStorage.setItem("token", userInformation.token);
             window.location.replace("./index.html");  
-        }
+        //}
     })
     .catch((error) => console.error(error));
 });
