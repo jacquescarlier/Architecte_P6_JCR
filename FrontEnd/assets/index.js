@@ -18,12 +18,7 @@ console.log("log", loginLogout)
 //tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 // tableau pour fonction "create button sans passer par l'API"
 //Faute d'orthographe dans un nom de catégorie Hotel => Hôtel
-//let arrayCreateButton = [
-/*  ["Tous", "Tous", "Tous"],
-  ["Objets", "Objets", "Objets"],
-  ["Appartements", "Appartements", "Appartements"],
-  ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"],
-];*/
+let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"],];
 
 // --------------------------------------
 // | Check the connection with the API  |
@@ -152,6 +147,8 @@ async function buildWorks() {
     });
   }
   createFilter();
+
+
 }
 
 buildWorks();
@@ -213,6 +210,7 @@ function logInLogOut() {
 // ---------------------
 // parts of the modals |
 // --------------------
+
 const modalContainer = document.querySelector(".modal-container");
 
 const modalTrigger =document.querySelectorAll(".modal-trigger");
@@ -222,6 +220,10 @@ modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
 function toggleModal() {
   modalContainer.classList.toggle("active")
 }
+
+
+
+
 
 
 

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 		crossorigin="anonymous" referrerpolicy="no-referrer">
-	<meta name="description" content="DocSophie Bluel - Architecte d'intérieurument">
+	<!--<meta name="description" content="DocSophie Bluel - Architecte d'intérieurument">-->
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="../FrontEnd/assets/index.js" defer></script>
 </head>
@@ -48,6 +48,7 @@
 					</a>
 				</figure>
 				<article class="introduction">
+					<div class="div-introduction">
 					<a href="#modal-galerie" class="modifier modal-trigger" id="bouton-modifier-introduction">
 						<i class="fa-regular fa-pen-to-square"></i>
 						<span>Modifier</span>
@@ -61,6 +62,7 @@
 						chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 						décorateur(trice)</p>
+					</div>
 				</article>
 			</section>
 			<section id="portfolio">
@@ -102,6 +104,11 @@
 		<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
 			<button class="close-modal modal-trigger">X</button>
 			<h1 id="modalTitle">Galerie</h1>
+			<div class="gallery-modal"></div>
+			
+			<div class="border-modal"></div>
+			<button type="button" class="button-add-photo" >Ajouter une photo</button>
+			<button type="button" class="button-del-photo">Supprimer la galerie</button>
 		</div>
 	</div>
 	<!--fin de modal-->
