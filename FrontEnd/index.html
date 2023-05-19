@@ -99,15 +99,23 @@
 		</nav>
 	</footer>
 	<!--structure pour Modal-->
-	<div class="modal-container modal-trigger">
+	<div class="modal-container">
 		<div class="overlay"></div>
-		<div class="modal-galerie js-modal-stop" role="dialog" aria-labelledby="modalTitle">
+		<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
 			<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
 			<h1 id="modalTitle">Galerie</h1>
 			<div class="gallery-modal"></div>
 			<div class="border-modal"></div>
-			<button type="button" class="button-add-photo" >Ajouter une photo</button>
+			<button type="button" class="button-modal" id="button-add-modal" >Ajouter une photo</button>
 			<button type="button" class="button-del-photo">Supprimer la galerie</button>
+		</div>
+	</div>
+	<div class="modal2-container">
+		<div class="overlay"></div>
+		<div class="add-photo" role="dialog">
+			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
+			<div class="border-modal"></div>
+			<button type="button" class="button-modal" id="button-add-photo" >Ajouter une photo</button>
 		</div>
 	</div>
 	<!--fin de modal-->

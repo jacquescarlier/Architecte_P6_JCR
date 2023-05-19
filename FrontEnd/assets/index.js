@@ -15,10 +15,12 @@ const modalCallButtons = document.querySelectorAll(".modifier")
 //login or logout button depending on the token
 const loginLogout = document.getElementById("login")
 console.log("log", loginLogout)
-//tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
-// tableau pour fonction "create button sans passer par l'API"
-//Faute d'orthographe dans un nom de catégorie Hotel => Hôtel, désactivé pour l'instant
-/*let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"]];*/
+
+var worksTwin;
+/*tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
+tableau pour fonction "create button sans passer par l'API"
+Faute d'orthographe dans un nom de catégorie Hotel => Hôtel, désactivé pour l'instant
+let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"]];*/
 
 // --------------------------------------
 // | Check the connection with the API  |
@@ -26,7 +28,7 @@ console.log("log", loginLogout)
 
 async function getWorks(url) {
   const response = await fetch(url);
-  if (response.ok) return await response.json(); 
+  if (response.ok) return await response.json();
   else {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
@@ -114,8 +116,9 @@ createButton();*/
 async function buildWorks() {
   // array constant
   let works = await getWorks(url);
+   worksTwin = works;
   console.log("works", works);
-
+console.log("twintwin", worksTwin)
   // job creation function
 
   function createWork() {
@@ -139,24 +142,22 @@ async function buildWorks() {
     btnFilter.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
-          console.log("target-e", e.target);
+                              console.log("target-e", e.target);
           filterChoice = works;
-          console.log("filterChoice", filterChoice);
+                              console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         } else {
           filterChoice = works.filter(
             (obj) => obj.category.name === e.target.name
           );
-          console.log("target-e", e.target);
-          console.log("filterChoice", filterChoice);
+                              console.log("target-e", e.target);
+                              console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         }
       });
     });
   }
   createFilter();
-
-
 }
 
 buildWorks();
@@ -182,13 +183,13 @@ function applyFilter(filterChoice) {
 //  ---------------------------------------------
 
 let controlToken = sessionStorage.getItem('token')
-console.log("token", controlToken)
+                                      console.log("token", controlToken)
 // Make the admin navigation bar and "edit" buttons visible
 controlToken === null ? (adminNav.style["display"] = "none") : (adminNav.style["display"] = "flex");
 //Change the name of the button according to the token
 controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
 //change header margin-top
-controlToken === null ? (header.style.marginTop = "50px"):(header.style.marginTop = "38px");
+controlToken === null ? (header.style.marginTop = "50px") : (header.style.marginTop = "38px");
 //make the "edit" buttons appear or disappear
 modalCallButtons.forEach(function (item) {
   controlToken === null ? item.style["display"] = "none" : item.style["display"] = "flex";
@@ -209,32 +210,41 @@ function logInLogOut() {
     window.location.replace("./login.html");
 
   } else {
-    console.log("token", controlToken)
+                                            console.log("token", controlToken)
     sessionStorage.clear();
     window.location.replace("./index.html");
   }
 }
-
+console.log("twin", worksTwin)
 // ---------------------
 // parts of the modals |
 // --------------------
 
 const modalContainer = document.querySelector(".modal-container");
-const modalStop = document.querySelector(".js-modal-stop")
-const modalTrigger =document.querySelectorAll(".modal-trigger");
+const modal2Container = document.querySelector(".modal2-container")
+//const modalStop = document.querySelector(".js-modal-stop");
+const modalTrigger = document.querySelectorAll(".modal-trigger");
+const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
+const addPhotos = document.getElementById("button-add-modal");
 
-modalStop.addEventListener ("click", function(){toggleModal})
-console.log("modal.stop", modalStop)
 
-
-modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal))
-console.log("modalTrigger", modalTrigger)
+modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
+                                      console.log("modalTrigger", modalTrigger)
 function toggleModal() {
-  modalContainer.classList.toggle("active")
-  console.log("toggle", modalContainer)
+  modalContainer.classList.toggle("active");
+                                      console.log("toggle", modalContainer);
+}
+modalTrigger2.forEach(trigger =>trigger.addEventListener("click", toggleModal2));
+
+function toggleModal2(){
+  modal2Container.classList.toggle("active");
+                                      console.log("toggle", modal2Container);
 }
 
-
+addPhotos.addEventListener("click", function() {
+  toggleModal();
+  toggleModal2();
+})
 
 
 

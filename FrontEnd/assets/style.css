@@ -134,7 +134,6 @@ table {
 * { box-sizing: border-box;}
 
 body {
-  padding: 0 10px;
   width: 100vw;
   height: 100vh;
   background: #e5e5e5;
@@ -146,7 +145,7 @@ body {
 }
 
 .container-general {
-  max-width: 1160px;
+  max-width: 1140px;
   width: 100%;
   margin: auto;
   display: grid;
@@ -560,7 +559,7 @@ form #errorInformation {
 
 /* fenêtres modal */
 
-.close-modal {
+.close-modal, .close-modal2 {
   padding: 6px;
   height: 12px;
   width: 12px;
@@ -583,7 +582,7 @@ form #errorInformation {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
-  transition: visibily 0.8s;
+  transition: visibily 0.5s;
 }
 
 .modal-container.active {
@@ -645,7 +644,7 @@ form #errorInformation {
   z-index: 1;
 }
 
-.button-add-photo {
+.button-modal {
   position: absolute;
   bottom: 88px;
   left: 50%;
@@ -688,5 +687,39 @@ form #errorInformation {
   transform: translateX(-50%);
   border: 1px solid blue;
   margin-top: 46px;
+}
 
+
+.modal2-container {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  transition: visibily 0.5s;
+}
+
+.modal2-container.active {
+  visibility: visible;
+}
+
+
+.add-photo {
+  display: flex;
+  flex-flow: column wrap;
+  opacity: 1;
+  position: absolute;
+  top: 40%;
+  left: 52%;
+  width: 630px;
+  height: 731px;
+  background: #FFFFFF;
+  border: 2px solid #1d6154;
+  border-radius: 10px;
+  font-family: 'work sans';
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+  transform: translateX(-50%);
 }
