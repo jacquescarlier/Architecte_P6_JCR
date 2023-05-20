@@ -214,26 +214,34 @@ function logInLogOut() {
 // parts of the modals |
 // --------------------
 
+const reload=()=>window.location.reload();
+
 const modalContainer = document.querySelector(".modal-container");
 const modal2Container = document.querySelector(".modal2-container")
 const modalTrigger = document.querySelectorAll(".modal-trigger");
 const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
 const addPhotos = document.getElementById("button-add-modal");
 
-
+// modal 1 - gallery
 modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
                                       console.log("modalTrigger", modalTrigger)
 function toggleModal() {
   modalContainer.classList.toggle("active");
+ // modalContainer.className === "modal-container active" ? fetch(url):reload();
+  
                                       console.log("toggle", modalContainer);
 }
+console.log("classList =>", modalContainer.classList)
+
+
+//modal 2 - add photo
+
 modalTrigger2.forEach(trigger =>trigger.addEventListener("click", toggleModal2));
 
 function toggleModal2(){
   modal2Container.classList.toggle("active");
                                       console.log("toggle", modal2Container);
 }
-
 
 addPhotos.addEventListener("click", function() {
   toggleModal();

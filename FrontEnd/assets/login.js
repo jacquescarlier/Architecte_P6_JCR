@@ -10,6 +10,7 @@ errorInformation.style.border = "none ";
 //  -----------------------------------------------
 submit.addEventListener("click", (e) => {
     e.preventDefault();
+    /*récupération de l'objet event et lui applique la méthode 'preventDefault'. Bloque l'action par défaut du bouton si l'évennement n'est pas explicitement géré */
     const email = document.getElementById("emailUser").value;
     const password = document.getElementById("password").value;
 

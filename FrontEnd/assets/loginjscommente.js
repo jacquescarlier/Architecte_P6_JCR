@@ -1,5 +1,5 @@
 // constante du bouton 'se connecter'
-const sendIt = document.getElementById("submit");
+//const sendIt = document.getElementById("submit");
 //constante pour le message d'erreur
 const errorInformation = document.getElementById("errorInformation");
 
