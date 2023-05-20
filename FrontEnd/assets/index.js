@@ -182,14 +182,14 @@ function applyFilter(filterChoice) {
 let controlToken = sessionStorage.getItem('token')
                                       console.log("token", controlToken)
 // Make the admin navigation bar and "edit" buttons visible
-controlToken === null ? (adminNav.style["display"] = "none") : (adminNav.style["display"] = "flex");
+controlToken === null ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
 //Change the name of the button according to the token
 controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
 //change header margin-top
 controlToken === null ? (header.style.marginTop = "50px") : (header.style.marginTop = "38px");
 //make the "edit" buttons appear or disappear
 modalCallButtons.forEach(function (item) {
-  controlToken === null ? item.style["display"] = "none" : item.style["display"] = "flex";
+  controlToken === null ? item.style.display = "none" : item.style.display = "flex";
 })
 
 //  ---------------------------------------------------------
