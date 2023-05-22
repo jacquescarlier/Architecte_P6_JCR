@@ -17,8 +17,9 @@ submitSeConnecter.addEventListener("click", (e) => {
     let email = document.getElementById("emailUser").value;
     let password = document.getElementById("password").value;
     //utilisation d'une expression régulière (RegExp) pour confirmer la validité de l'email
+    // ^ pour commencer l'expression, $ pour terminer,\w tous les caractères, _- pour les 2 tirets, et le point qu'on échappe avec le backslash, + @ pour @ et tous les caratères {2,4} de 2 à 4 carractères, i pas sensible aux majuscule ou minuscule ,.
     if (!email || !password) {
-    if (!email || !email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i) ) {
+    if (!email || !email.match(/^[\w_\-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
         console.log("email",email)
         document.getElementById("errorInformation").innerHTML =
             "Entrer un E-mail  ou un E-mail valide!"
