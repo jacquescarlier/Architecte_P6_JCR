@@ -48,18 +48,7 @@ async function getCategories(urlCategories) {
 
 async function createButtons() {
   let category = await getCategories(urlCategories);
-
-  // creation of the all category button
-
-  let newFilterButton = document.createElement("button");
-  newFilterButton.type = "button";
-  newFilterButton.name = "Tous";
-  newFilterButton.innerHTML = "Tous";
-  newFilterButton.id = "btn-" + "Tous";
-  newFilterButton.className = "btn-filter";
-  let portfolio = document.getElementById("filterButton");
-  portfolio.appendChild(newFilterButton);
-
+ 
   //creation of buttons for each category
 
   for (let i = 0; i < category.length; i++) {
@@ -72,9 +61,9 @@ async function createButtons() {
     // Texte entre les balises button
     newFilterButton.innerHTML = category[i].name;
     console.log("inner", category[i].name);
-    // id du bouton "btn-"" + premier mot récupéré
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
-    console.log("newFilterButton.id => ", newFilterButton.id)
+    // id du bouton "btn-"" + premier mot récupéré
+    ////console.log("newFilterButton.id => ", newFilterButton.id)
     // class ajouté au bouton
     newFilterButton.className = "btn-filter";
     //variable portfolio

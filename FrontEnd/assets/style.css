@@ -542,14 +542,22 @@ form a {
   color: #3d3d3d;
   text-align: center;
 }
-form #errorInformation {
+/*form #errorInformation {
   font-size: 18px;
   font-weight: 700;
   padding: 5px;
   margin-top: 5px;
   border: 1px solid red;
   background-color: #F0CCD8;
-}
+}*/
+.errorInformation {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid red;
+  background-color: #F0CCD8;
+ }
 
 .footer-login {
   width: 100%;
@@ -560,7 +568,7 @@ form #errorInformation {
 /* fenêtres modal */
 
 .close-modal, .close-modal2 {
-  padding: 6px;
+  padding: 0px;
   height: 12px;
   width: 12px;
   font-size: 14px;
@@ -731,6 +739,8 @@ form #errorInformation {
 }
 
 #previous-arrow {
+  padding: 0;
+  width: 21px;
   position: absolute;
   top: 2.9%;
   left: 4.8%;
