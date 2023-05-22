@@ -6,7 +6,7 @@ const errorInformation = document.getElementById("errorInformation");
 //style reset for errorInformation
 errorInformation.style.background = "none";
 errorInformation.style.border = "none ";
-// focus in input email
+// focus in input
 document.getElementById("emailUser").focus()
 //  -----------------------------------------------
 //  | added event listening on the connect button |
@@ -16,15 +16,27 @@ submitSeConnecter.addEventListener("click", (e) => {
     /*récupération de l'objet event et lui applique la méthode 'preventDefault'. Bloque l'action par défaut du bouton si l'évennement n'est pas explicitement géré */
     let email = document.getElementById("emailUser").value;
     let password = document.getElementById("password").value;
-
+    //utilisation d'une expression régulière (RegExp) pour confirmer la validité de l'email
     if (!email || !password) {
-        console.log(email)
+    if (!email || !email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i) ) {
+        console.log("email",email)
         document.getElementById("errorInformation").innerHTML =
-            "Entrer un identifiant ou un mot de passe valide"
+            "Entrer un E-mail  ou un E-mail valide!"
         errorInformation.style.background = "#F0CCD8";
         errorInformation.style.border = "solid 1px #FF0000";
         return;
     }
+     if (!password){
+        console.log("email",email)
+        console.log("password", password)
+        document.getElementById("errorInformation").innerHTML =
+            "Entrer un mot de passe !"
+        errorInformation.style.background = "#F0CCD8";
+        errorInformation.style.border = "solid 1px #FF0000";
+        return;
+    };
+    
+}
     //  ------------------
     //  | API connection |
     //  ------------------
@@ -42,6 +54,7 @@ submitSeConnecter.addEventListener("click", (e) => {
         //  ---------------------------
         .then(function (authResponse) {
             if (authResponse.status === 200) {
+                console.log("zeze")
                 return authResponse.json();
             } else {
                 errorInformation.innerHTML =
