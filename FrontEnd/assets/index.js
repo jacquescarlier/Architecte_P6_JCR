@@ -213,8 +213,11 @@ function logInLogOut() {
 // ---------------------
 // parts of the modals |
 // --------------------
-
-const reload=()=>window.location.reload();
+//page refresh
+const reload=()=>{
+                            console.log("reload")
+  window.location.reload();
+}
 
 const modalContainer = document.querySelector(".modal-container");
 const modal2Container = document.querySelector(".modal2-container")
@@ -227,10 +230,10 @@ modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
                                       console.log("modalTrigger", modalTrigger)
 function toggleModal() {
   modalContainer.classList.toggle("active");
- // modalContainer.className === "modal-container active" ? fetch(url):reload();
-  
-                                      console.log("toggle", modalContainer);
+  if (modalContainer.className === "modal-container active") fetch(url);
+               console.log("toggle", modalContainer);
 }
+
 console.log("classList =>", modalContainer.classList)
 
 
@@ -243,12 +246,18 @@ function toggleModal2(){
                                       console.log("toggle", modal2Container);
 }
 
+//modal add photos
 addPhotos.addEventListener("click", function() {
   toggleModal();
   toggleModal2();
 })
 
-
+//modal 2 - add photo Arrow previous
+const previousArrow = document.getElementById("previous-arrow")
+previousArrow.addEventListener("click", function(){
+  toggleModal2();
+  modalContainer.classList.toggle("active");
+})
 
 
 

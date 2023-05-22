@@ -729,3 +729,12 @@ form #errorInformation {
   position: absolute;
   bottom: 55px;
 }
+
+#previous-arrow {
+  position: absolute;
+  top: 2.9%;
+  left: 4.8%;
+  cursor: pointer;
+  border: none;
+  background: #FFFFFF;
+}
