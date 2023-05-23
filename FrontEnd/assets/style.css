@@ -565,9 +565,13 @@ form a {
   position: absolute;
   bottom: 0;
 }
+/*  -------------------- */
+/*  |  fenêtres modal  | */
+/*  -------------------- */
 
-/* fenêtres modal */
+/* Modal visuel de la gallerie */
 
+/* croix de fermeture de la modale*/
 .close-modal,
 .close-modal2 {
   padding: 0px;
@@ -615,15 +619,10 @@ form a {
 .modal-galerie {
   display: none;
   flex-flow: column wrap;
-  opacity: 0;
+  /*opacity: 0;*/
   position: absolute;
   top: 40%;
   left: 52%;
-  /* width: 28.5%;
-  height: 43.5%;*/
-  /*min-width: 300px;
-  min-width: 500px;*/
-  /*overflow: auto;*/
   width: 630px;
   height: 731px;
   background: #ffffff;
@@ -635,7 +634,7 @@ form a {
   text-align: center;
   transform: translateX(-50%);
   transform: opacity 0.3s ease-out;
-  z-index: -1;
+  /*z-index: -1;*/
   padding: 0px 105px;
 }
 
