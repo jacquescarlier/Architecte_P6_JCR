@@ -282,7 +282,9 @@ buttonAddPhotos.addEventListener("click", function() {
 
 //modal - add photo Arrow previous
 const previousArrow = document.getElementById("previous-arrow")
+console.log("previous",previousArrow)
 previousArrow.addEventListener("click", function(){
+  console.log("clickou")
   toggleModal2();
   modalContainer.classList.toggle("active");
 })

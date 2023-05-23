@@ -104,35 +104,56 @@
 	<!--structure pour Modal-->
 	<div class="modal-container">
 		<div class="overlay"></div>
-		<div class="modal-general">
-			<div class="header-modal">
-				<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
-				<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+		<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
+			<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
+			<h1 id="modalTitle">Galerie photo</h1>
+			<div class="gallery-modal">
+				<i class="fa-solid fa-arrows-up-down-left-right"></i>
 			</div>
-			<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
-				<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
-				<h1 id="modalTitle">Galerie photo</h1>
-				<div class="gallery-modal">
-					<i class="fa-solid fa-arrows-up-down-left-right"></i>
-				</div>
-				<div class="border-modal"></div>
-				<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
-				<button type="button" class="button-del-photo">Supprimer la galerie</button>
+			<div class="border-modal"></div>
+			<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
+			<button type="button" class="button-del-photo">Supprimer la galerie</button>
 
-			</div>
-		</div>
-		<div class="modal2-container">
-			<div class="overlay"></div>
-			<div class="add-photo" role="dialog" aria-labelledby="modalTitle">
-				<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
-				<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
-				<h1 id="modalTitle">Ajout photo</h1>
-				<div class="border-modal"></div>
-				<button type="button" class="button-modal" id="button-add-photo">Valider</button>
-			</div>
 		</div>
 	</div>
-	<!--fin de modal-->
+	<div class="modal2-container">
+		<div class="overlay"></div>
+		<div class="add-photo" role="dialog" aria-labelledby="modalTitle">
+			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
+			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+			<h1 id="modalTitle">Ajout photo</h1>
+			<div class="rectangle-add-photo">
+				<i class="fa-sharp fa-regular fa-image"></i>
+				<i class="fa-light fa-image-landscape"></i>
+				<button class="btn-add-photo" type="button">Ajouter photo</button>
+				<div class="add-photo">+ Ajouter photo</div>
+				<span class="jpg">jpg png : 4 mo max</span>
+			</div>
+			<form id="form-modal">
+				<div clas="label-form">
+					<label class="label-title" for="title">Titre</label>
+					<input type="text" id="title" name="title" required>
+				</div>
+				<div class="form-category">
+					<label class="label-category" for="category">Catégorie :</label>
+					<select id="category" name="category">
+						<option value="" disabled selected></option>
+					</select>
+				</div>
+				<span id="errorMessage"></span>
+			</form>
+			<div class="border-modal"></div>
+			<button type="button" class="button-modal" id="button-add-photo">Valider</button>
+		</div>
+	</div>
+	<div class="modal3-container">
+		<div class="overlay"></div>
+		<div class="photo-added" role="dialog" aria-labelledby="modalTitle">
+			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
+			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+
+		</div>
+		<!--fin de modal-->
 </body>
 
 </html>
