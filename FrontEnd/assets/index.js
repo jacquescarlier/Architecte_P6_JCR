@@ -14,7 +14,6 @@ const adminNav = document.getElementById("admin-nav");
 const modalCallButtons = document.querySelectorAll(".modifier")
 //login or logout button depending on the token
 const loginLogout = document.getElementById("login")
-console.log("log", loginLogout)
 
 /*tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 tableau pour fonction "create button sans passer par l'API"
@@ -101,12 +100,13 @@ createButton();*/
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
 
-async function buildWorks(works2) {
+async function buildWorks() {
   // array constant
   let works = await getWorks(url);
-  works2 = works
-  console.log("worwor", works2)
-  // job creation function
+  
+// -------------------------
+// | job creation function |
+// -------------------------
 
   function createWork() {
     for (const project of works) {
@@ -121,8 +121,10 @@ async function buildWorks(works2) {
     }
   }
   createWork();
+//  ----------------------------
+//  | filter creation function |
+//  ----------------------------
 
-  // filter creation function
   async function createFilter() {
     let filterChoice = "";
     const btnFilter = document.querySelectorAll(".btn-filter");
@@ -152,6 +154,7 @@ async function buildWorks(works2) {
 // ------------------
 // |  Apply filter  |
 // ------------------
+
 function applyFilter(filterChoice) {
   gallery.innerHTML = "";
   for (const filter of filterChoice) {
@@ -165,19 +168,14 @@ function applyFilter(filterChoice) {
     gallery.appendChild(figure);
   }
 }
-async function yopo(works2){
-  //let works2 =  works
-  
-console.log("works2", works2)
-}
-yopo()
+
 //  ---------------------------------------------
 //  | setting up element according to the token |
 //  ---------------------------------------------
 
 // storing the token in a variable
 let controlToken = sessionStorage.getItem('token')
-                                      console.log("token", controlToken)
+                                        console.log("token", controlToken)
 // Modifies elements when switching to "edit mode"
 controlToken === null ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
 controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
@@ -198,7 +196,6 @@ function logInLogOut() {
   if (controlToken === null) {
     window.location.replace("./login.html");
   } else {
-                                            console.log("token", controlToken)
     sessionStorage.clear();
     window.location.replace("./index.html");
   }
@@ -209,12 +206,12 @@ function logInLogOut() {
 // --------------------
 
 
-//page refresh
+// page refresh
 const reload=()=>{
-                            console.log("reload")
   window.location.reload();
 }
 
+// constantes
 const modalContainer = document.querySelector(".modal-container");
 const modalGallery = document.querySelector(".modal-galerie")
 const modal2Container = document.querySelector(".modal2-container")
@@ -242,18 +239,14 @@ const galleryOfModal = document.querySelector(".gallery-modal")
     galleryOfModal.appendChild(figure);
   }   
 
-
-
-console.log("modalgellery", modalGallery)
+                                        console.log("modalgellery", modalGallery)
 modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex") : (modalGallery.style.display = "none");
 
-
-
 modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
-                                      console.log("modalTrigger", modalTrigger)
+                                        console.log("modalTrigger", modalTrigger)
 function toggleModal() {
   modalContainer.classList.toggle("active");
-                        console.log("toggle", modalContainer);
+                                        console.log("toggle", modalContainer);
   modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";
      
 }
@@ -289,6 +282,64 @@ previousArrow.addEventListener("click", function(){
   modalContainer.classList.toggle("active");
 })
 
+///////////////////////
+// add photo
+let imgSrc;
+document.querySelector(".add-photo").addEventListener("click", function () {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/jpg, image/png,image/jPEG";
+    input.click();
+    /* Check the file type and size */
+    input.addEventListener("change", async function () {
+        image = input.files[0];
+        if (image.type !== "image/jpg" && image.type !== "image/png" && image.type !== "image/jpeg") {
+            document.getElementById("errorMessage").innerHTML = "jpg ou png obligatoire";
+            return;
+        }
+        if (image.size > 4 * 1024 * 1024) {
+            document.getElementById("errorMessage").innerHTML = "4mo maximum";
+            return;
+        }
+        /* Replace by image loaded, the default message jpg png 4mo max */
+        background.innerHTML = "";
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = function () {
+            img.src = reader.result;
+            imgSrc = reader.result;
+            img.style.width = "30%";
+            background.appendChild(img);
+        }
+    }
+    );
+});
+
+
+/* take categories from API when load new image*/
+async function categories() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const categories = await response.json();
+    const select = document.querySelector("#category");
+    for (let i = 0; i < categories.length; i++) {
+        let option = document.createElement("option");
+        option.value = categories[i].id;
+        option.innerHTML = categories[i].name;
+        select.appendChild(option);
+    }}
+
+    async function categories() {
+      const response = await fetch("http://localhost:5678/api/categories");
+      const categories = await response.json();
+      const select = document.querySelector("#category");
+      for (let i = 0; i < categories.length; i++) {
+          let option = document.createElement("option");
+          option.value = categories[i].id;
+          option.innerHTML = categories[i].name;
+          select.appendChild(option);
+      }
+  }
+    
 
 
 
