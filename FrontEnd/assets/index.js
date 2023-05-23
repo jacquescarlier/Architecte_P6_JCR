@@ -60,7 +60,7 @@ async function createButtons() {
     newFilterButton.name = category[i].name;
     // Texte entre les balises button
     newFilterButton.innerHTML = category[i].name;
-    console.log("inner", category[i].name);
+                      console.log("inner", category[i].name);
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
     // id du bouton "btn-"" + premier mot récupéré
     ////console.log("newFilterButton.id => ", newFilterButton.id)
@@ -101,10 +101,11 @@ createButton();*/
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
 
-async function buildWorks() {
+async function buildWorks(works2) {
   // array constant
   let works = await getWorks(url);
-
+  works2 = works
+  console.log("worwor", works2)
   // job creation function
 
   function createWork() {
@@ -144,9 +145,9 @@ async function buildWorks() {
     });
   }
   createFilter();
-}
+//}
 
-buildWorks();
+//buildWorks();
 
 // ------------------
 // |  Apply filter  |
@@ -164,19 +165,23 @@ function applyFilter(filterChoice) {
     gallery.appendChild(figure);
   }
 }
+async function yopo(works2){
+  //let works2 =  works
+  
+console.log("works2", works2)
+}
+yopo()
 //  ---------------------------------------------
 //  | setting up element according to the token |
 //  ---------------------------------------------
 
+// storing the token in a variable
 let controlToken = sessionStorage.getItem('token')
                                       console.log("token", controlToken)
-// Make the admin navigation bar and "edit" buttons visible
+// Modifies elements when switching to "edit mode"
 controlToken === null ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
-//Change the name of the button according to the token
 controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
-//change header margin-top
 controlToken === null ? (header.style.marginTop = "50px") : (header.style.marginTop = "38px");
-//make the "edit" buttons appear or disappear
 modalCallButtons.forEach(function (item) {
   controlToken === null ? item.style.display = "none" : item.style.display = "flex";
 })
@@ -202,6 +207,8 @@ function logInLogOut() {
 // ---------------------
 // parts of the modals |
 // --------------------
+
+
 //page refresh
 const reload=()=>{
                             console.log("reload")
@@ -209,39 +216,67 @@ const reload=()=>{
 }
 
 const modalContainer = document.querySelector(".modal-container");
+const modalGallery = document.querySelector(".modal-galerie")
 const modal2Container = document.querySelector(".modal2-container")
+const addPhotos = document.querySelector(".add-photo");
 const modalTrigger = document.querySelectorAll(".modal-trigger");
 const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
-const addPhotos = document.getElementById("button-add-modal");
+const buttonAddPhotos = document.getElementById("button-add-modal");
+const galleryOfModal = document.querySelector(".gallery-modal")
+
 
 // modal 1 - gallery
+
+  for (const project of works) {
+    let figure = document.createElement("figure");
+    let img = document.createElement("img");
+    img.src = project.imageUrl;
+    figure.appendChild(img);
+    let figcaption = document.createElement("figcaption");
+    figcaption.innerHTML = "éditer";
+    figure.appendChild(figcaption);
+    galleryOfModal.appendChild(figure);
+  }   
+
+
+
+console.log("modalgellery", modalGallery)
+modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex") : (modalGallery.style.display = "none");
+
+
+
 modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
                                       console.log("modalTrigger", modalTrigger)
 function toggleModal() {
   modalContainer.classList.toggle("active");
-  if (modalContainer.className === "modal-container active") fetch(url);
-               console.log("toggle", modalContainer);
+                        console.log("toggle", modalContainer);
+  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";
+     
 }
 
 console.log("classList =>", modalContainer.classList)
 
 
-//modal 2 - add photo
-
+//modal - add photo
+//button "edit"
 modalTrigger2.forEach(trigger =>trigger.addEventListener("click", toggleModal2));
 
+
 function toggleModal2(){
-  modal2Container.classList.toggle("active");
+ modal2Container.classList.toggle("active");
                                       console.log("toggle", modal2Container);
+  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";   
+  modal2Container.className === "modal2-container active" ? addPhotos.style.display = "flex" : addPhotos.style.display = "none";   
+  modal2Container.className === "modal2-container active" ? modalGallery.style.display = "none" : modalGallery.style.display = "flex";                               
 }
 
 //modal add photos
-addPhotos.addEventListener("click", function() {
+buttonAddPhotos.addEventListener("click", function() {
   toggleModal();
   toggleModal2();
 })
 
-//modal 2 - add photo Arrow previous
+//modal - add photo Arrow previous
 const previousArrow = document.getElementById("previous-arrow")
 previousArrow.addEventListener("click", function(){
   toggleModal2();
@@ -251,3 +286,6 @@ previousArrow.addEventListener("click", function(){
 
 
 
+}
+
+buildWorks();
