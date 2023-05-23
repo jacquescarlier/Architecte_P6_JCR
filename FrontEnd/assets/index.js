@@ -235,6 +235,10 @@ const galleryOfModal = document.querySelector(".gallery-modal")
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = "éditer";
     figure.appendChild(figcaption);
+    let spanGallery = document.createElement("i");
+    spanGallery.className = "fa-solid fa-trash-can";
+    spanGallery.innerHTML = "";
+    figure.appendChild(spanGallery);
     galleryOfModal.appendChild(figure);
   }   
 

@@ -759,19 +759,23 @@ form a {
   gap:6px;
  
 }
+.gallery-modal figure {
+  position: relative;
+}
 
 .gallery-modal figure img{
   width: 100%;
   height: 106px;  
 }
 
-.gallery-modal figure img:hover{
-
-}
-  
-.modal-gallery fa-solid {
-  font-size: 10px;
+.gallery-modal  .fa-solid{
+  position: absolute;
+  top: 6px;
+  right: 9.1%;
+  font-size: 9px;
+  padding: 4px;
   background-color: #000000;
+  border-radius: 2px;
   color: #FFFFFF;
 }
 .modal-galerie figure figcaption {

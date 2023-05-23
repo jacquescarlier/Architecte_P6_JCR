@@ -49,19 +49,20 @@
 				</figure>
 				<article class="introduction">
 					<div class="div-introduction">
-					<a href="#modal-galerie" class="modifier modal-trigger" id="bouton-modifier-introduction">
-						<i class="fa-regular fa-pen-to-square"></i>
-						<span>Modifier</span>
-					</a>
-					<h2>Designer d'espace</h2>
-					<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
-						livraison
-						finale du chantier.</p>
-					<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
-						couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
-						chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-					<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
-						décorateur(trice)</p>
+						<a href="#modal-galerie" class="modifier modal-trigger" id="bouton-modifier-introduction">
+							<i class="fa-regular fa-pen-to-square"></i>
+							<span>Modifier</span>
+						</a>
+						<h2>Designer d'espace</h2>
+						<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
+							livraison
+							finale du chantier.</p>
+						<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et
+							les
+							couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+							chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+						<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+							décorateur(trice)</p>
 					</div>
 				</article>
 			</section>
@@ -74,7 +75,7 @@
 					</a>
 				</div>
 				<div class="btns-filter" id="filterButton">
-					<button type=""button name="Tous" id="btn-Tous" class="btn-filter">Tous</button>
+					<button type="" button name="Tous" id="btn-Tous" class="btn-filter">Tous</button>
 				</div>
 				<div class="gallery"></div>
 			</section>
@@ -103,27 +104,32 @@
 	<!--structure pour Modal-->
 	<div class="modal-container">
 		<div class="overlay"></div>
-		<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
-			<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
-			<h1 id="modalTitle">Galerie photo</h1>
-			<div class="gallery-modal">
-				<i class="fa-solid fa-arrows-up-down-left-right"></i>
-			<i class="fa-solid fa-trash-can"></i>
+		<div class="modal-general">
+			<div class="header-modal">
+				<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
+				<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
 			</div>
-			<div class="border-modal"></div>
-			<button type="button" class="button-modal" id="button-add-modal" >Ajouter une photo</button>
-			<button type="button" class="button-del-photo">Supprimer la galerie</button>
-			
+			<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
+				<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
+				<h1 id="modalTitle">Galerie photo</h1>
+				<div class="gallery-modal">
+					<i class="fa-solid fa-arrows-up-down-left-right"></i>
+				</div>
+				<div class="border-modal"></div>
+				<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
+				<button type="button" class="button-del-photo">Supprimer la galerie</button>
+
+			</div>
 		</div>
-	</div>
-	<div class="modal2-container">
-		<div class="overlay"></div>
-		<div class="add-photo" role="dialog" aria-labelledby="modalTitle">
-			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
-			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
-			<h1 id="modalTitle">Ajout photo</h1>
-			<div class="border-modal"></div>
-			<button type="button" class="button-modal" id="button-add-photo" >Valider</button>
+		<div class="modal2-container">
+			<div class="overlay"></div>
+			<div class="add-photo" role="dialog" aria-labelledby="modalTitle">
+				<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
+				<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+				<h1 id="modalTitle">Ajout photo</h1>
+				<div class="border-modal"></div>
+				<button type="button" class="button-modal" id="button-add-photo">Valider</button>
+			</div>
 		</div>
 	</div>
 	<!--fin de modal-->
