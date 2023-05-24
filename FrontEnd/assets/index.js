@@ -59,10 +59,8 @@ async function createButtons() {
     newFilterButton.name = category[i].name;
     // Texte entre les balises button
     newFilterButton.innerHTML = category[i].name;
-                      console.log("inner", category[i].name);
+    // id du bouton "btn-"" + premier mot récupéré             
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
-    // id du bouton "btn-"" + premier mot récupéré
-    ////console.log("newFilterButton.id => ", newFilterButton.id)
     // class ajouté au bouton
     newFilterButton.className = "btn-filter";
     //variable portfolio
@@ -296,10 +294,9 @@ previousArrow.addEventListener("click", function(){
 //  | add photo  input file part |
 //  ------------------------------
 
-let  image;
+let  image, imgSrc ;
 const inputFile = document.getElementById("my-file")
 const recAddPhoto = document.querySelector(".rectangle-add-photo")
-
 
 inputFile.addEventListener("click", function (e) {
      inputFile.addEventListener("change",  function (e) {
@@ -307,19 +304,25 @@ inputFile.addEventListener("click", function (e) {
       if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg ==="jpeg") {
                           console.log("img Ok")
                           buttonValidPhoto.style.background= "#1D6154"
-
       } else {
-                          console.log("img not ok")
-                          
-        return
+                          console.log("img not ok")  
+         document.querySelector(".jpg-size").innerHTML = "fichier jpg ou png obligatoire" ;            
+        return;
       }
       //e.preventDefault();
       image = e.target.files[0].name
+
                           console.log("type =>", typeImg)
                           console.log("fichier =>", image)
+        let img = document.createElement("img");
+        img.src = image;
+        recAddPhoto.appendChild(img);
     }
     );
 });
+
+
+
 }
 
 buildWorks();
