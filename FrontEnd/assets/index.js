@@ -201,9 +201,9 @@ function logInLogOut() {
   }
 }
 
-// ---------------------
-// parts of the modals |
-// --------------------
+//  -----------------------
+//  | parts of the modals |
+//  -----------------------
 
 
 // page refresh
@@ -211,18 +211,30 @@ const reload=()=>{
   window.location.reload();
 }
 
-// constantes
+//  ------------------------
+//  | constantes for modal |
+//  ------------------------
+
+// gallery modal
+
 const modalContainer = document.querySelector(".modal-container");
 const modalGallery = document.querySelector(".modal-galerie")
-const modal2Container = document.querySelector(".modal2-container")
-const addPhotos = document.querySelector(".add-photo");
 const modalTrigger = document.querySelectorAll(".modal-trigger");
-const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
 const buttonAddPhotos = document.getElementById("button-add-modal");
-const galleryOfModal = document.querySelector(".gallery-modal")
+const galleryOfModal = document.querySelector(".gallery-modal");
 
+//modal add photo
 
-// modal 1 - gallery
+const modal2Container = document.querySelector(".modal2-container")
+const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
+const addPhotos = document.querySelector(".add-photo");
+const buttonValidPhoto = document.getElementById("button-add-photo")
+
+//  ---------------------
+//  | modal 1 - gallery |
+//  ---------------------
+//  |  Create gallery   |
+//  ---------------------
 
   for (const project of works) {
     let figure = document.createElement("figure");
@@ -238,42 +250,41 @@ const galleryOfModal = document.querySelector(".gallery-modal")
     figure.appendChild(spanGallery);
     galleryOfModal.appendChild(figure);
   }   
-
-                                        console.log("modalgellery", modalGallery)
+//display modal
 modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex") : (modalGallery.style.display = "none");
-
+//list of  elements listened to under the class "trigger"
 modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
-                                        console.log("modalTrigger", modalTrigger)
+// change the name of the class using toggle                                     
 function toggleModal() {
   modalContainer.classList.toggle("active");
-                                        console.log("toggle", modalContainer);
-  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";
-     
+// makes the modal appears or disappear depending on the class
+  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none"; 
 }
 
-console.log("classList =>", modalContainer.classList)
+//  ---------------------
+//  | modal - add photo |
+//  ---------------------
 
-
-//modal - add photo
-//button "edit"
+//for close modal
 modalTrigger2.forEach(trigger =>trigger.addEventListener("click", toggleModal2));
 
-
+// conditions of appearance of the modal
 function toggleModal2(){
- modal2Container.classList.toggle("active");
-                                      console.log("toggle", modal2Container);
+  modal2Container.classList.toggle("active");
   modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";   
   modal2Container.className === "modal2-container active" ? addPhotos.style.display = "flex" : addPhotos.style.display = "none";   
   modal2Container.className === "modal2-container active" ? modalGallery.style.display = "none" : modalGallery.style.display = "flex";                               
 }
 
-//modal add photos
+//toogle funtion to manage the appearance of the modal
 buttonAddPhotos.addEventListener("click", function() {
   toggleModal();
   toggleModal2();
 })
+//  ------------------------------------
+//  | modal - add photo Arrow previous |
+//  ------------------------------------
 
-//modal - add photo Arrow previous
 const previousArrow = document.getElementById("previous-arrow")
 console.log("previous",previousArrow)
 previousArrow.addEventListener("click", function(){
@@ -281,22 +292,31 @@ previousArrow.addEventListener("click", function(){
   toggleModal2();
   modalContainer.classList.toggle("active");
 })
+//  ------------------------------
+//  | add photo  input file part |
+//  ------------------------------
 
-///////////////////////
-// add photo  input file part
 let  image;
 const inputFile = document.getElementById("my-file")
 const recAddPhoto = document.querySelector(".rectangle-add-photo")
 
 
 inputFile.addEventListener("click", function (e) {
-     inputFile.addEventListener("change", async function (e) {
+     inputFile.addEventListener("change",  function (e) {
+      const typeImg = inputFile.value.split('.').reverse()[0]
+      if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg ==="jpeg") {
+                          console.log("img Ok")
+                          buttonValidPhoto.style.background= "#1D6154"
+
+      } else {
+                          console.log("img not ok")
+                          
+        return
+      }
       //e.preventDefault();
       image = e.target.files[0].name
-      /*inputFile.value.split('.').reverse()[0] = ('png'||'PNG'||'jpg'||'jpeg')? console.log("ok"): console.log("notok");*/
-                          console.log("type", inputFile.value.split('.').reverse()[0])
-                          
-                          console.log("e", image)
+                          console.log("type =>", typeImg)
+                          console.log("fichier =>", image)
     }
     );
 });

@@ -901,13 +901,7 @@ form a {
   cursor: pointer;
   z-index: -5;
 }
-.input-file:hover + .input-file-trigger,
-.input-file:focus + .input-file-trigger,
-.input-file-trigger:hover,
-.input-file-trigger:focus {
-  background: #306685;
-  color: #F0F0F0;
-}
+
 
 .jpg {
   margin-top: 7px;
