@@ -283,66 +283,23 @@ previousArrow.addEventListener("click", function(){
 })
 
 ///////////////////////
-// add photo
-let imgSrc;
-document.querySelector(".add-photo").addEventListener("click", function () {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/jpg, image/png,image/jPEG";
-    input.click();
-    /* Check the file type and size */
-    input.addEventListener("change", async function () {
-        image = input.files[0];
-        if (image.type !== "image/jpg" && image.type !== "image/png" && image.type !== "image/jpeg") {
-            document.getElementById("errorMessage").innerHTML = "jpg ou png obligatoire";
-            return;
-        }
-        if (image.size > 4 * 1024 * 1024) {
-            document.getElementById("errorMessage").innerHTML = "4mo maximum";
-            return;
-        }
-        /* Replace by image loaded, the default message jpg png 4mo max */
-        background.innerHTML = "";
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = function () {
-            img.src = reader.result;
-            imgSrc = reader.result;
-            img.style.width = "30%";
-            background.appendChild(img);
-        }
+// add photo  input file part
+let  image;
+const inputFile = document.getElementById("my-file")
+const recAddPhoto = document.querySelector(".rectangle-add-photo")
+
+
+inputFile.addEventListener("click", function (e) {
+     inputFile.addEventListener("change", async function (e) {
+      //e.preventDefault();
+      image = e.target.files[0].name
+      /*inputFile.value.split('.').reverse()[0] = ('png'||'PNG'||'jpg'||'jpeg')? console.log("ok"): console.log("notok");*/
+                          console.log("type", inputFile.value.split('.').reverse()[0])
+                          
+                          console.log("e", image)
     }
     );
 });
-
-
-/* take categories from API when load new image*/
-async function categories() {
-    const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
-    const select = document.querySelector("#category");
-    for (let i = 0; i < categories.length; i++) {
-        let option = document.createElement("option");
-        option.value = categories[i].id;
-        option.innerHTML = categories[i].name;
-        select.appendChild(option);
-    }}
-
-    async function categories() {
-      const response = await fetch("http://localhost:5678/api/categories");
-      const categories = await response.json();
-      const select = document.querySelector("#category");
-      for (let i = 0; i < categories.length; i++) {
-          let option = document.createElement("option");
-          option.value = categories[i].id;
-          option.innerHTML = categories[i].name;
-          select.appendChild(option);
-      }
-  }
-    
-
-
-
 }
 
 buildWorks();

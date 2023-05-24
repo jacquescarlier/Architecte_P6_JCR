@@ -261,7 +261,7 @@ li img {
 }
 
 li:active,
-nav a:active {
+nav a:active, li button:active {
   font-weight: 700;
 }
 nav a {
@@ -806,6 +806,7 @@ form a {
   color: B9C5CC;
   padding: 0;
   font-size: 46px;
+  margin-bottom: 20px;
 }
 
 .btn-add-photo {
@@ -864,3 +865,53 @@ form a {
 	align-items: center;
 	margin: 0 0 5px 0;
 }
+/* input title part */
+
+.input-file-container {
+  position: relative;
+  width: 173px;
+  height: 36px;
+} 
+.input-file-trigger {
+  margin-top: 21px;
+  display: block;
+  position: absolute;
+  top: -26px;
+  left:  0;
+  /*padding: 14px 45px;*/
+  background: #CBD6DC;
+  border-radius: 50px;
+  color: #306685;
+  font-family: 'work sans';
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: all .4s;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 5;
+}
+.input-file {
+  position: absolute;
+  top: 5px; left: 0;
+  width: 173px;
+  height: 36px;
+  opacity: 0;
+  padding: 13px 0;
+  cursor: pointer;
+  z-index: -5;
+}
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  background: #306685;
+  color: #F0F0F0;
+}
+
+.jpg {
+  margin-top: 7px;
+}
+
+
+
