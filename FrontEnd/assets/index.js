@@ -309,16 +309,18 @@ async function buildWorks() {
         if(response.status = 200) {
           figure.remove();
           figure.innerHTML = " ";
-          alert("image supprimé")
-          return()
+          //alert("image supprimé");
+          modalContainer.className = "modal-container active";
+          console.log("mcontain", modalContainer.className )
+
         } else {
-          console.error("Suppression du fichier annulé")
-          return()
+          console.error("Suppression du fichier annulé");
+          modalContainer.className = "modal-container active";
         }
     })
       .catch(function() {
-        console.error("Suppression du fichier annulé")
-        return()
+        console.error("Suppression du fichier annulé");
+        modalContainer.className = "modal-container active";
       }
       )
     }
