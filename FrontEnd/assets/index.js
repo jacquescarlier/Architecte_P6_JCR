@@ -11,9 +11,9 @@ const gallery = document.querySelector(".gallery");
 //const admin navigation bar
 const adminNav = document.getElementById("admin-nav");
 // "edit" buttons for the admin part
-const modalCallButtons = document.querySelectorAll(".modifier")
+const modalCallButtons = document.querySelectorAll(".modifier");
 //login or logout button depending on the token
-const loginLogout = document.getElementById("login")
+const loginLogout = document.getElementById("login");
 
 /*tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
 tableau pour fonction "create button sans passer par l'API"
@@ -47,7 +47,7 @@ async function getCategories(urlCategories) {
 
 async function createButtons() {
   let category = await getCategories(urlCategories);
- 
+
   //creation of buttons for each category
 
   for (let i = 0; i < category.length; i++) {
@@ -59,13 +59,13 @@ async function createButtons() {
     newFilterButton.name = category[i].name;
     // Texte entre les balises button
     newFilterButton.innerHTML = category[i].name;
-    // id du bouton "btn-"" + premier mot récupéré             
+    // id du bouton "btn-"" + premier mot récupéré
     newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
     // class ajouté au bouton
     newFilterButton.className = "btn-filter";
     //variable portfolio
     let portfolio = document.getElementById("filterButton");
-    // ajout de "newFilterButton" à la div "#portfolio" 
+    // ajout de "newFilterButton" à la div "#portfolio"
     portfolio.appendChild(newFilterButton);
   }
 }
@@ -101,10 +101,10 @@ createButton();*/
 async function buildWorks() {
   // array constant
   let works = await getWorks(url);
-  
-// -------------------------
-// | job creation function |
-// -------------------------
+
+  // -------------------------
+  // | job creation function |
+  // -------------------------
 
   function createWork() {
     for (const project of works) {
@@ -119,9 +119,9 @@ async function buildWorks() {
     }
   }
   createWork();
-//  ----------------------------
-//  | filter creation function |
-//  ----------------------------
+  //  ----------------------------
+  //  | filter creation function |
+  //  ----------------------------
 
   async function createFilter() {
     let filterChoice = "";
@@ -129,110 +129,120 @@ async function buildWorks() {
     btnFilter.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
-                              console.log("target-e", e.target);
+          console.log("target-e", e.target);
           filterChoice = works;
-                              console.log("filterChoice", filterChoice);
+          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         } else {
           filterChoice = works.filter(
             (obj) => obj.category.name === e.target.name
           );
-                              console.log("target-e", e.target);
-                              console.log("filterChoice", filterChoice);
+          console.log("target-e", e.target);
+          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         }
       });
     });
   }
   createFilter();
-//}
+  //}
 
-//buildWorks();
+  //buildWorks();
 
-// ------------------
-// |  Apply filter  |
-// ------------------
+  // ------------------
+  // |  Apply filter  |
+  // ------------------
 
-function applyFilter(filterChoice) {
-  gallery.innerHTML = "";
-  for (const filter of filterChoice) {
-    let figure = document.createElement("figure");
-    let img = document.createElement("img");
-    img.src = filter.imageUrl;
-    figure.appendChild(img);
-    let figcaption = document.createElement("figcaption");
-    figcaption.innerHTML = filter.title;
-    figure.appendChild(figcaption);
-    gallery.appendChild(figure);
+  function applyFilter(filterChoice) {
+    gallery.innerHTML = "";
+    for (const filter of filterChoice) {
+      let figure = document.createElement("figure");
+      let img = document.createElement("img");
+      img.src = filter.imageUrl;
+      figure.appendChild(img);
+      let figcaption = document.createElement("figcaption");
+      figcaption.innerHTML = filter.title;
+      figure.appendChild(figcaption);
+      gallery.appendChild(figure);
+    }
   }
-}
 
-//  ---------------------------------------------
-//  | setting up element according to the token |
-//  ---------------------------------------------
+  //  ---------------------------------------------
+  //  | setting up element according to the token |
+  //  ---------------------------------------------
 
-// storing the token in a variable
-let controlToken = sessionStorage.getItem('token')
-                                        console.log("token", controlToken)
-// Modifies elements when switching to "edit mode"
-controlToken === null ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
-controlToken === null ? document.getElementById("login").innerHTML = "login" : document.getElementById("login").innerHTML = "logout"
-controlToken === null ? (header.style.marginTop = "50px") : (header.style.marginTop = "38px");
-modalCallButtons.forEach(function (item) {
-  controlToken === null ? item.style.display = "none" : item.style.display = "flex";
-})
+  // storing the token in a variable
+  let controlToken = sessionStorage.getItem("token");
+  console.log("token", controlToken);
+  // Modifies elements when switching to "edit mode"
+  controlToken === null
+    ? (adminNav.style.display = "none")
+    : (adminNav.style.display = "flex");
+  controlToken === null
+    ? (document.getElementById("login").innerHTML = "login")
+    : (document.getElementById("login").innerHTML = "logout");
+  controlToken === null
+    ? (header.style.marginTop = "50px")
+    : (header.style.marginTop = "38px");
+  modalCallButtons.forEach(function (item) {
+    controlToken === null
+      ? (item.style.display = "none")
+      : (item.style.display = "flex");
+  });
 
-//  ---------------------------------------------------------
-//  | Management of the action of the "login/logout" button |
-//  ---------------------------------------------------------
+  //  ---------------------------------------------------------
+  //  | Management of the action of the "login/logout" button |
+  //  ---------------------------------------------------------
 
-// add event listening on the  "login/logout" button
-loginLogout.addEventListener("click", function () {logInLogOut()})
+  // add event listening on the  "login/logout" button
+  loginLogout.addEventListener("click", function () {
+    logInLogOut();
+  });
 
-// redirect function to a page according to the token
-function logInLogOut() {
-  if (controlToken === null) {
-    window.location.replace("./login.html");
-  } else {
-    sessionStorage.clear();
-    window.location.replace("./index.html");
+  // redirect function to a page according to the token
+  function logInLogOut() {
+    if (controlToken === null) {
+      window.location.replace("./login.html");
+    } else {
+      sessionStorage.clear();
+      window.location.replace("./index.html");
+    }
   }
-}
 
-//  -----------------------
-//  | parts of the modals |
-//  -----------------------
+  //  -----------------------
+  //  | parts of the modals |
+  //  -----------------------
 
+  // page refresh
+  const reload = () => {
+    window.location.reload();
+  };
 
-// page refresh
-const reload=()=>{
-  window.location.reload();
-}
+  //  ------------------------
+  //  | constantes for modal |
+  //  ------------------------
 
-//  ------------------------
-//  | constantes for modal |
-//  ------------------------
+  // gallery modal
 
-// gallery modal
+  const modalContainer = document.querySelector(".modal-container");
+  const modalGallery = document.querySelector(".modal-galerie");
+  const modalTrigger = document.querySelectorAll(".modal-trigger");
+  const buttonAddPhotos = document.getElementById("button-add-modal");
+  const galleryOfModal = document.querySelector(".gallery-modal");
 
-const modalContainer = document.querySelector(".modal-container");
-const modalGallery = document.querySelector(".modal-galerie")
-const modalTrigger = document.querySelectorAll(".modal-trigger");
-const buttonAddPhotos = document.getElementById("button-add-modal");
-const galleryOfModal = document.querySelector(".gallery-modal");
+  //modal add photo
 
-//modal add photo
+  const modal2Container = document.querySelector(".modal2-container");
+  const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
+  const addPhotos = document.querySelector(".add-photo");
+  const buttonValidPhoto = document.getElementById("button-add-photo");
+  const infoFile = document.querySelector(".info-file");
 
-const modal2Container = document.querySelector(".modal2-container")
-const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
-const addPhotos = document.querySelector(".add-photo");
-const buttonValidPhoto = document.getElementById("button-add-photo")
-
-//  ---------------------
-//  | modal 1 - gallery |
-//  ---------------------
-//  |  Create gallery   |
-//  ---------------------
+  //  ---------------------
+  //  | modal 1 - gallery |
+  //  ---------------------
+  //  |  Create gallery   |
+  //  ---------------------
 
   for (const project of works) {
     let figure = document.createElement("figure");
@@ -247,82 +257,117 @@ const buttonValidPhoto = document.getElementById("button-add-photo")
     spanGallery.innerHTML = "";
     figure.appendChild(spanGallery);
     galleryOfModal.appendChild(figure);
-  }   
-//display modal
-modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex") : (modalGallery.style.display = "none");
-//list of  elements listened to under the class "trigger"
-modalTrigger.forEach(trigger => trigger.addEventListener("click", toggleModal));
-// change the name of the class using toggle                                     
-function toggleModal() {
-  modalContainer.classList.toggle("active");
-// makes the modal appears or disappear depending on the class
-  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none"; 
-}
+  }
+  //display modal
+  modalContainer.className === "modal-container active"
+    ? (modalgallery.style.display = "flex")
+    : (modalGallery.style.display = "none");
+  //list of  elements listened to under the class "trigger"
+  modalTrigger.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModal)
+  );
+  // change the name of the class using toggle
 
-//  ---------------------
-//  | modal - add photo |
-//  ---------------------
+  function toggleModal() {
+    modalContainer.classList.toggle("active");
+    // makes the modal appears or disappear depending on the class
+    modalContainer.className === "modal-container active"
+      ? (modalGallery.style.display = "flex")
+      : (modalGallery.style.display = "none");
+  }
 
-//for close modal
-modalTrigger2.forEach(trigger =>trigger.addEventListener("click", toggleModal2));
+  //close the modal by clicking outside 
 
-// conditions of appearance of the modal
-function toggleModal2(){
-  modal2Container.classList.toggle("active");
-  modalContainer.className === "modal-container active" ? modalGallery.style.display = "flex" : modalGallery.style.display = "none";   
-  modal2Container.className === "modal2-container active" ? addPhotos.style.display = "flex" : addPhotos.style.display = "none";   
-  modal2Container.className === "modal2-container active" ? modalGallery.style.display = "none" : modalGallery.style.display = "flex";                               
-}
-
-//toogle funtion to manage the appearance of the modal
-buttonAddPhotos.addEventListener("click", function() {
-  toggleModal();
-  toggleModal2();
+  modalContainer.addEventListener("click", (e)=> {  toggleModal();}) ;
+  modalContainer.children[1].addEventListener('click', function (e) {
+    e.stopPropagation();
 })
-//  ------------------------------------
-//  | modal - add photo Arrow previous |
-//  ------------------------------------
 
-const previousArrow = document.getElementById("previous-arrow")
-console.log("previous",previousArrow)
-previousArrow.addEventListener("click", function(){
-  console.log("clickou")
-  toggleModal2();
-  modalContainer.classList.toggle("active");
+modal2Container.addEventListener("click", (e)=> {  toggleModal2();}) ;
+modal2Container.children[1].addEventListener('click', function (e) {
+  e.stopPropagation();
 })
-//  ------------------------------
-//  | add photo  input file part |
-//  ------------------------------
 
-let  image, imgSrc ;
-const inputFile = document.getElementById("my-file")
-const recAddPhoto = document.querySelector(".rectangle-add-photo")
+  //  ---------------------
+  //  | modal - add photo |
+  //  ---------------------
 
-inputFile.addEventListener("click", function (e) {
-     inputFile.addEventListener("change",  function (e) {
-      const typeImg = inputFile.value.split('.').reverse()[0]
-      if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg ==="jpeg") {
-                          console.log("img Ok")
-                          buttonValidPhoto.style.background= "#1D6154"
+  //for close modal
+  modalTrigger2.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModal2)
+  );
+
+  // conditions of appearance of the modal
+  function toggleModal2() {
+    modal2Container.classList.toggle("active");
+    
+    modalContainer.className === "modal-container active"
+      ? (modalGallery.style.display = "flex")
+      : (modalGallery.style.display = "none");
+    
+    modal2Container.className === "modal2-container active"
+      ? (addPhotos.style.display = "flex")
+      : (addPhotos.style.display = "none");
+    
+    modal2Container.className === "modal2-container active"
+      ? (modalGallery.style.display = "none")
+      : (modalGallery.style.display = "flex");
+  }
+
+  //toogle funtion to manage the appearance of the modal
+  buttonAddPhotos.addEventListener("click", function () {
+    toggleModal();
+    toggleModal2();
+  });
+  //  ------------------------------------
+  //  | modal - add photo Arrow previous |
+  //  ------------------------------------
+
+  const previousArrow = document.getElementById("previous-arrow");
+
+  previousArrow.addEventListener("click", function () {
+    toggleModal2();
+    modalContainer.classList.toggle("active");
+  });
+  //  ------------------------------
+  //  | add photo  input file part |
+  //  ------------------------------
+
+  let image, imgSrc;
+  const inputFile = document.getElementById("my-file");
+  const containerAddPhoto = document.querySelector(".container-add-photo");
+  infoFile.innerHTML = "jpg png : 4 mo max";
+  inputFile.addEventListener("click", function (e) {
+    infoFile.classList = "info-file";
+
+  inputFile.addEventListener("change", function (e) {
+    document.querySelector(".info-file").innerHTML = "jpg png : 4 mo max";
+    const typeImg = inputFile.value.split(".").reverse()[0];
+      if (
+        typeImg === "png" ||
+        typeImg === "PNG" ||
+        typeImg === "jpg" ||
+        typeImg === "jpeg"
+      ) {
+        console.log("img Ok");
+        buttonValidPhoto.style.background = "#1D6154";
       } else {
-                          console.log("img not ok")  
-         document.querySelector(".jpg-size").innerHTML = "fichier jpg ou png obligatoire" ;            
+        console.log("img not ok");
+        infoFile.innerHTML = "fichier jpg ou png obligatoire";
+        infoFile.classList = "message-info-file";
+
         return;
       }
       //e.preventDefault();
-      image = e.target.files[0].name
+      image = e.target.files[0].name;
 
-                          console.log("type =>", typeImg)
-                          console.log("fichier =>", image)
-        let img = document.createElement("img");
-        img.src = image;
-        recAddPhoto.appendChild(img);
-    }
-    );
-});
-
-
-
+      console.log("type =>", typeImg);
+      console.log("fichier =>", image);
+      let img = document.createElement("img");
+      img.src = image;
+      containerAddPhoto.appendChild(img);
+    });
+  });
 }
 
 buildWorks();

@@ -104,7 +104,7 @@
 	<!--structure pour Modal-->
 	<div class="modal-container">
 		<div class="overlay"></div>
-		<div class="modal-galerie" role="dialog" aria-labelledby="modalTitle">
+		<div class="modal-galerie  modal-stop " role="dialog" aria-labelledby="modalTitle">
 			<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
 			<h1 id="modalTitle">Galerie photo</h1>
 			<div class="gallery-modal">
@@ -122,14 +122,15 @@
 			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
 			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
 			<h1 id="modalTitle">Ajout photo</h1>
-			<div class="rectangle-add-photo">
+			<div class="container-add-photo">
 				<i class="fa-sharp fa-regular fa-image"></i>
-				<div class="input-file-container">	
-					<input class="input-file" id="my-file" type="file" accept="image/png, image/jpeg, image/PNG, image/jpg">	
+				<div class="input-file-container">
+					<input class="input-file" id="my-file" type="file"
+						accept="image/png, image/jpeg, image/PNG, image/jpg">
 					<label for="my-file" class="input-file-trigger" tabindex="0">+ Ajouter une photo</label>
-					</div>
-					
-				<span class="jpg-size">jpg png : 4 mo max</span>
+				</div>
+
+				<span class="info-file">jpg png : 4 mo max</span>
 			</div>
 			<form id="form-modal">
 				<div clas="label-form">
@@ -155,7 +156,7 @@
 			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
 
 		</div>-->
-		<!--fin de modal-->
+	<!--fin de modal-->
 </body>
 
 </html>

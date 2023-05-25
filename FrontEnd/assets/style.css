@@ -783,7 +783,7 @@ form a {
   text-align: left;
 }
 
-.rectangle-add-photo {
+.container-add-photo {
   width: 420px;
   height: 169px;
   display: flex;
@@ -800,7 +800,7 @@ form a {
   margin: 36px auto 20px;
 }
 
-.rectangle-add-photo .fa-sharp {
+.container-add-photo .fa-sharp {
   width: 58px;
   height: 46px;
   color: B9C5CC;
@@ -902,10 +902,16 @@ form a {
   z-index: -5;
 }
 
-
-.jpg-size {
+.info-file {
   margin-top: 7px;
 }
 
+.message-info-file {
+  font-size: 16px;
+  font-weight: 800;
+  color: crimson;
+ 
+
+}
 
 
