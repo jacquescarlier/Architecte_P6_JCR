@@ -310,15 +310,15 @@ async function buildWorks() {
           figure.remove();
           figure.innerHTML = " ";
           alert("image supprimé")
-          modalContainer.classList = "modal-container active"
+          return()
         } else {
           console.error("Suppression du fichier annulé")
-          modalContainer.classList = "modal-container active"
+          return()
         }
     })
       .catch(function() {
         console.error("Suppression du fichier annulé")
-        modalContainer.classList = "modal-container active"
+        return()
       }
       )
     }
@@ -389,7 +389,7 @@ modalContainer.classList = "modal-container active"
       // file type check
       if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg === "jpeg" ) {
                                       console.log("img Ok");
-                                      
+
         // change the background color of the "validate" button
         buttonValidatePhoto.style.background = "#1D6154";
       } else {
