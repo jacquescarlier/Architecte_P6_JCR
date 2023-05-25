@@ -254,8 +254,11 @@ async function buildWorks() {
   //  ---------------------
   
   /**** Create gallery  ****/   
-  
+  console.log("works", works)
   for (const project of works) {
+    
+    let idPhoto = project.id
+    console.log("id", idPhoto)
     let figure = document.createElement("figure");
     let img = document.createElement("img");
     img.src = project.imageUrl;
@@ -264,8 +267,9 @@ async function buildWorks() {
     figcaption.innerHTML = "éditer";
     figure.appendChild(figcaption);
     let spanGallery = document.createElement("i");
-    spanGallery.className = "fa-solid fa-trash-can";
+    spanGallery.className = "fa-solid fa-trash-can trash";
     spanGallery.innerHTML = "";
+     figure.className = idPhoto
     figure.appendChild(spanGallery);
     galleryOfModal.appendChild(figure);
   }
@@ -275,14 +279,59 @@ async function buildWorks() {
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) => trigger.addEventListener("click", toggleModal));
   // change the name of the class using toggle
-
+  console.log("trigger", modalTrigger)
   function toggleModal() {
     modalContainer.classList.toggle("active");
     // makes the modal appears or disappear depending on the class
     modalContainer.className === "modal-container active" ? (modalGallery.style.display = "flex") : modalGallery.style.display = "none";
   }
 
-  //close the modal by clicking outside 
+  /**** delete image  ****/
+
+  let trashButton = document.querySelectorAll(".fa-trash-can")
+  console.log("trash",trashButton)
+  //forEach((trigger) => trigger.addEventListener("click", toggleModal2));
+  trashButton.forEach ((trash) =>trash.addEventListener("click", function () {
+  
+    let figure = this.parentNode
+    let idPhoto = figure.className
+    parseInt(idPhoto)
+    console.log("classname", idPhoto)
+    
+    function deletePhoto() {
+      fetch(`${url}/${idPhoto}` , {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${controlToken}`
+        },
+      })
+      .then(function (response) {
+        if(response.status = 200) {
+          figure.remove();
+          figure.innerHTML = " ";
+          alert("image supprimé")
+          modalContainer.classList = "modal-container active"
+        } else {
+          console.error("Suppression du fichier annulé")
+          modalContainer.classList = "modal-container active"
+        }
+    })
+      .catch(function() {
+        console.error("Suppression du fichier annulé")
+        modalContainer.classList = "modal-container active"
+      }
+      )
+    }
+deletePhoto() 
+modalContainer.classList = "modal-container active"    
+  }))
+
+
+
+
+
+
+  /**** close the modal by clicking outside ****/ 
 
   modalContainer.addEventListener("click", (e) => { toggleModal(); });
   modalContainer.children[1].addEventListener('click', function (e) { e.stopPropagation();});
@@ -340,6 +389,7 @@ async function buildWorks() {
       // file type check
       if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg === "jpeg" ) {
                                       console.log("img Ok");
+                                      
         // change the background color of the "validate" button
         buttonValidatePhoto.style.background = "#1D6154";
       } else {
