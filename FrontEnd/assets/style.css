@@ -619,7 +619,6 @@ form a {
 .modal-galerie {
   display: none;
   flex-flow: column wrap;
-  /*opacity: 0;*/
   position: absolute;
   top: 40%;
   left: 52%;
@@ -634,12 +633,11 @@ form a {
   text-align: center;
   transform: translateX(-50%);
   transform: opacity 0.3s ease-out;
-  /*z-index: -1;*/
   padding: 0px 105px;
 }
 
 .modal-container.active .modal-galerie {
-  opacity: 1;
+  /*opacity: 1;*/
   transition: opacity 0.3s 0.2s ease-out;
 }
 
@@ -768,12 +766,27 @@ form a {
   height: 106px;
 }
 
-.gallery-modal .fa-solid {
+.gallery-modal .trash {
   position: absolute;
   top: 6px;
-  right: 9.1%;
+  right:5%;
   font-size: 9px;
   padding: 4px;
+}
+
+.gallery-modal .arrow {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 29%;
+  font-size: 11px;
+  padding: 3px ;
+}
+
+.gallery-modal .fa-solid {
+  height: 17px;
+  width: 17px;
+  
   background-color: #000000;
   border-radius: 2px;
   color: #ffffff;

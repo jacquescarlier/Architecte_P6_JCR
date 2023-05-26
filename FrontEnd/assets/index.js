@@ -253,33 +253,53 @@ async function buildWorks() {
   //  | modal 1 - gallery |
   //  ---------------------
   
-  /**** Create gallery  ****/   
-  console.log("works", works)
+  /**** Create the gallery for modal ****/   
+  
   for (const project of works) {
-    
-    let idPhoto = project.id
-    console.log("id", idPhoto)
+    //create an id to delete photos
+   
+    //create galerry
     let figure = document.createElement("figure");
+    // id
+    let idPhoto = project.id
+    figure.className = idPhoto
+    //img
     let img = document.createElement("img");
     img.src = project.imageUrl;
     figure.appendChild(img);
+    //figcaption
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = "éditer";
     figure.appendChild(figcaption);
-    let spanGallery = document.createElement("i");
-    spanGallery.className = "fa-solid fa-trash-can trash";
-    spanGallery.innerHTML = "";
-     figure.className = idPhoto
-    figure.appendChild(spanGallery);
+    // trash 
+    let trashGallery = document.createElement("i");
+    trashGallery.className = "fa-solid fa-trash-can trash";
+    trashGallery.innerHTML = "";
+    figure.appendChild(trashGallery);
+    // arrow
+    let arrowGallery = document.createElement("i");
+    arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
+    arrowGallery.innerHTML = "";
+    figure.appendChild(arrowGallery);
+
     galleryOfModal.appendChild(figure);
+
+    // arrow hover
+    img.addEventListener("mouseover", function(e) {
+    arrowGallery.style.display = "flex" });
+    img.addEventListener("mouseout", function(e) {
+      arrowGallery.style.display = "none" });
   }
-  //display modal
+
+  //  *****************
+  //  * display modal *
+  //  *****************
+
   modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex")
     : (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) => trigger.addEventListener("click", toggleModal));
   // change the name of the class using toggle
-  console.log("trigger", modalTrigger)
   function toggleModal() {
     modalContainer.classList.toggle("active");
     // makes the modal appears or disappear depending on the class
@@ -289,50 +309,37 @@ async function buildWorks() {
   /**** delete image  ****/
 
   let trashButton = document.querySelectorAll(".fa-trash-can")
-  console.log("trash",trashButton)
-  //forEach((trigger) => trigger.addEventListener("click", toggleModal2));
-  trashButton.forEach ((trash) =>trash.addEventListener("click", function () {
   
+  trashButton.forEach ((trash) => trash.addEventListener("click", function () {
     let figure = this.parentNode
     let idPhoto = figure.className
     parseInt(idPhoto)
-    console.log("classname", idPhoto)
-    
-    function deletePhoto() {
-      fetch(`${url}/${idPhoto}` , {
+    const lru = "189.0.0.0"
+    async function deletePhoto() {
+      await fetch(`${url}/${idPhoto}` , {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${controlToken}`
         },
       })
+
       .then(function (response) {
-        if(response.status = 200) {
-          figure.remove();
-          figure.innerHTML = " ";
-          //alert("image supprimé");
-          modalContainer.className = "modal-container active";
-          console.log("mcontain", modalContainer.className )
+        if(response.status === 204) {
+         console.log("response", response.status)
+       
+        //alert("stb2")
 
         } else {
-          console.error("Suppression du fichier annulé");
-          modalContainer.className = "modal-container active";
+          console.log("pas ok autre", response.status);
+          alert("pas bon");
         }
-    })
-      .catch(function() {
-        console.error("Suppression du fichier annulé");
-        modalContainer.className = "modal-container active";
-      }
-      )
+      })
+     
     }
-deletePhoto() 
-modalContainer.classList = "modal-container active"    
+    deletePhoto()  
+
   }))
-
-
-
-
-
-
+  
   /**** close the modal by clicking outside ****/ 
 
   modalContainer.addEventListener("click", (e) => { toggleModal(); });
