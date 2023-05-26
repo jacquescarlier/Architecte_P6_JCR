@@ -261,7 +261,8 @@ li img {
 }
 
 li:active,
-nav a:active, li button:active {
+nav a:active,
+li button:active {
   font-weight: 700;
 }
 nav a {
@@ -769,7 +770,7 @@ form a {
 .gallery-modal .trash {
   position: absolute;
   top: 6px;
-  right:5%;
+  right: 5%;
   font-size: 9px;
   padding: 4px;
 }
@@ -780,13 +781,13 @@ form a {
   top: 6px;
   right: 29%;
   font-size: 11px;
-  padding: 3px ;
+  padding: 3px;
 }
 
 .gallery-modal .fa-solid {
   height: 17px;
   width: 17px;
-  
+
   background-color: #000000;
   border-radius: 2px;
   color: #ffffff;
@@ -795,6 +796,27 @@ form a {
   font-size: 12px;
   text-align: left;
 }
+
+.alert-modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  width: 320px;
+  height: 100px;
+  font-family: "work sans";
+  font-size: 16px;
+  font-weight: 700;
+  color: #3d3d3d;
+  background: #b3b3b3;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/**** modal add-photo ****/
 
 .container-add-photo {
   width: 420px;
@@ -809,7 +831,7 @@ form a {
   font-size: 10px;
   font-weight: 400;
   margin: 0 auto;
-  margin-top: 36px ;
+  margin-top: 36px;
   margin: 36px auto 20px;
 }
 
@@ -843,40 +865,42 @@ form a {
   margin-top: 11px;
 }
 
-#form-modal #title, #form-modal #category {
+#form-modal #title,
+#form-modal #category {
   width: 420px;
   height: 51px;
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   margin: 10px auto 0px;
 }
-.label-title, .label-category  {
+.label-title,
+.label-category {
   width: 420px;
   height: 16px;
   font-size: 14px;
   font-weight: 500;
-  font-family: 'work sans';
+  font-family: "work sans";
   background: transparent;
   margin: 10px 103px 0px 103px;
   position: relative;
   float: left;
- }
- .add-picture {
-	background: #CBD6DC;
-	color: white;
-	font-family: 'Work Sans';
-	font-size: 14px;
-	font-weight: 500;
-	text-align: center;
-	width: 127px;
-	height: 26px;
-	color: #306685;
-	border-radius: 50px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin: 0 0 5px 0;
+}
+.add-picture {
+  background: #cbd6dc;
+  color: white;
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  width: 127px;
+  height: 26px;
+  color: #306685;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 5px 0;
 }
 /* input title part */
 
@@ -884,29 +908,30 @@ form a {
   position: relative;
   width: 173px;
   height: 36px;
-} 
+}
 .input-file-trigger {
   margin-top: 21px;
   display: block;
   position: absolute;
   top: -26px;
-  left:  0;
+  left: 0;
   /*padding: 14px 45px;*/
-  background: #CBD6DC;
+  background: #cbd6dc;
   border-radius: 50px;
   color: #306685;
-  font-family: 'work sans';
+  font-family: "work sans";
   font-size: 14px;
   font-weight: 500;
   text-align: center;
-  transition: all .4s;
+  transition: all 0.4s;
   cursor: pointer;
   padding: 10px;
   z-index: 5;
 }
 .input-file {
   position: absolute;
-  top: 5px; left: 0;
+  top: 5px;
+  left: 0;
   width: 173px;
   height: 36px;
   opacity: 0;
@@ -923,8 +948,4 @@ form a {
   font-size: 16px;
   font-weight: 800;
   color: crimson;
- 
-
 }
-
-

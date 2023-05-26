@@ -302,13 +302,16 @@ async function buildWorks() {
   // change the name of the class using toggle
   function toggleModal() {
     modalContainer.classList.toggle("active");
+    alertModalGallery.style.display = "none";
     // makes the modal appears or disappear depending on the class
     modalContainer.className === "modal-container active" ? (modalGallery.style.display = "flex") : modalGallery.style.display = "none";
   }
 
   /**** delete image  ****/
 
-  let trashButton = document.querySelectorAll(".fa-trash-can")
+  let trashButton = document.querySelectorAll(".fa-trash-can");
+  let alertModalGallery = document.querySelector(".alert-modal");
+
   
   trashButton.forEach ((trash) => trash.addEventListener("click", function () {
     let figure = this.parentNode
@@ -316,7 +319,7 @@ async function buildWorks() {
     parseInt(idPhoto)
     const lru = "189.0.0.0"
     async function deletePhoto() {
-      await fetch(`${url}/${idPhoto}` , {
+      await fetch(`${lru}/${idPhoto}` , {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${controlToken}`
@@ -325,13 +328,15 @@ async function buildWorks() {
 
       .then(function (response) {
         if(response.status === 204) {
-         console.log("response", response.status)
-       
-        //alert("stb2")
-
+          alert("status url", response.staus)
+          alertModalGallery.innerHTML = "Félicitation, fichier effacé ";
+          alertModalGallery.style.display = "flex";
+         console.log("response.status => ", response.status);
         } else {
+          resStatus = response.status
           console.log("pas ok autre", response.status);
-          alert("pas bon");
+          alertModalGallery.innerHTML = "impossible d'effacé le fichier, status du serveur :  " + resStatus;
+          alertModalGallery.style.display = "flex";
         }
       })
      
@@ -339,7 +344,9 @@ async function buildWorks() {
     deletePhoto()  
 
   }))
-  
+
+  modalGallery.addEventListener("click", function(){  alertModalGallery.style.display = "none";})
+  alertModalGallery.innerHTML = " ";
   /**** close the modal by clicking outside ****/ 
 
   modalContainer.addEventListener("click", (e) => { toggleModal(); });
