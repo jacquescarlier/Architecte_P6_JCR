@@ -33,8 +33,8 @@
 				<ul>
 					<li> <button type="button">projets</button></li>
 					<li><button type="button">contact</button></li>
-					<li> <button type="button" id="login" onclick="logInLogOut">login</button> </li>
-					<li> <button><img src="./assets/icons/instagram.png" alt="Instagram"></button></li>
+					<li> <button type="button" class= "login-link" id="login" onclick="logInLogOut">login</button> </li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 				</ul>
 			</nav>
 		</header>
@@ -75,14 +75,14 @@
 					</a>
 				</div>
 				<div class="btns-filter" id="filterButton">
-					<button type="" button name="Tous" id="btn-Tous" class="btn-filter">Tous</button>
+					<button type="button" name="Tous" id="btn-Tous" class="btn-filter">Tous</button>
 				</div>
 				<div class="gallery"></div>
 			</section>
 			<section id="contact">
 				<h2>Contact</h2>
 				<p>Vous avez un projet ? Discutons-en !</p>
-				<form action="" method="">
+				<form >
 					<label for="name">Nom</label>
 					<input type="text" name="name" id="name">
 					<label for="email">Email</label>
@@ -101,28 +101,26 @@
 			</ul>
 		</nav>
 	</footer>
+
 	<!--structure pour Modal-->
 	<div class="modal-container">
 		<div class="overlay"></div>
 		<div class="modal-photo-gallery  modal-stop " role="dialog" aria-labelledby="modalTitle">
 			<button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
 			<h1 id="modalTitle">Galerie photo</h1>
-			<div class="gallery-modal">
-				<!--<i class="fa-solid fa-arrows-up-down-left-right"></i>-->
-			</div>
+			<div class="gallery-modal"></div>
 			<div class="border-modal"></div>
 			<span class="alert-modal"></span>
 			<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
 			<button type="button" class="button-del-gallery">Supprimer la galerie</button>
-
 		</div>
 	</div>
 	<div class="modal2-container">
 		<div class="overlay"></div>
-		<div class="add-photo" role="dialog" aria-labelledby="modalTitle">
+		<div class="add-photo" role="dialog" aria-labelledby="modalTitle2">
 			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
 			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
-			<h1 id="modalTitle">Ajout photo</h1>
+			<h1 id="modalTitle2">Ajout photo</h1>
 			<div class="container-add-photo">
 				<i class="fa-sharp fa-regular fa-image"></i>
 				<div class="input-file-container">
@@ -130,18 +128,17 @@
 						accept="image/png, image/jpeg, image/PNG, image/jpg">
 					<label for="my-file" class="input-file-trigger" tabindex="0">+ Ajouter une photo</label>
 				</div>
-
 				<span class="info-file">jpg png : 4 mo max</span>
 			</div>
 			<form id="form-modal">
-				<div clas="label-form">
+				<div class="label-form">
 					<label class="label-title" for="title">Titre</label>
 					<input type="text" id="title" name="title" required>
 				</div>
 				<div class="form-category">
 					<label class="label-category" for="category">Catégorie :</label>
 					<select id="category" name="category">
-						<option value="" disabled selected></option>
+						<option value= " " disabled selected></option>
 					</select>
 				</div>
 				<span id="errorMessage"></span>
@@ -150,14 +147,6 @@
 			<button type="button" class="button-modal" id="button-validate-photo">Valider</button>
 		</div>
 	</div>
-	<!--<div class="modal3-container">
-		<div class="overlay"></div>
-		<div class="photo-added" role="dialog" aria-labelledby="modalTitle">
-			<button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
-			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
-
-		</div>-->
-	<!--fin de modal-->
 </body>
 
 </html>

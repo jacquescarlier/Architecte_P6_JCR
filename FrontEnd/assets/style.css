@@ -252,27 +252,29 @@ li button {
   font-family: "Work Sans", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  cursor: pointer;
 }
+
+.login-link {
+  cursor: pointer;
+ }
 
 li img {
   height: 16px;
   width: 16px;
   margin-left: 14px;
-  cursor: pointer;
 }
 
-nav a:active,
-li button:active {
+li button:hover {
   font-weight: 700;
 }
+/*
 nav a {
   text-decoration: none;
   color: #000000;
   font-size: 16px;
   font-weight: 400;
   margin-left: 10px;
-}
+}*/
 
 /* Main */
 
@@ -490,8 +492,12 @@ footer nav ul {
 
 /*Partie login*/
 
+.login-page {
+  font-weight: 700;
+}
+
 .form {
-  background: #e5e5e5;
+  background: #E5E5E5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -507,9 +513,10 @@ footer nav ul {
 .input input[type="submit"] {
   padding: 10px 38px 9px 39px;
 }
+/*
 .input input[type="submit"]:active {
   background: #000000;
-}
+}*/
 
 .input input[type="password"],
 .input input[type="email"] {
@@ -517,6 +524,7 @@ footer nav ul {
   width: 379px;
   border: none;
   box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  cursor: default;
 }
 
 label {
@@ -544,6 +552,7 @@ label {
 form a {
   color: #3d3d3d;
   text-align: center;
+  cursor: default;
 }
 
 .errorInformation {
@@ -554,11 +563,16 @@ form a {
   border: 1px solid red;
   background-color: #f0ccd8;
 }
-
+ .link {
+  text-decoration: underline;
+ }
 .footer-login {
   width: 100%;
   position: absolute;
   bottom: 0;
+}
+#submit-connecter {
+  cursor: pointer;
 }
 /*  -------------------- */
 /*  |  fenêtres modal  | */

@@ -47,7 +47,7 @@ async function getCategories(urlCategories) {
 //  | Create buttons dynamically whith the API  |
 //  ---------------------------------------------
 
-async function createButtons() {
+async function createButtons(newFilterButton) {
   let category = await getCategories(urlCategories);
 
   //creation of buttons for each category
@@ -143,12 +143,15 @@ async function buildWorks() {
           );
                                         console.log("target-e", e.target);
                                         console.log("filterChoice", filterChoice);
+                                        console.log("button", e.target.name)
           applyFilter(filterChoice);
+          
         }
       });
     });
   }
   createFilter();
+ 
   //}
 
   //buildWorks();
@@ -174,7 +177,8 @@ async function buildWorks() {
   //  ---------------------------------------------
   //  | setting up element according to the token |
   //  ---------------------------------------------
-
+const btnsFilter = document.querySelector(".btns-filter")
+const mesProjetsH2 = document.querySelector(".mes-projets")
   // storing the token in a variable
   let controlToken = sessionStorage.getItem("token");
   console.log("token", controlToken);
@@ -185,6 +189,14 @@ async function buildWorks() {
   controlToken === null ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
 
+  controlToken === null ? (btnsFilter.style.display = "flex")
+    : (btnsFilter.style.display = "none"); 
+  
+  controlToken === null ? mesProjetsH2.style.marginBottom = "30px"
+  : mesProjetsH2.style.marginBottom = "165px"
+
+  controlToken === null ? (btnsFilter.style.marginBotton = "")
+    : (btnsFilter.style.marginBotton = "none"); 
   controlToken === null ? (header.style.marginTop = "50px")
     : (header.style.marginTop = "38px");
 
@@ -262,7 +274,7 @@ async function buildWorks() {
     let figure = document.createElement("figure");
     // id
     let idPhoto = project.id
-    figure.className = idPhoto
+    figure.id = idPhoto
     //img
     let img = document.createElement("img");
     img.src = project.imageUrl;
@@ -315,8 +327,8 @@ async function buildWorks() {
   
   trashButton.forEach ((trash) => trash.addEventListener("click", function () {
     let figure = this.parentNode
-    let idPhoto = figure.className
-    parseInt(idPhoto)
+    let idPhoto = figure.id
+    //parseInt(idPhoto)
     const lru = "189.0.0.0"
     async function deletePhoto() {
       await fetch(`${lru}/${idPhoto}` , {
@@ -329,8 +341,7 @@ async function buildWorks() {
       .then(function (response) {
         if(response.status === 204) {
           alert("status url", response.staus)
-          alertModalGallery.innerHTML = "Félicitation, fichier effacé ";
-          alertModalGallery.style.display = "flex";
+        
          console.log("response.status => ", response.status);
         } else {
           resStatus = response.status
@@ -376,23 +387,20 @@ async function buildWorks() {
       : (modalGallery.style.display = "flex");
   }
 
-  //toogle funtion to manage the appearance of the modal
+  // toogle funtion to manage the appearance of the modal
   buttonAddPhotos.addEventListener("click", function () { toggleModal(); toggleModal2();});
-  //  ------------------------------------
-  //  | modal - add photo Arrow previous |
-  //  ------------------------------------
-
   
-
+  /****modal - add photo Arrow previous ****/
+ 
   previousArrow.addEventListener("click", function () {
     toggleModal2();
     modalContainer.classList.toggle("active");
   });
-  //  ------------------------------
-  //  | add photo  input file part |
-  //  ------------------------------
+  
+  /**** add photo  input file part  ****/
+  
+  let image 
 
-  let image, imgSrc;
   const inputFile = document.getElementById("my-file");
   const containerAddPhoto = document.querySelector(".container-add-photo");
   infoFile.innerHTML = "jpg png : 4 mo max";
