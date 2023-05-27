@@ -227,7 +227,7 @@ async function buildWorks() {
 
   // general container & gallery
   const modalContainer = document.querySelector(".modal-container");
-  const modalGallery = document.querySelector(".modal-galerie");
+  const modalGallery = document.querySelector(".modal-photo-gallery");
   //all elements that can close or open the modal
   const modalTrigger = document.querySelectorAll(".modal-trigger");
   // button to open 2nd modal
