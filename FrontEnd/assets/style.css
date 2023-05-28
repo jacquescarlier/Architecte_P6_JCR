@@ -366,14 +366,23 @@ main {
   /*height: 37px;
   /*width: 100px;*/
 }
-
+/*
 #btn-Tous:active,
 #btn-Objets:active,
 #btn-Appartements:active,
 #btn-Hotels:active {
   background-color: #1d6154;
   color: #ffffff;
+}*/
+
+#btn-Tous:focus,
+#btn-Objets:focus,
+#btn-Appartements:focus,
+#btn-Hotels:focus {
+  background-color: #1d6154;
+  color: #ffffff;
 }
+
 #btn-Objets {
   border: 1px solid #1d6154;
   border-radius: 60px;

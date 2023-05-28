@@ -43,6 +43,7 @@ async function getCategories(urlCategories) {
   if (response.ok) return await response.json();
 }
 
+
 //  ---------------------------------------------
 //  | Create buttons dynamically whith the API  |
 //  ---------------------------------------------
@@ -143,13 +144,15 @@ async function buildWorks() {
           );
                                         console.log("target-e", e.target);
                                         console.log("filterChoice", filterChoice);
-                                        console.log("button", e.target.name)
-          applyFilter(filterChoice);
+                                        console.log("button", e.target.id);
           
+          applyFilter(filterChoice);
+        
         }
       });
     });
   }
+  
   createFilter();
  
   //}
