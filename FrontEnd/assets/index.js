@@ -193,7 +193,7 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
     : (btnsFilter.style.display = "none"); 
   
   controlToken === null ? mesProjetsH2.style.marginBottom = "30px"
-  : mesProjetsH2.style.marginBottom = "165px"
+  : mesProjetsH2.style.marginBottom = "92px"
 
   controlToken === null ? (btnsFilter.style.marginBotton = "")
     : (btnsFilter.style.marginBotton = "none"); 
@@ -261,6 +261,9 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   // arrow previous
   const previousArrow = document.getElementById("previous-arrow");
 
+  const imageSelected = document.querySelector(".image-selected")
+  
+
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
@@ -306,7 +309,9 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   //  *****************
   //  * display modal *
   //  *****************
-
+  const containerAddPhoto = document.querySelector(".container-add-photo");
+  const containerAddPhoto2 = document.querySelector(".container-add-photo2")
+  
   modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex")
     : (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
@@ -395,16 +400,73 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   previousArrow.addEventListener("click", function () {
     toggleModal2();
     modalContainer.classList.toggle("active");
+    containerAddPhoto.style.display = "flex"
+    containerAddPhoto2.style.display = "none";
+    
+    //containerAddPhoto2.figure.innerHTML = "";
   });
   
   /**** add photo  input file part  ****/
   
-  let image 
+const fileUploadInput = document.querySelector("#my-file");
+
+infoFile.innerHTML = "jpg png : 4 mo max";
+
+
+fileUploadInput.addEventListener('change', previewFile);
+console.log("fileuploadinput", fileUploadInput)
+
+function previewFile() {
+  console.log("file", this.files )
+  console.log("namefile", this.files[0].name)
+  // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
+  const fileExtensionRegex = /\.(jpe?g|png)$/i;
+//.test renvoie true ou false
+  if (this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) )  {
+    console.log("fichier pas accepté")
+    return;
+  }
+console.log("fichier img ok")
+
+const file = this.files[0];
+const newFileReader = new FileReader();
+
+newFileReader.readAsDataURL(file);
+
+newFileReader.addEventListener('load', (event) =>
+displayImage(event, file))
+
+function displayImage (event, file) {
+
+const figure = document.createElement('figure');
+figure.id = "image-selected";
+
+const image = document.createElement('img');
+image.src = event.target.result;
+
+figure.appendChild(image);
+image.style.width = "129px";
+image.style.height = "169px";
+document.querySelector(".container-add-photo2").appendChild(figure);
+containerAddPhoto2.style.display = "flex"
+containerAddPhoto.style.display = "none"
+
+// change the background color of the "validate" button
+buttonValidatePhoto.style.background = "#1D6154";
+
+  //display Image
+}
+//const figcaption = document.createElement ('figcaption);
+// figcaption.textContent = title;
+  //previewFile
+}
+
+ /* let image 
 
   const inputFile = document.getElementById("my-file");
   const containerAddPhoto = document.querySelector(".container-add-photo");
   infoFile.innerHTML = "jpg png : 4 mo max";
-  inputFile.addEventListener("click", function (e) {
+ inputFile.addEventListener("click", function (e) {
     // modify the class of infoFile
     infoFile.classList = "info-file";
     inputFile.addEventListener("change", function (e) {
@@ -413,7 +475,7 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
       // file type check
       if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg === "jpeg" ) {
                                       console.log("img Ok");
-
+    
         // change the background color of the "validate" button
         buttonValidatePhoto.style.background = "#1D6154";
       } else {
@@ -431,7 +493,7 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
       img.src = image;
       containerAddPhoto.appendChild(img);
     });
-  });
+  });*/
 }
 
 buildWorks();

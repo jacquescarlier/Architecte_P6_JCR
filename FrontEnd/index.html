@@ -42,14 +42,14 @@
 			<section id="introduction">
 				<figure>
 					<img src="./assets/images/sophie-bluel.png" alt="photos de Sophie Buel">
-					<a href="#modal-galerie" class="modifier modal-trigger" id="bouton-modifier-photo">
+					<a href="#modal-galerie" class="modifier " id="bouton-modifier-photo">
 						<span><i class="fa-regular fa-pen-to-square"></i>
 							Modifier</span>
 					</a>
 				</figure>
 				<article class="introduction">
 					<div class="div-introduction">
-						<a href="#modal-galerie" class="modifier modal-trigger" id="bouton-modifier-introduction">
+						<a href="#modal-galerie"  id="bouton-modifier-introduction">
 							<i class="fa-regular fa-pen-to-square"></i>
 							<span>Modifier</span>
 						</a>
@@ -125,11 +125,12 @@
 				<i class="fa-sharp fa-regular fa-image"></i>
 				<div class="input-file-container">
 					<input class="input-file" id="my-file" type="file"
-						accept="image/png, image/jpeg, image/PNG, image/jpg">
-					<label for="my-file" class="input-file-trigger" tabindex="0">+ Ajouter une photo</label>
+						accept="image/png, image/jpeg, image/PNG, image/jpg" hidden>
+					<label for="my-file" class="input-file-trigger">+ Ajouter une photo</label>
 				</div>
 				<span class="info-file">jpg png : 4 mo max</span>
 			</div>
+			<div class="container-add-photo2"></div>
 			<form id="form-modal">
 				<div class="label-form">
 					<label class="label-title" for="title">Titre</label>

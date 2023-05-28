@@ -267,14 +267,6 @@ li img {
 li button:hover {
   font-weight: 700;
 }
-/*
-nav a {
-  text-decoration: none;
-  color: #000000;
-  font-size: 16px;
-  font-weight: 400;
-  margin-left: 10px;
-}*/
 
 /* Main */
 
@@ -331,6 +323,7 @@ main {
 }
 
 #bouton-modifier-introduction {
+  display: none;
   position: absolute;
   top: 5%;
 }
@@ -436,10 +429,6 @@ main {
 #contact > * {
   text-align: center;
 }
-/*
-#contact h2 {
-  margin-bottom: 0px;
-}*/
 
 #contact form {
   display: flex;
@@ -652,7 +641,7 @@ form a {
   display: none;
   flex-flow: column wrap;
   position: absolute;
-  top: 40%;
+  top: 25%;
   left: 52%;
   width: 630px;
   height: 731px;
@@ -800,7 +789,7 @@ form a {
   flex-flow: column wrap;
   opacity: 1;
   position: absolute;
-  top: 40%;
+  top: 25%;
   left: 52%;
   width: 630px;
   height: 731px;
@@ -831,7 +820,7 @@ form a {
   background: #ffffff;
 }
 
-.container-add-photo {
+.container-add-photo, .container-add-photo2 {
   width: 420px;
   height: 169px;
   display: flex;
@@ -848,6 +837,9 @@ form a {
   margin: 36px auto 20px;
 }
 
+.container-add-photo2{
+  display: none;
+}
 .container-add-photo .fa-sharp {
   width: 58px;
   height: 46px;
@@ -870,7 +862,6 @@ form a {
   position: absolute;
   top: -26px;
   left: 0;
-  /*padding: 14px 45px;*/
   background: #cbd6dc;
   border-radius: 50px;
   color: #306685;
@@ -881,18 +872,6 @@ form a {
   transition: all 0.4s;
   cursor: pointer;
   padding: 10px;
-  z-index: 5;
-}
-.input-file {
-  position: absolute;
-  top: 5px;
-  left: 0;
-  width: 173px;
-  height: 36px;
-  opacity: 0;
-  padding: 13px 0;
-  cursor: pointer;
-  z-index: -5;
 }
 
 .info-file {
