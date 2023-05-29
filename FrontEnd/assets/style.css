@@ -762,6 +762,7 @@ form a {
 
 #button-add-modal {
   border: none;
+  cursor: pointer;
 }
 
 .button-del-gallery {
@@ -885,13 +886,7 @@ form a {
 
 .info-file {
   margin-top: 7px;
-}
-
-.message-info-file {
-  font-size: 16px;
-  font-weight: 800;
-  color: crimson;
-}
+ }
 
 .form-category {
   margin-top: 11px;

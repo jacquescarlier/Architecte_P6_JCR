@@ -43,7 +43,6 @@ async function getCategories(urlCategories) {
   if (response.ok) return await response.json();
 }
 
-
 //  ---------------------------------------------
 //  | Create buttons dynamically whith the API  |
 //  ---------------------------------------------
@@ -133,31 +132,26 @@ async function buildWorks() {
     btnFilter.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
-                                        console.log("target-e", e.target);
+          console.log("target-e", e.target);
           filterChoice = works;
-                                        console.log("filterChoice", filterChoice);
+          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         } else {
           filterChoice = works.filter(
-           //  compares the name of the button to the categories of the "works" array object
+            //  compares the name of the button to the categories of the "works" array object
             (obj) => obj.category.name === e.target.name
           );
-                                        console.log("target-e", e.target);
-                                        console.log("filterChoice", filterChoice);
-                                        console.log("button", e.target.id);
-          
+          console.log("target-e", e.target);
+          console.log("filterChoice", filterChoice);
+          console.log("button", e.target.id);
+
           applyFilter(filterChoice);
-        
         }
       });
     });
   }
-  
-  createFilter();
- 
-  //}
 
-  //buildWorks();
+  createFilter();
 
   // ------------------
   // |  Apply filter  |
@@ -180,31 +174,38 @@ async function buildWorks() {
   //  ---------------------------------------------
   //  | setting up element according to the token |
   //  ---------------------------------------------
-const btnsFilter = document.querySelector(".btns-filter")
-const mesProjetsH2 = document.querySelector(".mes-projets")
+  const btnsFilter = document.querySelector(".btns-filter");
+  const mesProjetsH2 = document.querySelector(".mes-projets");
   // storing the token in a variable
   let controlToken = sessionStorage.getItem("token");
   console.log("token", controlToken);
   // Modifies elements when switching to "edit mode"
-  controlToken === null ? (adminNav.style.display = "none")
+  controlToken === null
+    ? (adminNav.style.display = "none")
     : (adminNav.style.display = "flex");
 
-  controlToken === null ? (document.getElementById("login").innerHTML = "login")
+  controlToken === null
+    ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
 
-  controlToken === null ? (btnsFilter.style.display = "flex")
-    : (btnsFilter.style.display = "none"); 
-  
-  controlToken === null ? mesProjetsH2.style.marginBottom = "30px"
-  : mesProjetsH2.style.marginBottom = "92px"
+  controlToken === null
+    ? (btnsFilter.style.display = "flex")
+    : (btnsFilter.style.display = "none");
 
-  controlToken === null ? (btnsFilter.style.marginBotton = "")
-    : (btnsFilter.style.marginBotton = "none"); 
-  controlToken === null ? (header.style.marginTop = "50px")
+  controlToken === null
+    ? (mesProjetsH2.style.marginBottom = "30px")
+    : (mesProjetsH2.style.marginBottom = "92px");
+
+  controlToken === null
+    ? (btnsFilter.style.marginBotton = "")
+    : (btnsFilter.style.marginBotton = "none");
+  controlToken === null
+    ? (header.style.marginTop = "50px")
     : (header.style.marginTop = "38px");
 
   modalCallButtons.forEach(function (item) {
-    controlToken === null ? (item.style.display = "none")
+    controlToken === null
+      ? (item.style.display = "none")
       : (item.style.display = "flex");
   });
 
@@ -213,7 +214,9 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   //  ---------------------------------------------------------
 
   // add event listening on the  "login/logout" button
-  loginLogout.addEventListener("click", function () { logInLogOut(); });
+  loginLogout.addEventListener("click", function () {
+    logInLogOut();
+  });
 
   // redirect function to a page according to the token
   function logInLogOut() {
@@ -238,11 +241,15 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   //  | constantes for modal |
   //  ------------------------
 
-/**** gallery modal ****/
+  /**** gallery modal ****/
 
   // general container & gallery
   const modalContainer = document.querySelector(".modal-container");
   const modalGallery = document.querySelector(".modal-photo-gallery");
+  const modal2Container = document.querySelector(".modal2-container");
+  const addPhotos = document.querySelector(".add-photo");
+
+  // gallery modal
   //all elements that can close or open the modal
   const modalTrigger = document.querySelectorAll(".modal-trigger");
   // button to open 2nd modal
@@ -250,51 +257,44 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   // gallery container
   const galleryOfModal = document.querySelector(".gallery-modal");
 
-/**** modal add photo ****/
-
-  const modal2Container = document.querySelector(".modal2-container");
+  /**** modal add photo ****/
   //all elements that can close or open the modal
   const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
-  // general container to add a photo
-  const addPhotos = document.querySelector(".add-photo");
   //validate button
   const buttonValidatePhoto = document.getElementById("button-validate-photo");
   // messages for image size or error when selecting
   const infoFile = document.querySelector(".info-file");
   // arrow previous
   const previousArrow = document.getElementById("previous-arrow");
-
-  const imageSelected = document.querySelector(".image-selected")
-  
+  // selected image in the modal added a photo
+  const imageSelected = document.querySelector(".image-selected");
 
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
-  
-  /**** Create the gallery for modal ****/   
-  
+
+  /**** Create the gallery for modal ****/
+
   for (const project of works) {
-    //create an id to delete photos
-   
     //create galerry
     let figure = document.createElement("figure");
-    // id
-    let idPhoto = project.id
-    figure.id = idPhoto
+    //recover an id to delete photos
+    let idPhoto = project.id;
+    figure.id = idPhoto;
     //img
     let img = document.createElement("img");
     img.src = project.imageUrl;
     figure.appendChild(img);
-    //figcaption
+    //figcaption "éditer"
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = "éditer";
     figure.appendChild(figcaption);
-    // trash 
+    // trash can icon creation
     let trashGallery = document.createElement("i");
     trashGallery.className = "fa-solid fa-trash-can trash";
     trashGallery.innerHTML = "";
     figure.appendChild(trashGallery);
-    // arrow
+    // arrow icon creation
     let arrowGallery = document.createElement("i");
     arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
     arrowGallery.innerHTML = "";
@@ -303,28 +303,36 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
     galleryOfModal.appendChild(figure);
 
     // arrow hover
-    img.addEventListener("mouseover", function(e) {
-    arrowGallery.style.display = "flex" });
-    img.addEventListener("mouseout", function(e) {
-      arrowGallery.style.display = "none" });
+    img.addEventListener("mouseover", function (e) {
+      arrowGallery.style.display = "flex";
+    });
+    img.addEventListener("mouseout", function (e) {
+      arrowGallery.style.display = "none";
+    });
   }
 
   //  *****************
   //  * display modal *
   //  *****************
+  // containers for adding photos
   const containerAddPhoto = document.querySelector(".container-add-photo");
-  const containerAddPhoto2 = document.querySelector(".container-add-photo2")
-  
-  modalContainer.className === "modal-container active" ? (modalgallery.style.display = "flex")
+  const containerAddPhoto2 = document.querySelector(".container-add-photo2");
+
+  modalContainer.className === "modal-container active"
+    ? (modalgallery.style.display = "flex")
     : (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
-  modalTrigger.forEach((trigger) => trigger.addEventListener("click", toggleModal));
+  modalTrigger.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModal)
+  );
   // change the name of the class using toggle
   function toggleModal() {
     modalContainer.classList.toggle("active");
     alertModalGallery.style.display = "none";
     // makes the modal appears or disappear depending on the class
-    modalContainer.className === "modal-container active" ? (modalGallery.style.display = "flex") : modalGallery.style.display = "none";
+    modalContainer.className === "modal-container active"
+      ? (modalGallery.style.display = "flex")
+      : (modalGallery.style.display = "none");
   }
 
   /**** delete image  ****/
@@ -332,171 +340,219 @@ const mesProjetsH2 = document.querySelector(".mes-projets")
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
 
-  
-  trashButton.forEach ((trash) => trash.addEventListener("click", function () {
-    let figure = this.parentNode
-    let idPhoto = figure.id
-    //parseInt(idPhoto)
-    const lru = "189.0.0.0"
-    async function deletePhoto() {
-      await fetch(`${lru}/${idPhoto}` , {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${controlToken}`
-        },
-      })
+  trashButton.forEach((trash) =>
+    trash.addEventListener("click", function (e) {
+      let figure = this.parentNode;
+      let idPhoto = figure.id;
 
-      .then(function (response) {
-        if(response.status === 204) {
-          alert("status url", response.staus)
-        
-         console.log("response.status => ", response.status);
-        } else {
-          resStatus = response.status
-          console.log("pas ok autre", response.status);
-          alertModalGallery.innerHTML = "impossible d'effacé le fichier, status du serveur :  " + resStatus;
-          alertModalGallery.style.display = "flex";
-        }
-      })
-     
-    }
-    deletePhoto()  
+      const lru = "189.0.0.0";
+      async function deletePhoto() {
+        fetch(`${lru}/${idPhoto}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${controlToken}`,
+          },
+        }).then(function (response) {
+          if (response.status === 204) {
+            console.log("figureid", figure);
+            figure.remove();
+            console.log("response.status => ", response.status);
+            e.preventDefault();
+          } else {
+            resStatus = response.status;
+            console.log("pas ok autre", response.status);
+            alertModalGallery.innerHTML =
+              "impossible d'effacé le fichier, statut du serveur :  " +
+              resStatus;
+            alertModalGallery.style.display = "flex";
+          }
+        });
+      }
+      deletePhoto();
+    })
+  );
 
-  }))
-
-  modalGallery.addEventListener("click", function(){  alertModalGallery.style.display = "none";})
+  modalGallery.addEventListener("click", function () {
+    alertModalGallery.style.display = "none";
+  });
   alertModalGallery.innerHTML = " ";
-  /**** close the modal by clicking outside ****/ 
+  /**** close the modal by clicking outside ****/
 
-  modalContainer.addEventListener("click", (e) => { toggleModal(); });
-  modalContainer.children[1].addEventListener('click', function (e) { e.stopPropagation();});
+  modalContainer.addEventListener("click", (e) => {
+    toggleModal();
+  });
+  modalContainer.children[1].addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 
-  modal2Container.addEventListener("click", (e) => { toggleModal2(); });
-  modal2Container.children[1].addEventListener('click', function (e) {e.stopPropagation();});
+  modal2Container.addEventListener("click", (e) => {
+    toggleModal2();
+  });
+  modal2Container.children[1].addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 
   //  ---------------------
   //  | modal - add photo |
   //  ---------------------
 
   //for close modal
-  modalTrigger2.forEach((trigger) => trigger.addEventListener("click", toggleModal2));
+  modalTrigger2.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModal2)
+  );
 
   // conditions of appearance of the modal
   function toggleModal2() {
     modal2Container.classList.toggle("active");
 
-    modalContainer.className === "modal-container active" ? (modalGallery.style.display = "flex")
+    modalContainer.className === "modal-container active"
+      ? (modalGallery.style.display = "flex")
       : (modalGallery.style.display = "none");
 
-    modal2Container.className === "modal2-container active" ? (addPhotos.style.display = "flex")
+    modal2Container.className === "modal2-container active"
+      ? (addPhotos.style.display = "flex")
       : (addPhotos.style.display = "none");
 
-    modal2Container.className === "modal2-container active" ? (modalGallery.style.display = "none")
+    modal2Container.className === "modal2-container active"
+      ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
+
+    infoFile.innerHTML = "jpg png : 4 mo max";
+    infoFile.style.color = "#444444";
+    infoFile.style.fontSize = "12px";
+    infoFile.style.fontWeight = "400";
+    infoFile.style.background = "none";
+    infoFile.style.padding = "0";
+    infoFile.style.borderRadius = "0";
+
+    buttonValidatePhoto.style.background = "#A7A7A7";
+    buttonValidatePhoto.style.cursor = "default";
   }
 
   // toogle funtion to manage the appearance of the modal
-  buttonAddPhotos.addEventListener("click", function () { toggleModal(); toggleModal2();});
-  
+  buttonAddPhotos.addEventListener("click", function () {
+    toggleModal();
+    toggleModal2();
+  });
+
   /****modal - add photo Arrow previous ****/
- 
+
   previousArrow.addEventListener("click", function () {
     toggleModal2();
     modalContainer.classList.toggle("active");
-    containerAddPhoto.style.display = "flex"
+    containerAddPhoto.style.display = "flex";
     containerAddPhoto2.style.display = "none";
-    
-    //containerAddPhoto2.figure.innerHTML = "";
   });
-  
+
   /**** add photo  input file part  ****/
-  
-const fileUploadInput = document.querySelector("#my-file");
 
-infoFile.innerHTML = "jpg png : 4 mo max";
-
-
-fileUploadInput.addEventListener('change', previewFile);
-console.log("fileuploadinput", fileUploadInput)
-
-function previewFile() {
-  console.log("file", this.files )
-  console.log("namefile", this.files[0].name)
-  // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
-  const fileExtensionRegex = /\.(jpe?g|png)$/i;
-//.test renvoie true ou false
-  if (this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) )  {
-    console.log("fichier pas accepté")
-    return;
-  }
-console.log("fichier img ok")
-
-const file = this.files[0];
-const newFileReader = new FileReader();
-
-newFileReader.readAsDataURL(file);
-
-newFileReader.addEventListener('load', (event) =>
-displayImage(event, file))
-
-function displayImage (event, file) {
-
-const figure = document.createElement('figure');
-figure.id = "image-selected";
-
-const image = document.createElement('img');
-image.src = event.target.result;
-
-figure.appendChild(image);
-image.style.width = "129px";
-image.style.height = "169px";
-document.querySelector(".container-add-photo2").appendChild(figure);
-containerAddPhoto2.style.display = "flex"
-containerAddPhoto.style.display = "none"
-
-// change the background color of the "validate" button
-buttonValidatePhoto.style.background = "#1D6154";
-
-  //display Image
-}
-//const figcaption = document.createElement ('figcaption);
-// figcaption.textContent = title;
-  //previewFile
-}
-
- /* let image 
-
-  const inputFile = document.getElementById("my-file");
-  const containerAddPhoto = document.querySelector(".container-add-photo");
+  const fileUploadInput = document.querySelector("#my-file");
+  console.log("fileinput", fileUploadInput);
   infoFile.innerHTML = "jpg png : 4 mo max";
- inputFile.addEventListener("click", function (e) {
-    // modify the class of infoFile
-    infoFile.classList = "info-file";
-    inputFile.addEventListener("change", function (e) {
-      document.querySelector(".info-file").innerHTML = "jpg png : 4 mo max";
-      const typeImg = inputFile.value.split(".").reverse()[0];
-      // file type check
-      if (typeImg === "png" || typeImg === "PNG" || typeImg === "jpg" || typeImg === "jpeg" ) {
-                                      console.log("img Ok");
-    
-        // change the background color of the "validate" button
-        buttonValidatePhoto.style.background = "#1D6154";
-      } else {
-                                      console.log("img not ok");
-        // change the text and modify the class of infofile
-        infoFile.innerHTML = "fichier jpg ou png obligatoire";
-        infoFile.classList = "message-info-file";
-        return;
-      }
-      
-      image = e.target.files[0].name;
-                                      console.log("type =>", typeImg);
-                                      console.log("fichier =>", image);
-      let img = document.createElement("img");
-      img.src = image;
-      containerAddPhoto.appendChild(img);
-    });
-  });*/
+
+  fileUploadInput.addEventListener("change", previewFile);
+  console.log("fileuploadinput", fileUploadInput);
+
+  console.log("containeraddphoto2", containerAddPhoto2);
+
+  function previewFile() {
+    const sizeFile = this.files[0].size;
+    console.log("file", this.files);
+    console.log("namefile", this.files[0].name);
+    // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
+    const fileExtensionRegex = /\.(jpe?g|png)$/i;
+    //.test renvoie true ou false
+    if (
+      this.files.length === 0 ||
+      !fileExtensionRegex.test(this.files[0].name) ||
+      sizeFile > 4194304
+    ) {
+      console.log("fichier pas accepté");
+      infoFileNotOk();
+      return;
+    }
+
+    function infoFileNotOk() {
+      infoFile.innerHTML = "Fichier pas accepté";
+      infoFile.style.color = "red";
+      infoFile.style.fontWeight = "700";
+      infoFile.style.fontSize = "18px";
+      infoFile.style.background = "#FFFFFF";
+      infoFile.style.padding = "10px";
+      infoFile.style.borderRadius = "30px";
+    }
+
+    const file = this.files[0];
+    const newFileReader = new FileReader();
+
+    newFileReader.readAsDataURL(file);
+
+    newFileReader.addEventListener("load", (event) =>
+      displayImage(event, file)
+    );
+
+    function displayImage(event) {
+      const figureUpload = document.createElement("figure");
+      figureUpload.id = "image-selected";
+
+      const image = document.createElement("img");
+      image.src = event.target.result;
+
+      figureUpload.appendChild(image);
+      image.style.width = "129px";
+      image.style.height = "169px";
+      document.querySelector(".container-add-photo2").appendChild(figureUpload);
+      containerAddPhoto2.style.display = "flex";
+      containerAddPhoto.style.display = "none";
+    }
+
+    //previewFile
+  }
+
+  // change the background color of the "validate" button
+  //buttonValidatePhoto.style.background = "#1D6154";
+  //buttonValidatePhoto.style.cursor ="pointer";
+
+  //const figcaption = document.createElement ('figcaption);
+  // figcaption.textContent = title;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 buildWorks();
