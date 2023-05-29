@@ -232,11 +232,6 @@ async function buildWorks() {
   //  | parts of the modals |
   //  -----------------------
 
-  // page refresh
-  const reload = () => {
-    window.location.reload();
-  };
-
   //  ------------------------
   //  | constantes for modal |
   //  ------------------------
@@ -347,7 +342,7 @@ async function buildWorks() {
 
       const lru = "189.0.0.0";
       async function deletePhoto() {
-        fetch(`${lru}/${idPhoto}`, {
+        fetch(`${url}/${idPhoto}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${controlToken}`,
@@ -427,6 +422,7 @@ async function buildWorks() {
 
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
+
   }
 
   // toogle funtion to manage the appearance of the modal
