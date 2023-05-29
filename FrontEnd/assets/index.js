@@ -174,6 +174,7 @@ async function buildWorks() {
   //  ---------------------------------------------
   //  | setting up element according to the token |
   //  ---------------------------------------------
+
   const btnsFilter = document.querySelector(".btns-filter");
   const mesProjetsH2 = document.querySelector(".mes-projets");
   // storing the token in a variable
@@ -243,7 +244,7 @@ async function buildWorks() {
   const addPhotos = document.querySelector(".add-photo");
 
   //gallery & addPhoto modal content
-  
+
   modalGallery.innerHTML = `
       <button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
 			<h1 id="modalTitle">Galerie photo</h1>
@@ -252,7 +253,9 @@ async function buildWorks() {
 			<span class="alert-modal"></span>
 			<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
 			<button type="button" class="button-del-gallery">Supprimer la galerie</button>
-  `
+  `;
+
+
   addPhotos.innerHTML = `
       <button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
 			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
@@ -282,7 +285,7 @@ async function buildWorks() {
 			</form>
 			<div class="border-modal"></div>
 			<button type="button" class="button-modal" id="button-validate-photo">Valider</button>
-  `
+  `;
 
   // constant for modal
 
@@ -327,12 +330,11 @@ async function buildWorks() {
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = "éditer";
     figure.appendChild(figcaption);
-    // trash can icon creation
+    //  icon creation
     let trashGallery = document.createElement("i");
     trashGallery.className = "fa-solid fa-trash-can trash";
     trashGallery.innerHTML = "";
     figure.appendChild(trashGallery);
-    // arrow icon creation
     let arrowGallery = document.createElement("i");
     arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
     arrowGallery.innerHTML = "";
@@ -392,9 +394,9 @@ async function buildWorks() {
           },
         }).then(function (response) {
           if (response.status === 204) {
-            console.log("figureid", figure);
             figure.remove();
             console.log("response.status => ", response.status);
+            alert("stop")
             e.preventDefault();
           } else {
             resStatus = response.status;
@@ -412,18 +414,28 @@ async function buildWorks() {
 
   //how the modal close
 
-  modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none";  });
-  
+  modalGallery.addEventListener("click", function () {
+    alertModalGallery.style.display = "none";
+  });
+
   alertModalGallery.innerHTML = " ";
 
   /**** close the modal by clicking outside ****/
-  modalContainer.addEventListener("click", (e) => { toggleModal();  });
+  modalContainer.addEventListener("click", (e) => {
+    toggleModal();
+  });
 
-  modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
+  modalContainer.children[1].addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 
-  modal2Container.addEventListener("click", (e) => { toggleModal2(); });
+  modal2Container.addEventListener("click", (e) => {
+    toggleModal2();
+  });
 
-  modal2Container.children[1].addEventListener("click", function (e) { e.stopPropagation();  });
+  modal2Container.children[1].addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 
   //  ---------------------
   //  | modal - add photo |
@@ -450,17 +462,16 @@ async function buildWorks() {
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
 
-      infoFile.innerHTML = "jpg png : 4 mo max";
-      infoFile.style.color = "#444444";
-      infoFile.style.fontSize = "12px";
-      infoFile.style.fontWeight = "400";
-      infoFile.style.background = "none";
-      infoFile.style.padding = "0";
-      infoFile.style.borderRadius = "0";
+    infoFile.innerHTML = "jpg png : 4 mo max";
+    infoFile.style.color = "#444444";
+    infoFile.style.fontSize = "12px";
+    infoFile.style.fontWeight = "400";
+    infoFile.style.background = "none";
+    infoFile.style.padding = "0";
+    infoFile.style.borderRadius = "0";
 
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
-
   }
 
   // toogle funtion to manage the appearance of the modal
@@ -470,17 +481,16 @@ async function buildWorks() {
   });
 
   /****modal - add photo Arrow previous ****/
-                      console.log("previousarrow", previousArrow)
+  console.log("previousarrow", previousArrow);
   previousArrow.addEventListener("click", function () {
-                      console.log("hop");
+    console.log("hop");
     modalContainer.classList.toggle("active");
-    const imageSelected = document.getElementById("image-selected")
-                      console.log("selected", imageSelected)
+    const imageSelected = document.getElementById("image-selected");
+    console.log("selected", imageSelected);
     containerAddPhoto.style.display = "flex";
-    
+
     containerAddPhoto2.style.display = "none";
     toggleModal2();
-
   });
 
   /**** add photo  input file part  ****/
@@ -520,7 +530,7 @@ async function buildWorks() {
       infoFile.style.background = "#FFFFFF";
       infoFile.style.padding = "10px";
       infoFile.style.borderRadius = "30px";
-    };
+    }
 
     const file = this.files[0];
     const newFileReader = new FileReader();
@@ -556,43 +566,5 @@ async function buildWorks() {
   //const figcaption = document.createElement ('figcaption);
   // figcaption.textContent = title;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 buildWorks();
