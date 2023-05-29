@@ -236,15 +236,58 @@ async function buildWorks() {
   //  | constantes for modal |
   //  ------------------------
 
-  /**** gallery modal ****/
-
   // general container & gallery
   const modalContainer = document.querySelector(".modal-container");
   const modalGallery = document.querySelector(".modal-photo-gallery");
   const modal2Container = document.querySelector(".modal2-container");
   const addPhotos = document.querySelector(".add-photo");
 
+  //gallery & addPhoto modal content
+  
+  modalGallery.innerHTML = `
+      <button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
+			<h1 id="modalTitle">Galerie photo</h1>
+			<div class="gallery-modal"></div>
+			<div class="border-modal"></div>
+			<span class="alert-modal"></span>
+			<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
+			<button type="button" class="button-del-gallery">Supprimer la galerie</button>
+  `
+  addPhotos.innerHTML = `
+      <button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
+			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+			<h1 id="modalTitle2">Ajout photo</h1>
+			<div class="container-add-photo">
+				<i class="fa-sharp fa-regular fa-image"></i>
+				<div class="input-file-container">
+					<input class="input-file" id="my-file" type="file"
+						accept="image/png, image/jpeg, image/PNG, image/jpg" hidden>
+					<label for="my-file" class="input-file-trigger">+ Ajouter une photo</label>
+				</div>
+				<span class="info-file">jpg png : 4 mo max</span>
+			</div>
+      <div class="container-add-photo2"></div>
+			<form id="form-modal">
+				<div class="label-form">
+					<label class="label-title" for="title">Titre</label>
+					<input type="text" id="title" name="title" required>
+				</div>
+				<div class="form-category">
+					<label class="label-category" for="category">Catégorie :</label>
+					<select id="category" name="category">
+						<option value= " " disabled selected></option>
+					</select>
+				</div>
+				<span id="errorMessage"></span>
+			</form>
+			<div class="border-modal"></div>
+			<button type="button" class="button-modal" id="button-validate-photo">Valider</button>
+  `
+
+  // constant for modal
+
   // gallery modal
+
   //all elements that can close or open the modal
   const modalTrigger = document.querySelectorAll(".modal-trigger");
   // button to open 2nd modal
@@ -367,25 +410,20 @@ async function buildWorks() {
     })
   );
 
-  modalGallery.addEventListener("click", function () {
-    alertModalGallery.style.display = "none";
-  });
+  //how the modal close
+
+  modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none";  });
+  
   alertModalGallery.innerHTML = " ";
+
   /**** close the modal by clicking outside ****/
+  modalContainer.addEventListener("click", (e) => { toggleModal();  });
 
-  modalContainer.addEventListener("click", (e) => {
-    toggleModal();
-  });
-  modalContainer.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
+  modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
 
-  modal2Container.addEventListener("click", (e) => {
-    toggleModal2();
-  });
-  modal2Container.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
+  modal2Container.addEventListener("click", (e) => { toggleModal2(); });
+
+  modal2Container.children[1].addEventListener("click", function (e) { e.stopPropagation();  });
 
   //  ---------------------
   //  | modal - add photo |
@@ -412,13 +450,13 @@ async function buildWorks() {
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
 
-    infoFile.innerHTML = "jpg png : 4 mo max";
-    infoFile.style.color = "#444444";
-    infoFile.style.fontSize = "12px";
-    infoFile.style.fontWeight = "400";
-    infoFile.style.background = "none";
-    infoFile.style.padding = "0";
-    infoFile.style.borderRadius = "0";
+      infoFile.innerHTML = "jpg png : 4 mo max";
+      infoFile.style.color = "#444444";
+      infoFile.style.fontSize = "12px";
+      infoFile.style.fontWeight = "400";
+      infoFile.style.background = "none";
+      infoFile.style.padding = "0";
+      infoFile.style.borderRadius = "0";
 
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
@@ -432,12 +470,17 @@ async function buildWorks() {
   });
 
   /****modal - add photo Arrow previous ****/
-
+                      console.log("previousarrow", previousArrow)
   previousArrow.addEventListener("click", function () {
-    toggleModal2();
+                      console.log("hop");
     modalContainer.classList.toggle("active");
+    const imageSelected = document.getElementById("image-selected")
+                      console.log("selected", imageSelected)
     containerAddPhoto.style.display = "flex";
+    
     containerAddPhoto2.style.display = "none";
+    toggleModal2();
+
   });
 
   /**** add photo  input file part  ****/
@@ -463,6 +506,7 @@ async function buildWorks() {
       !fileExtensionRegex.test(this.files[0].name) ||
       sizeFile > 4194304
     ) {
+      //size file max  = 4* 1024 * 1024
       console.log("fichier pas accepté");
       infoFileNotOk();
       return;
@@ -476,7 +520,7 @@ async function buildWorks() {
       infoFile.style.background = "#FFFFFF";
       infoFile.style.padding = "10px";
       infoFile.style.borderRadius = "30px";
-    }
+    };
 
     const file = this.files[0];
     const newFileReader = new FileReader();
@@ -501,10 +545,10 @@ async function buildWorks() {
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
     }
-
     //previewFile
   }
 
+  //let formData = new FormData([])
   // change the background color of the "validate" button
   //buttonValidatePhoto.style.background = "#1D6154";
   //buttonValidatePhoto.style.cursor ="pointer";
