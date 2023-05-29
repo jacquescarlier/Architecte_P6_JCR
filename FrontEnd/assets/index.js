@@ -462,6 +462,8 @@ async function buildWorks() {
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
 
+    containerAddPhoto2.innerHTML = ' ' ; 
+
     infoFile.innerHTML = "jpg png : 4 mo max";
     infoFile.style.color = "#444444";
     infoFile.style.fontSize = "12px";
@@ -469,6 +471,8 @@ async function buildWorks() {
     infoFile.style.background = "none";
     infoFile.style.padding = "0";
     infoFile.style.borderRadius = "0";
+
+
 
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
