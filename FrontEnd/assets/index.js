@@ -29,6 +29,7 @@ let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"]
 async function getWorks(url) {
   const response = await fetch(url);
   if (response.ok) return await response.json();
+  
   else {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
@@ -47,7 +48,7 @@ async function getCategories(urlCategories) {
 //  | Create buttons dynamically whith the API  |
 //  ---------------------------------------------
 
-async function createButtons(newFilterButton) {
+async function createButtons() {
   let category = await getCategories(urlCategories);
 
   //creation of buttons for each category
@@ -72,29 +73,6 @@ async function createButtons(newFilterButton) {
   }
 }
 createButtons();
-//  -------------------------------
-//  |   Create Button with Array  |
-//  -------------------------------
-
-//fonction avec tableau perso pour corriger la faute sur Hôtels (ô)
-//désactivé pour l'instant
-/*function createButton() {
-    for (item of arrayCreateButton) {
-        let newButton = document.createElement("button");
-        console.log("newbutton", newButton);
-        newButton.type = 'button';
-        newButton.name = [item[2]]
-        newButton.innerHTML = [item[0]];
-        newButton.id = 'btn-' + [item[1]];
-        console.log("id",newButton)
-        newButton.className = 'btn-filter';
-        let portfolio = document.getElementById("filterButton");
-        console.log("id button", newButton.id)
-        console.log("portfolio", portfolio);
-        portfolio.appendChild(newButton);
-    }
-}
-createButton();*/
 
 //  --------------------------------------------
 //  |    Creation of the gallery & the filter  |
@@ -102,15 +80,18 @@ createButton();*/
 
 async function buildWorks() {
   // array constant
-  let works = await getWorks(url);
-
+let works = await getWorks(url);
+  
   // -------------------------
   // | job creation function |
   // -------------------------
 
   function createWork() {
     for (const project of works) {
+      let idPhoto = project.id;
       let figure = document.createElement("figure");
+      figure.id = idPhoto;
+      figure.className = "figure-gallery";
       let img = document.createElement("img");
       img.src = project.imageUrl;
       figure.appendChild(img);
@@ -132,19 +113,13 @@ async function buildWorks() {
     btnFilter.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
-          console.log("target-e", e.target);
           filterChoice = works;
-          console.log("filterChoice", filterChoice);
           applyFilter(filterChoice);
         } else {
           filterChoice = works.filter(
             //  compares the name of the button to the categories of the "works" array object
             (obj) => obj.category.name === e.target.name
           );
-          console.log("target-e", e.target);
-          console.log("filterChoice", filterChoice);
-          console.log("button", e.target.id);
-
           applyFilter(filterChoice);
         }
       });
@@ -179,7 +154,6 @@ async function buildWorks() {
   const mesProjetsH2 = document.querySelector(".mes-projets");
   // storing the token in a variable
   let controlToken = sessionStorage.getItem("token");
-  console.log("token", controlToken);
   // Modifies elements when switching to "edit mode"
   controlToken === null
     ? (adminNav.style.display = "none")
@@ -243,50 +217,6 @@ async function buildWorks() {
   const modal2Container = document.querySelector(".modal2-container");
   const addPhotos = document.querySelector(".add-photo");
 
-  //gallery & addPhoto modal content
-
-  modalGallery.innerHTML = `
-      <button class="close-modal modal-trigger" aria-label="close" title="close modal">X</button>
-			<h1 id="modalTitle">Galerie photo</h1>
-			<div class="gallery-modal"></div>
-			<div class="border-modal"></div>
-			<span class="alert-modal"></span>
-			<button type="button" class="button-modal" id="button-add-modal">Ajouter une photo</button>
-			<button type="button" class="button-del-gallery">Supprimer la galerie</button>
-  `;
-
-
-  addPhotos.innerHTML = `
-      <button class="close-modal modal-trigger2" aria-label="close" title="close modal">X</button>
-			<button id="previous-arrow"><i class="fa-solid fa-arrow-left fa-lg"></i></button>
-			<h1 id="modalTitle2">Ajout photo</h1>
-			<div class="container-add-photo">
-				<i class="fa-sharp fa-regular fa-image"></i>
-				<div class="input-file-container">
-					<input class="input-file" id="my-file" type="file"
-						accept="image/png, image/jpeg, image/PNG, image/jpg" hidden>
-					<label for="my-file" class="input-file-trigger">+ Ajouter une photo</label>
-				</div>
-				<span class="info-file">jpg png : 4 mo max</span>
-			</div>
-      <div class="container-add-photo2"></div>
-			<form id="form-modal">
-				<div class="label-form">
-					<label class="label-title" for="title">Titre</label>
-					<input type="text" id="title" name="title" required>
-				</div>
-				<div class="form-category">
-					<label class="label-category" for="category">Catégorie :</label>
-					<select id="category" name="category">
-						<option value= " " disabled selected></option>
-					</select>
-				</div>
-				<span id="errorMessage"></span>
-			</form>
-			<div class="border-modal"></div>
-			<button type="button" class="button-modal" id="button-validate-photo">Valider</button>
-  `;
-
   // constant for modal
 
   // gallery modal
@@ -310,6 +240,9 @@ async function buildWorks() {
   // selected image in the modal added a photo
   const imageSelected = document.querySelector(".image-selected");
 
+  
+
+
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
@@ -322,6 +255,7 @@ async function buildWorks() {
     //recover an id to delete photos
     let idPhoto = project.id;
     figure.id = idPhoto;
+    figure.className = "figure-gallery";
     //img
     let img = document.createElement("img");
     img.src = project.imageUrl;
@@ -374,9 +308,11 @@ async function buildWorks() {
       ? (modalGallery.style.display = "flex")
       : (modalGallery.style.display = "none");
   }
-
+  
+           
   /**** delete image  ****/
 
+  
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
 
@@ -387,7 +323,7 @@ async function buildWorks() {
 
       const lru = "189.0.0.0";
       async function deletePhoto() {
-        fetch(`${url}/${idPhoto}`, {
+        await fetch(`${url}/${idPhoto}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${controlToken}`,
@@ -395,9 +331,9 @@ async function buildWorks() {
         }).then(function (response) {
           if (response.status === 204) {
             figure.remove();
-            console.log("response.status => ", response.status);
-            alert("stop")
-            e.preventDefault();
+            let figureDelete = figure.id
+            const figureToDelete = document.getElementById(figureDelete)
+            figureToDelete.remove(); 
           } else {
             resStatus = response.status;
             console.log("pas ok autre", response.status);
@@ -485,28 +421,17 @@ async function buildWorks() {
   });
 
   /****modal - add photo Arrow previous ****/
-  console.log("previousarrow", previousArrow);
   previousArrow.addEventListener("click", function () {
-    console.log("hop");
     modalContainer.classList.toggle("active");
     const imageSelected = document.getElementById("image-selected");
-    console.log("selected", imageSelected);
-    containerAddPhoto.style.display = "flex";
-
-    containerAddPhoto2.style.display = "none";
     toggleModal2();
   });
 
   /**** add photo  input file part  ****/
 
   const fileUploadInput = document.querySelector("#my-file");
-  console.log("fileinput", fileUploadInput);
   infoFile.innerHTML = "jpg png : 4 mo max";
-
   fileUploadInput.addEventListener("change", previewFile);
-  console.log("fileuploadinput", fileUploadInput);
-
-  console.log("containeraddphoto2", containerAddPhoto2);
 
   function previewFile() {
     const sizeFile = this.files[0].size;

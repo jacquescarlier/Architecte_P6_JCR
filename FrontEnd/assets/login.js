@@ -6,7 +6,6 @@ const submitSeConnecter = document.getElementById("submit-connecter")
 const errorInformation = document.getElementById("errorInformation");
 //style reset for errorInformation
 errorInformation.classList.remove = "errorInformation";
-console.log("class error", errorInformation)
 // focus in input
 document.getElementById("emailUser").focus()
 //  -----------------------------------------------
@@ -22,16 +21,12 @@ document.getElementById("emailUser").focus()
     //if (!email || !password){
     
     if (!email.match(/^[\w_\-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
-        console.log("email",email)
         document.getElementById("errorInformation").innerHTML =
             "Entrer un E-mail  ou un E-mail valide!"
             errorInformation.classList = "errorInformation";
-            console.log("class error", errorInformation)
         return;
     }
       else if (!password){
-        console.log("email",email)
-        console.log("password", password)
         document.getElementById("errorInformation").innerHTML =
             "Entrer un mot de passe !"
             errorInformation.classList = "errorInformation";
@@ -55,13 +50,11 @@ document.getElementById("emailUser").focus()
         //  ---------------------------
         .then(function (authResponse) {
             if(authResponse.status === 404){
-                console.log("404")
                 errorInformation.innerHTML =
                     "Nous n'avons pas trouvé de compte avec cette adresse e-mail";
                     errorInformation.classList = "errorInformation";
 
             } else if (authResponse.status === 200) {
-                console.log("zeze")
                 return authResponse.json();
             } else {
                 errorInformation.innerHTML =
