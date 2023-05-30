@@ -485,8 +485,73 @@ let works = await getWorks(url);
       containerAddPhoto.style.display = "none";
     }
     //previewFile
-  }
+   
+//formData
 
+const validateButton = document.getElementById("button-validate-photo")
+const titleInput = document.getElementById("title")
+const categorySelect = document.getElementById("category")
+const img = document.createElement("img")
+
+console.log("category",category)
+console.log("image", img)
+console.log("title", title)
+
+validateButton.addEventListener("click", function(event) {
+event.preventDefault();
+const title = titleInput.value;
+const category = categorySelect.value;
+
+if (!img) {
+  document.getElementById("errorMessage").innerHtml = "Une image est requise pour continuer";
+  return
+}
+
+if (!title) {
+  document.getElementById("errorMessage").innerHTML = "Un titre est requis";
+  return;
+}
+
+if (!category) {
+  document.getElementById("errorMessage").innerHTML = "Une catégorie est obligatoire";
+}
+
+const formData = new FormData();
+
+formData.append("title", title);
+formData.append("category", category);
+formData.append("image", img); 
+fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Authorization": `Bearer ${controlToken}`
+        },
+        body: formData
+    })
+        .then(function (response) {
+            if (response.status === 201) {
+                return response.json();
+            }
+            else {
+                console.error("Il y a une erreur");
+            }
+        })
+})
+
+async function categories() {
+  const response = await fetch("http://localhost:5678/api/categories");
+  const categories = await response.json();
+  const select = document.querySelector("#category");
+  for (let i = 0; i < categories.length; i++) {
+      let option = document.createElement("option");
+      option.value = categories[i].id;
+      option.innerHTML = categories[i].name;
+      select.appendChild(option);
+  }
+}
+categories();
+  }
   //let formData = new FormData([])
   // change the background color of the "validate" button
   //buttonValidatePhoto.style.background = "#1D6154";
