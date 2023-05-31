@@ -8,7 +8,7 @@
 let url = "http://localhost:5678/api/works";
 // url for the category part
 let urlCategories = "http://localhost:5678/api/categories";
-
+// const gallery container
 const gallery = document.querySelector(".gallery");
 //const admin navigation bar
 const adminNav = document.getElementById("admin-nav");
@@ -17,14 +17,9 @@ const modalCallButtons = document.querySelectorAll(".modifier");
 // login or logout button depending on the token
 const loginLogout = document.getElementById("login");
 
-/* tableau ['entitled','suffix for button ID' (btn-" "), 'category name']
-tableau pour fonction "create button sans passer par l'API"
-Faute d'orthographe dans un nom de catégorie Hotel => Hôtel, désactivé pour l'instant
-let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"], ["Appartements", "Appartements", "Appartements"], ["Hôtels & restaurants", "Hotels", "Hotels & restaurants"]];*/
-
-// --------------------------------------
-// | Check the connection with the API  |
-// --------------------------------------
+// ---------------------------------------------
+// | Check the connection with the API "works" |
+// ---------------------------------------------
 
 async function getWorks(url) {
   const response = await fetch(url);
@@ -43,6 +38,22 @@ async function getCategories(urlCategories) {
   const response = await fetch(urlCategories);
   if (response.ok) return await response.json();
 }
+
+//  ------------------------
+//  | CategoryId for modal |
+//  ------------------------
+async function categoryIdForModal() {
+  
+  const categories = await getCategories(urlCategories);
+  const select = document.querySelector("#category");
+  for (let i = 0; i < categories.length; i++) {
+    let option = document.createElement("option");
+    option.value = categories[i].id;
+    option.innerHTML = categories[i].name;
+    select.appendChild(option);
+  }
+}
+categoryIdForModal();
 
 //  ---------------------------------------------
 //  | Create buttons dynamically whith the API  |
@@ -437,6 +448,7 @@ async function buildWorks() {
   function previewFile() {
     const sizeFile = this.files[0].size;
     console.log("file", this.files);
+    console.log("filelist",this.fileList)
     console.log("namefile", this.files[0].name);
     const imageUploaded = this.files[0].name
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
@@ -489,92 +501,66 @@ async function buildWorks() {
     //previewFile
 
     //console.log("imagechoisie", imageUploaded)
-    console.log("tokenVérification", controlToken)
+   
     //formData
 
     const validateButton = document.getElementById("button-validate-photo")
     const titleInput = document.getElementById("title")
     const categorySelect = document.getElementById("category")
 
-    console.log("category => ", category);
-    console.log("title => ", title)
-    console.log("idphoto => ", works.length)
-    console.log("imageUploaded => ", imageUploaded)
-    //let newIndex = works.length + 1
-
     validateButton.addEventListener("click", function (event) {
       event.preventDefault();
-      const title = titleInput.value;
+      let title = titleInput.value;
       const category = categorySelect.value;
-
-
-      if (!imageUploaded) {
-        document.getElementById("errorMessage").innerHtml = "Une image est requise pour continuer";
-        return
-      }
-
-      if (!title) {
-        document.getElementById("errorMessage").innerHTML = "Un titre est requis";
-        return;
-      }
-
-      if (!category) {
-        document.getElementById("errorMessage").innerHTML = "Une catégorie est obligatoire";
-      }
-      sendNewWork();
-
-      
+      title.toString(2);
+      console.log("category => ", category);
+      console.log("title => ", title)
+      console.log("imageUploaded => ", imageUploaded)
+      sendNewWork()
     })
 
     function sendNewWork() {
       const formData = new FormData();
-
-      formData.append("image", `http://localhost:5678/images/${imageUploaded}`);
-      formData.append("title", titleInput.value);
-      formData.append("category", categorySelect.value);
-
+      formData.append("image", imageUploaded);
+      //formData.append("image", `http://localhost:5678/images/${imageUploaded}`);
+      //=> gitn&b.png
+      formData.append("title", title.value);
+      // =>github
+      
+      formData.append("category", category.value);
+      //=> 1
       for (item of formData) {
         console.log("item", item[0], item[1], item[2])
-        console.log("item", item)
       }
-      //const res = Object.fromEntries(formData);
-      //const payload = JSON.stringify(res);
-      //console.log("payload", payload)
+      
       fetch(url, {
         method: "POST",
         headers: {
           //"content-type": "multipart/form-data",
-          //"Authorization": `Bearer ${controlToken}`
+          "Authorization": `Bearer ${controlToken}`
         },
         body: formData
 
       })
         .then(function (response) {
           if (response.status === 201) {
-            console.log(response)
-            return response.json();
+            console.log("tokenVérification201", controlToken)
+            console.log("post ok");
+            
           }
           else {
+            console.log("tokenVérification401500", controlToken)
             console.log("response notok", response)
-            console.error("Il y a une erreur");
+            //console.error("Il y a une erreur");
           }
         })
     }
   }
 
-  async function categories() {
-    const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
-    const select = document.querySelector("#category");
-    for (let i = 0; i < categories.length; i++) {
-      let option = document.createElement("option");
-      option.value = categories[i].id;
-      option.innerHTML = categories[i].name;
-      select.appendChild(option);
-    }
-  }
-  categories();
-
+ 
+//const res = Object.fromEntries(formData);
+      //const payload = JSON.stringify(res);
+      //console.log("payload", payload)
 
   // change the background color of the "validate" button
   //buttonValidatePhoto.style.background = "#1D6154";
