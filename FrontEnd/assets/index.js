@@ -43,7 +43,6 @@ async function getCategories(urlCategories) {
 //  | CategoryId for modal |
 //  ------------------------
 async function categoryIdForModal() {
-  
   const categories = await getCategories(urlCategories);
   const select = document.querySelector("#category");
   for (let i = 0; i < categories.length; i++) {
@@ -61,9 +60,7 @@ categoryIdForModal();
 
 async function createButtons() {
   let category = await getCategories(urlCategories);
-
   //creation of buttons for each category
-
   for (let i = 0; i < category.length; i++) {
     //variable for creating a button
     let newFilterButton = document.createElement("button");
@@ -291,10 +288,15 @@ async function buildWorks() {
     // arrow hover
     img.addEventListener("mouseover", function (e) {
       arrowGallery.style.display = "flex";
+      //arrowGallery.style.zIndex =  "unset";
     });
     img.addEventListener("mouseout", function (e) {
       arrowGallery.style.display = "none";
     });
+    arrowGallery.addEventListener("mouseover", function(){
+      arrowGallery.style.display = "flex";
+    })
+    
   }
 
   //  *****************
@@ -348,7 +350,6 @@ async function buildWorks() {
             figureToDelete.remove();
           } else {
             resStatus = response.status;
-            console.log("pas ok autre", response.status);
             alertModalGallery.innerHTML =
               "impossible d'effacé le fichier, statut du serveur :  " +
               resStatus;
@@ -383,7 +384,9 @@ async function buildWorks() {
 
   modal2Container.children[1].addEventListener("click", function (e) {
     e.stopPropagation();
+    
   });
+
 
   //  ---------------------
   //  | modal - add photo |
@@ -448,7 +451,7 @@ async function buildWorks() {
   function previewFile() {
     const sizeFile = this.files[0].size;
     console.log("file", this.files);
-    console.log("filelist",this.fileList)
+    console.log("filelist", this.fileList)
     console.log("namefile", this.files[0].name);
     const imageUploaded = this.files[0].name
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
@@ -501,7 +504,7 @@ async function buildWorks() {
     //previewFile
 
     //console.log("imagechoisie", imageUploaded)
-   
+
     //formData
 
     const validateButton = document.getElementById("button-validate-photo")
@@ -526,13 +529,12 @@ async function buildWorks() {
       //=> gitn&b.png
       formData.append("title", title.value);
       // =>github
-      
       formData.append("category", category.value);
       //=> 1
       for (item of formData) {
         console.log("item", item[0], item[1], item[2])
       }
-      
+
       fetch(url, {
         method: "POST",
         headers: {
@@ -546,7 +548,7 @@ async function buildWorks() {
           if (response.status === 201) {
             console.log("tokenVérification201", controlToken)
             console.log("post ok");
-            
+
           }
           else {
             console.log("tokenVérification401500", controlToken)
@@ -557,10 +559,10 @@ async function buildWorks() {
     }
   }
 
- 
-//const res = Object.fromEntries(formData);
-      //const payload = JSON.stringify(res);
-      //console.log("payload", payload)
+
+  //const res = Object.fromEntries(formData);
+  //const payload = JSON.stringify(res);
+  //console.log("payload", payload)
 
   // change the background color of the "validate" button
   //buttonValidatePhoto.style.background = "#1D6154";
