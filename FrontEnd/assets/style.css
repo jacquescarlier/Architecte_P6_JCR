@@ -893,14 +893,14 @@ form a {
   margin-top: 11px;
 }
 
-#form-modal {
+#formModal {
   display: flex;
   flex-flow: row wrap;
   margin: 0 auto;
 }
 
-#form-modal #title,
-#form-modal #category {
+#formModal #title,
+#formModal #category {
   width: 420px;
   height: 51px;
   border: none;

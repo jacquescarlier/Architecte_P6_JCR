@@ -29,7 +29,7 @@ let arrayCreateButton = [["Tous", "Tous", "Tous"],["Objets", "Objets", "Objets"]
 async function getWorks(url) {
   const response = await fetch(url);
   if (response.ok) return await response.json();
-  
+
   else {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
@@ -80,8 +80,8 @@ createButtons();
 
 async function buildWorks() {
   // array constant
-let works = await getWorks(url);
-  
+  let works = await getWorks(url);
+
   // -------------------------
   // | job creation function |
   // -------------------------
@@ -154,6 +154,7 @@ let works = await getWorks(url);
   const mesProjetsH2 = document.querySelector(".mes-projets");
   // storing the token in a variable
   let controlToken = sessionStorage.getItem("token");
+  console.log("token", controlToken)
   // Modifies elements when switching to "edit mode"
   controlToken === null
     ? (adminNav.style.display = "none")
@@ -240,7 +241,7 @@ let works = await getWorks(url);
   // selected image in the modal added a photo
   const imageSelected = document.querySelector(".image-selected");
 
-  
+
 
 
   //  ---------------------
@@ -308,11 +309,11 @@ let works = await getWorks(url);
       ? (modalGallery.style.display = "flex")
       : (modalGallery.style.display = "none");
   }
-  
-           
+
+
   /**** delete image  ****/
 
-  
+
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
 
@@ -333,7 +334,7 @@ let works = await getWorks(url);
             figure.remove();
             let figureDelete = figure.id
             const figureToDelete = document.getElementById(figureDelete)
-            figureToDelete.remove(); 
+            figureToDelete.remove();
           } else {
             resStatus = response.status;
             console.log("pas ok autre", response.status);
@@ -398,7 +399,7 @@ let works = await getWorks(url);
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
 
-    containerAddPhoto2.innerHTML = ' ' ; 
+    containerAddPhoto2.innerHTML = ' ';
 
     infoFile.innerHTML = "jpg png : 4 mo max";
     infoFile.style.color = "#444444";
@@ -437,6 +438,7 @@ let works = await getWorks(url);
     const sizeFile = this.files[0].size;
     console.log("file", this.files);
     console.log("namefile", this.files[0].name);
+    const imageUploaded = this.files[0].name
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false
@@ -485,80 +487,101 @@ let works = await getWorks(url);
       containerAddPhoto.style.display = "none";
     }
     //previewFile
-   
-//formData
 
-const validateButton = document.getElementById("button-validate-photo")
-const titleInput = document.getElementById("title")
-const categorySelect = document.getElementById("category")
-const img = document.createElement("img")
+    //console.log("imagechoisie", imageUploaded)
+    console.log("tokenVérification", controlToken)
+    //formData
 
-console.log("category",category)
-console.log("image", img)
-console.log("title", title)
+    const validateButton = document.getElementById("button-validate-photo")
+    const titleInput = document.getElementById("title")
+    const categorySelect = document.getElementById("category")
 
-validateButton.addEventListener("click", function(event) {
-event.preventDefault();
-const title = titleInput.value;
-const category = categorySelect.value;
+    console.log("category => ", category);
+    console.log("title => ", title)
+    console.log("idphoto => ", works.length)
+    console.log("imageUploaded => ", imageUploaded)
+    //let newIndex = works.length + 1
 
-if (!img) {
-  document.getElementById("errorMessage").innerHtml = "Une image est requise pour continuer";
-  return
-}
+    validateButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const title = titleInput.value;
+      const category = categorySelect.value;
 
-if (!title) {
-  document.getElementById("errorMessage").innerHTML = "Un titre est requis";
-  return;
-}
 
-if (!category) {
-  document.getElementById("errorMessage").innerHTML = "Une catégorie est obligatoire";
-}
+      if (!imageUploaded) {
+        document.getElementById("errorMessage").innerHtml = "Une image est requise pour continuer";
+        return
+      }
 
-const formData = new FormData();
+      if (!title) {
+        document.getElementById("errorMessage").innerHTML = "Un titre est requis";
+        return;
+      }
 
-formData.append("title", title);
-formData.append("category", category);
-formData.append("image", img); 
-fetch("http://localhost:5678/api/works", {
+      if (!category) {
+        document.getElementById("errorMessage").innerHTML = "Une catégorie est obligatoire";
+      }
+      sendNewWork();
+
+      
+    })
+
+    function sendNewWork() {
+      const formData = new FormData();
+
+      formData.append("image", `http://localhost:5678/images/${imageUploaded}`);
+      formData.append("title", titleInput.value);
+      formData.append("category", categorySelect.value);
+
+      for (item of formData) {
+        console.log("item", item[0], item[1], item[2])
+        console.log("item", item)
+      }
+      //const res = Object.fromEntries(formData);
+      //const payload = JSON.stringify(res);
+      //console.log("payload", payload)
+      fetch(url, {
         method: "POST",
         headers: {
-            "accept": "application/json",
-            "Authorization": `Bearer ${controlToken}`
+          //"content-type": "multipart/form-data",
+          //"Authorization": `Bearer ${controlToken}`
         },
         body: formData
-    })
-        .then(function (response) {
-            if (response.status === 201) {
-                return response.json();
-            }
-            else {
-                console.error("Il y a une erreur");
-            }
-        })
-})
 
-async function categories() {
-  const response = await fetch("http://localhost:5678/api/categories");
-  const categories = await response.json();
-  const select = document.querySelector("#category");
-  for (let i = 0; i < categories.length; i++) {
+      })
+        .then(function (response) {
+          if (response.status === 201) {
+            console.log(response)
+            return response.json();
+          }
+          else {
+            console.log("response notok", response)
+            console.error("Il y a une erreur");
+          }
+        })
+    }
+  }
+
+  async function categories() {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const categories = await response.json();
+    const select = document.querySelector("#category");
+    for (let i = 0; i < categories.length; i++) {
       let option = document.createElement("option");
       option.value = categories[i].id;
       option.innerHTML = categories[i].name;
       select.appendChild(option);
+    }
   }
-}
-categories();
-  }
-  //let formData = new FormData([])
+  categories();
+
+
   // change the background color of the "validate" button
   //buttonValidatePhoto.style.background = "#1D6154";
   //buttonValidatePhoto.style.cursor ="pointer";
 
   //const figcaption = document.createElement ('figcaption);
-  // figcaption.textContent = title;
-}
+  // figcaption.textContent = title;*/
 
+}
 buildWorks();
