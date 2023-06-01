@@ -362,19 +362,9 @@ main {
 #btn-Tous {
   border: 1px solid #1d6154;
   border-radius: 60px;
-  padding: 9px 30px 9px 28px;
+  padding: 8px 28px 8px 28px;
   outline:0;
-  /*height: 37px;
-  /*width: 100px;*/
 }
-/*
-#btn-Tous:active,
-#btn-Objets:active,
-#btn-Appartements:active,
-#btn-Hotels:active {
-  background-color: #1d6154;
-  color: #ffffff;
-}*/
 
 #btn-Tous:focus,
 #btn-Objets:focus,
@@ -387,40 +377,35 @@ main {
 #btn-Objets {
   border: 1px solid #1d6154;
   border-radius: 60px;
-  padding: 9px 22px 9px 20px;
-  /*height: 37px;
-  /*width: 100px;*/
+  padding: 8px 20px 8px 20px;
 }
 
 #btn-Appartements {
   border: 1px solid #1d6154;
   border-radius: 60px;
-  padding: 9px 14px 9px 15px;
-  /*height: 37px;
-  /*width: 157px;*/
+  padding: 8px 14px 8px 14px;
 }
 
 #btn-Hotels {
   border: 1px solid #1d6154;
   border-radius: 60px;
-  padding: 9px 11px 9px 9px;
-  /* height: 37px;
-  /*width: 198px;*/
+  padding: 8px 10px 8px 9px;
 }
 
 /* div gallery */
 
 .gallery {
-  /*margin-left: 1%;*/
   width: 95%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-column-gap: 18px;
+  grid-row-gap: 18px;
 }
 
 .gallery img {
+  height: 410px;
   width: 100%;
+  object-fit: contain;
 }
 .gallery figcaption {
   font-family: "work sans";
@@ -686,6 +671,7 @@ form a {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 6px;
+  overflow: auto;
 }
 .gallery-modal figure {
   position: relative;

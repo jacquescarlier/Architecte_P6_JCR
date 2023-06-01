@@ -23,9 +23,10 @@ const loginLogout = document.getElementById("login");
 
 async function getWorks(url) {
   const response = await fetch(url);
-  if (response.ok) return await response.json();
+  if (response.ok) {
+    return await response.json();
 
-  else {
+  } else {
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
 }
@@ -42,46 +43,47 @@ async function getCategories(urlCategories) {
 //  ------------------------
 //  | CategoryId for modal |
 //  ------------------------
-async function categoryIdForModal() {
-  const categories = await getCategories(urlCategories);
-  const select = document.querySelector("#category");
-  for (let i = 0; i < categories.length; i++) {
-    let option = document.createElement("option");
-    option.value = categories[i].id;
-    option.innerHTML = categories[i].name;
-    select.appendChild(option);
-  }
-}
-categoryIdForModal();
-
-//  ---------------------------------------------
-//  | Create buttons dynamically whith the API  |
-//  ---------------------------------------------
-
-async function createButtons() {
+async function generalCategory() {
   let category = await getCategories(urlCategories);
-  //creation of buttons for each category
-  for (let i = 0; i < category.length; i++) {
-    //variable for creating a button
-    let newFilterButton = document.createElement("button");
-    //button type attribute
-    newFilterButton.type = "button";
-    // button name attribute
-    newFilterButton.name = category[i].name;
-    // button title
-    newFilterButton.innerHTML = category[i].name;
-    // button id ("btn-" + first retrieved word)
-    newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
-    // class add to button
-    newFilterButton.className = "btn-filter";
-    //variable portfolio
-    let portfolio = document.getElementById("filterButton");
-    // adding buttons to " #portfolio "
-    portfolio.appendChild(newFilterButton);
+  function categoryIdForModal() {
+    const select = document.querySelector("#category");
+    for (let i = 0; i < category.length; i++) {
+      let option = document.createElement("option");
+      option.value = category[i].id;
+      option.innerHTML = category[i].name;
+      select.appendChild(option);
+    }
   }
-}
-createButtons();
+  categoryIdForModal();
 
+  //  ---------------------------------------------
+  //  | Create buttons dynamically whith the API  |
+  //  ---------------------------------------------
+
+  async function createButtons() {
+    //creation of buttons for each category
+    for (let i = 0; i < category.length; i++) {
+      //variable for creating a button
+      let newFilterButton = document.createElement("button");
+      //button type attribute
+      newFilterButton.type = "button";
+      // button name attribute
+      newFilterButton.name = category[i].name;
+      // button title
+      newFilterButton.innerHTML = category[i].name;
+      // button id ("btn-" + first retrieved word)
+      newFilterButton.id = "btn-" + category[i].name.split(" ")[0];
+      // class add to button
+      newFilterButton.className = "btn-filter";
+      //variable portfolio
+      let portfolio = document.getElementById("filterButton");
+      // adding buttons to " #portfolio "
+      portfolio.appendChild(newFilterButton);
+    }
+  }
+  createButtons();
+}
+generalCategory();
 //  --------------------------------------------
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
@@ -102,6 +104,7 @@ async function buildWorks() {
       figure.className = "figure-gallery";
       let img = document.createElement("img");
       img.src = project.imageUrl;
+      console.log("imagegallery",img.src)
       figure.appendChild(img);
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = project.title;
@@ -110,6 +113,7 @@ async function buildWorks() {
     }
   }
   createWork();
+
   //  ----------------------------
   //  | filter creation function |
   //  ----------------------------
@@ -159,7 +163,7 @@ async function buildWorks() {
   //  ---------------------------------------------
 
   const btnsFilter = document.querySelector(".btns-filter");
-  const mesProjetsH2 = document.querySelector(".mes-projets");
+  const mesProjetsMarginH2 = document.querySelector(".mes-projets");
   // storing the token in a variable
   let controlToken = sessionStorage.getItem("token");
   console.log("token", controlToken)
@@ -177,8 +181,8 @@ async function buildWorks() {
     : (btnsFilter.style.display = "none");
 
   controlToken === null
-    ? (mesProjetsH2.style.marginBottom = "30px")
-    : (mesProjetsH2.style.marginBottom = "92px");
+    ? (mesProjetsMarginH2.style.marginBottom = "30px")
+    : (mesProjetsMarginH2.style.marginBottom = "92px");
 
   controlToken === null
     ? (btnsFilter.style.marginBotton = "")
@@ -247,57 +251,56 @@ async function buildWorks() {
   // arrow previous
   const previousArrow = document.getElementById("previous-arrow");
   // selected image in the modal added a photo
-  const imageSelected = document.querySelector(".image-selected");
-
-
-
+  //const imageSelected = document.querySelector(".image-selected");
 
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
 
   /**** Create the gallery for modal ****/
+  
+  async function createWorksForGallery() {
+    for (const project of works) {
+      //create galerry
+      let figure = document.createElement("figure");
+      //recover an id to delete photos
+      let idPhoto = project.id;
+      figure.id = idPhoto;
+      figure.className = "figure-gallery";
+      //img
+      let img = document.createElement("img");
+      img.src = project.imageUrl;
+      figure.appendChild(img);
+      //figcaption "éditer"
+      let figcaption = document.createElement("figcaption");
+      figcaption.innerHTML = "éditer";
+      figure.appendChild(figcaption);
+      //  icon creation
+      let trashGallery = document.createElement("i");
+      trashGallery.className = "fa-solid fa-trash-can trash";
+      trashGallery.innerHTML = "";
+      figure.appendChild(trashGallery);
+      let arrowGallery = document.createElement("i");
+      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
+      arrowGallery.innerHTML = "";
+      figure.appendChild(arrowGallery);
 
-  for (const project of works) {
-    //create galerry
-    let figure = document.createElement("figure");
-    //recover an id to delete photos
-    let idPhoto = project.id;
-    figure.id = idPhoto;
-    figure.className = "figure-gallery";
-    //img
-    let img = document.createElement("img");
-    img.src = project.imageUrl;
-    figure.appendChild(img);
-    //figcaption "éditer"
-    let figcaption = document.createElement("figcaption");
-    figcaption.innerHTML = "éditer";
-    figure.appendChild(figcaption);
-    //  icon creation
-    let trashGallery = document.createElement("i");
-    trashGallery.className = "fa-solid fa-trash-can trash";
-    trashGallery.innerHTML = "";
-    figure.appendChild(trashGallery);
-    let arrowGallery = document.createElement("i");
-    arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
-    arrowGallery.innerHTML = "";
-    figure.appendChild(arrowGallery);
+      galleryOfModal.appendChild(figure);
 
-    galleryOfModal.appendChild(figure);
-
-    // arrow hover
-    img.addEventListener("mouseover", function (e) {
-      arrowGallery.style.display = "flex";
-      //arrowGallery.style.zIndex =  "unset";
-    });
-    img.addEventListener("mouseout", function (e) {
-      arrowGallery.style.display = "none";
-    });
-    arrowGallery.addEventListener("mouseover", function(){
-      arrowGallery.style.display = "flex";
-    })
-    
+      // arrow hover
+      img.addEventListener("mouseover", function (e) {
+        arrowGallery.style.display = "flex";
+        //arrowGallery.style.zIndex =  "unset";
+      });
+      img.addEventListener("mouseout", function (e) {
+        arrowGallery.style.display = "none";
+      });
+      arrowGallery.addEventListener("mouseover", function () {
+        arrowGallery.style.display = "flex";
+      })
+    }
   }
+  createWorksForGallery();
 
   //  *****************
   //  * display modal *
@@ -323,9 +326,7 @@ async function buildWorks() {
       : (modalGallery.style.display = "none");
   }
 
-
   /**** delete image  ****/
-
 
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
@@ -334,8 +335,7 @@ async function buildWorks() {
     trash.addEventListener("click", function (e) {
       let figure = this.parentNode;
       let idPhoto = figure.id;
-
-      const lru = "189.0.0.0";
+      //  const lru = "189.0.0.0";
       async function deletePhoto() {
         await fetch(`${url}/${idPhoto}`, {
           method: "DELETE",
@@ -384,9 +384,8 @@ async function buildWorks() {
 
   modal2Container.children[1].addEventListener("click", function (e) {
     e.stopPropagation();
-    
-  });
 
+  });
 
   //  ---------------------
   //  | modal - add photo |
@@ -423,8 +422,6 @@ async function buildWorks() {
     infoFile.style.padding = "0";
     infoFile.style.borderRadius = "0";
 
-
-
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
   }
@@ -451,20 +448,14 @@ async function buildWorks() {
 
   function previewFile() {
     const sizeFile = this.files[0].size;
-    console.log("file", this.files[0]);
-    console.log("filelist", this.fileList)
-    console.log("namefile", this.files[0].name);
     const imageUploaded = this.files[0]
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false
     if (
-      this.files.length === 0 ||
-      !fileExtensionRegex.test(this.files[0].name) ||
-      sizeFile > 4194304
+      this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) || sizeFile > 4194304
     ) {
       //size file max  = 4* 1024 * 1024
-      console.log("fichier pas accepté");
       infoFileNotOk();
       return;
     }
@@ -483,10 +474,7 @@ async function buildWorks() {
     const newFileReader = new FileReader();
 
     newFileReader.readAsDataURL(file);
-
-    newFileReader.addEventListener("load", (event) =>
-      displayImage(event, file)
-    );
+    newFileReader.addEventListener("load", (event) => displayImage(event, file));
 
     function displayImage(event) {
       const figureUpload = document.createElement("figure");
@@ -503,55 +491,36 @@ async function buildWorks() {
       containerAddPhoto.style.display = "none";
     }
     //previewFile
-
-    //console.log("imagechoisie", imageUploaded)
-
     //formData
-
     const validateButton = document.getElementById("button-validate-photo")
-    const titleInput = document.getElementById("title")
-    const categorySelect = document.getElementById("category")
+
     const errorMessage = document.getElementById("errorMessage")
 
-    
+    validateButton.getAttribute.disable = true;
 
-
-
-    validateButton.disable = true;
-    
     validateButton.addEventListener("click", function (event) {
-      
-      event.preventDefault();
-      let title = titleInput.value;
-      const category = categorySelect.value;
-      title.toString(2);
-      console.log("category => ", category);
-      console.log("title => ", title)
-      console.log("imageUploaded => ", imageUploaded)
       sendNewWork()
     })
-   
 
     function sendNewWork() {
       const formData = new FormData();
-      formData.append("image",imageUploaded);
+      formData.append("image", imageUploaded);
       formData.append("title", title.value);
       formData.append("category", category.value);
 
       for (item of formData) {
         console.log("item", item[0], item[1], item[2])
       }
-      if( (title.value === " ") || (category.value === " ")) {
+      if ((title.value === " ") || (category.value === " ")) {
         console.log("vide");
         errorMessage.style.display = "flex"
         errorMessage.innerHTML = " Veuillez complèter tous les champs"
-      return;
-      } else{
+        return;
+      } else {
         validateButton.disable = false;
         buttonValidatePhoto.style.background = "#1D6154";
-        buttonValidatePhoto.style.cursor ="pointer";
+        buttonValidatePhoto.style.cursor = "pointer";
       }
-      
 
       fetch(url, {
         method: "POST",
@@ -559,34 +528,19 @@ async function buildWorks() {
           "Authorization": `Bearer ${controlToken}`
         },
         body: formData
-
       })
         .then(function (response) {
           if (response.status === 201) {
-            console.log("tokenVérification201", controlToken)
-            console.log("post ok");
-
+          console.log("201", imageUploaded);
+          category.value = " ";
+          title.value = " ";
+          alert("stop")
           }
           else {
-            console.log("tokenVérification401500", controlToken)
-            console.log("response notok", response)
-            //console.error("Il y a une erreur");
+            console.error("Il y a une erreur");
           }
         })
     }
   }
-
-
-  //const res = Object.fromEntries(formData);
-  //const payload = JSON.stringify(res);
-  //console.log("payload", payload)
-
-  // change the background color of the "validate" button
-  //buttonValidatePhoto.style.background = "#1D6154";
-  //buttonValidatePhoto.style.cursor ="pointer";
-
-  //const figcaption = document.createElement ('figcaption);
-  // figcaption.textContent = title;*/
-
 }
 buildWorks();
