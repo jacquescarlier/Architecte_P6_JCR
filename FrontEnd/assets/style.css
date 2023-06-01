@@ -932,3 +932,19 @@ form a {
   margin: 21px 0px 7px;
   border: none;
 }
+
+#errorMessage {
+  position: absolute ;
+  left: 103px;
+  bottom: 180px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #f0ccd8;
+  color: #d65353;
+  font-size: 16px;
+  font-weight: 700;
+  width: 420px;
+  height: 32px;
+}

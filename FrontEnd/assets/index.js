@@ -438,7 +438,8 @@ async function buildWorks() {
   /****modal - add photo Arrow previous ****/
   previousArrow.addEventListener("click", function () {
     modalContainer.classList.toggle("active");
-    const imageSelected = document.getElementById("image-selected");
+    errorMessage.style.display = "none"
+    //const imageSelected = document.getElementById("image-selected");
     toggleModal2();
   });
 
@@ -450,10 +451,10 @@ async function buildWorks() {
 
   function previewFile() {
     const sizeFile = this.files[0].size;
-    console.log("file", this.files);
+    console.log("file", this.files[0]);
     console.log("filelist", this.fileList)
     console.log("namefile", this.files[0].name);
-    const imageUploaded = this.files[0].name
+    const imageUploaded = this.files[0]
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false
@@ -510,8 +511,16 @@ async function buildWorks() {
     const validateButton = document.getElementById("button-validate-photo")
     const titleInput = document.getElementById("title")
     const categorySelect = document.getElementById("category")
+    const errorMessage = document.getElementById("errorMessage")
 
+    
+
+
+
+    validateButton.disable = true;
+    
     validateButton.addEventListener("click", function (event) {
+      
       event.preventDefault();
       let title = titleInput.value;
       const category = categorySelect.value;
@@ -521,24 +530,32 @@ async function buildWorks() {
       console.log("imageUploaded => ", imageUploaded)
       sendNewWork()
     })
+   
 
     function sendNewWork() {
       const formData = new FormData();
-      formData.append("image", imageUploaded);
-      //formData.append("image", `http://localhost:5678/images/${imageUploaded}`);
-      //=> gitn&b.png
+      formData.append("image",imageUploaded);
       formData.append("title", title.value);
-      // =>github
       formData.append("category", category.value);
-      //=> 1
+
       for (item of formData) {
         console.log("item", item[0], item[1], item[2])
       }
+      if( (title.value === " ") || (category.value === " ")) {
+        console.log("vide");
+        errorMessage.style.display = "flex"
+        errorMessage.innerHTML = " Veuillez complèter tous les champs"
+      return;
+      } else{
+        validateButton.disable = false;
+        buttonValidatePhoto.style.background = "#1D6154";
+        buttonValidatePhoto.style.cursor ="pointer";
+      }
+      
 
       fetch(url, {
         method: "POST",
         headers: {
-          //"content-type": "multipart/form-data",
           "Authorization": `Bearer ${controlToken}`
         },
         body: formData
