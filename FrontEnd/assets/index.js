@@ -431,7 +431,7 @@ async function buildWorks() {
           buttonValidatePhoto.style.cursor = "pointer";
         }
       }));
-    const dateNow = Date.now()
+    
 function addNewProject() {
   let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
@@ -443,26 +443,16 @@ function addNewProject() {
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = figcaptionNewWork;
       figure.appendChild(figcaption);
-      gallery.appendChild(figure);
+      gallery.appendChild(figure)
 }
     function addNewWorkGallery() {
       figcaptionNewWork = title.value;
-      addNewProject();
-      /*let idPhoto = works.length + 1;
-      let figure = document.createElement("figure");
-      figure.id = idPhoto;
-      figure.className = "figure-gallery";
-      let img = document.createElement("img");
-      img.src = addedImage;
-      figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = title.value;
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);*/
+      addNewProject()
     }
 
     // add new work
     function addNewWorkInModal() {
+      //figcaptionNewWork = "éditer";
       let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
       figure.id = idPhoto;
