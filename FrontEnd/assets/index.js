@@ -89,7 +89,6 @@ async function buildWorks() {
       figure.className = "figure-gallery";
       let img = document.createElement("img");
       img.src = project.imageUrl;
-      console.log("imagegallery",img.src)
       figure.appendChild(img);
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = project.title;
@@ -146,29 +145,29 @@ async function buildWorks() {
 
   const btnsFilter = document.querySelector(".btns-filter");
   const mesProjetsMarginH2 = document.querySelector(".mes-projets");
+
   let controlToken = sessionStorage.getItem("token");
-  console.log("token", controlToken)
   // Modifies elements when switching to "edit mode"
   controlToken === null
     ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
 
   controlToken === null
-    ? (document.getElementById("login").innerHTML = "login"): (document.getElementById("login").innerHTML = "logout");
+    ? (document.getElementById("login").innerHTML = "login") : (document.getElementById("login").innerHTML = "logout");
 
   controlToken === null
-    ? (btnsFilter.style.display = "flex"): (btnsFilter.style.display = "none");
+    ? (btnsFilter.style.display = "flex") : (btnsFilter.style.display = "none");
 
   controlToken === null
-    ? (mesProjetsMarginH2.style.marginBottom = "30px"): (mesProjetsMarginH2.style.marginBottom = "92px");
+    ? (mesProjetsMarginH2.style.marginBottom = "30px") : (mesProjetsMarginH2.style.marginBottom = "92px");
 
   controlToken === null
-    ? (btnsFilter.style.marginBotton = ""): (btnsFilter.style.marginBotton = "none");
+    ? (btnsFilter.style.marginBotton = "") : (btnsFilter.style.marginBotton = "none");
   controlToken === null
-    ? (header.style.marginTop = "50px"): (header.style.marginTop = "38px");
+    ? (header.style.marginTop = "50px") : (header.style.marginTop = "38px");
 
   modalCallButtons.forEach(function (item) {
     controlToken === null
-      ? (item.style.display = "none"): (item.style.display = "flex");
+      ? (item.style.display = "none") : (item.style.display = "flex");
   });
 
   //  ---------------------------------------------------------
@@ -218,7 +217,7 @@ async function buildWorks() {
   // arrow previous
   const previousArrow = document.getElementById("previous-arrow");
   // selected image in the modal added a photo
- 
+
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
@@ -262,7 +261,7 @@ async function buildWorks() {
   const containerAddPhoto2 = document.querySelector(".container-add-photo2");
 
   modalContainer.className === "modal-container active"
-    ? (modalgallery.style.display = "flex"): (modalGallery.style.display = "none");
+    ? (modalgallery.style.display = "flex") : (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) => trigger.addEventListener("click", toggleModal));
   // change the name of the class using toggle
@@ -338,13 +337,13 @@ async function buildWorks() {
     modal2Container.classList.toggle("active");
 
     modalContainer.className === "modal-container active"
-      ? (modalGallery.style.display = "flex"): (modalGallery.style.display = "none");
+      ? (modalGallery.style.display = "flex") : (modalGallery.style.display = "none");
 
     modal2Container.className === "modal2-container active"
-      ? (addPhotos.style.display = "flex"): (addPhotos.style.display = "none");
+      ? (addPhotos.style.display = "flex") : (addPhotos.style.display = "none");
 
     modal2Container.className === "modal2-container active"
-      ? (modalGallery.style.display = "none"): (modalGallery.style.display = "flex");
+      ? (modalGallery.style.display = "none") : (modalGallery.style.display = "flex");
 
     containerAddPhoto2.innerHTML = ' ';
     containerAddPhoto2.style.display = "none";
@@ -353,7 +352,7 @@ async function buildWorks() {
     infoFile.classList.remove("infoFileNotOk")
     infoFile.classList.add("infoFileOK");
     title.value = " "
-    category.value= " "
+    category.value = " "
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
   }
@@ -381,50 +380,44 @@ async function buildWorks() {
   function previewFile() {
     const sizeFile = this.files[0].size;
     const imageUploaded = this.files[0];
-    console.log("type", imageUploaded)
     imageName = imageUploaded.name;
-    console.log("imagename", imageName)
     splitImageUploaded = imageName.split(".");
-    
+
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false
     if (
       this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) || sizeFile > 4194304
-    ) {
-      //size file max  = 4* 1024 * 1024
+    ) {//size file max  = 4* 1024 * 1024
       infoFileNotOk();
       return;
     }
-    console.log("uploaded", imageUploaded)
+
     function infoFileNotOk() {
       infoFile.innerHTML = "Fichier pas valide";
       infoFile.classList.remove("infoFileOk");
-      infoFile.classList.add ("infoFileNotOk");
+      infoFile.classList.add("infoFileNotOk");
     }
 
     const file = this.files[0];
-    console.log("thisfile[@]",  file)
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
     newFileReader.addEventListener("load", (event) => displayImage(event, file));
-
+    let addedImage;
     function displayImage(event) {
       const figureUpload = document.createElement("figure");
-      figureUpload.id = works.lenth + 1;
+      figureUpload.id = works.length + 1;
       const image = document.createElement("img");
       image.src = event.target.result;
-      console.log("eventtargetresult", figureUpload)
+      addedImage = event.target.result;
       figureUpload.appendChild(image);
       image.style.width = "129px";
       image.style.height = "169px";
       document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
-
-      console.log("image", image)
     }
-    
+
     /**** formData ****/
     const validateButton = document.getElementById("button-validate-photo")
     const errorMessage = document.getElementById("errorMessage")
@@ -432,69 +425,67 @@ async function buildWorks() {
     validateButton.addEventListener("click", function (event) {
       sendNewWork()
     })
-   let controleContenuInput = document.querySelectorAll(".controle-contenu");
-   controleContenuInput.forEach((controle) =>
-    controle.addEventListener("change", function(e) {
-     if ((title.value != " ") && (category.value != " ") ) {
-        buttonValidatePhoto.style.background = "#1D6154";
-        buttonValidatePhoto.style.cursor = "pointer";
-      }
-    }));
+    let controleContenuInput = document.querySelectorAll(".controle-contenu");
+    controleContenuInput.forEach((controle) =>
+      controle.addEventListener("change", function (e) {
+        if ((title.value != " ") && (category.value != " ")) {
+          buttonValidatePhoto.style.background = "#1D6154";
+          buttonValidatePhoto.style.cursor = "pointer";
+        }
+      }));
+    const dateNow = Date.now()
 
-    function addNewWorkGallery(event) {
-      /*let idPhoto = works.length + 10;
+    function addNewWorkGallery() {
+      let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
       figure.id = idPhoto;
       figure.className = "figure-gallery";
       let img = document.createElement("img");
-      img.src = `http://localhost:5678/images/${splitImageUploaded[0]}${dateNow}.${splitImageUploaded[1]}`;
+      img.src = addedImage;
       figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = title.value;
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);*/
-      const figureUpload = document.createElement("figure");
-      figureUpload.id = works.lenth + 10;
-      const image = document.createElement("img");
-      image.src = event.target.result;
-      console.log("eventtargetresult", figureUpload)
-      figureUpload.appendChild(image);
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = title.value;
       figure.appendChild(figcaption);
       gallery.appendChild(figure);
     }
-// add new work
+
+    // add new work
     function addNewWorkInModal() {
+      let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
+      figure.id = idPhoto;
       figure.className = "figure-gallery";
       let img = document.createElement("img");
-      img.src = `http://localhost:5678/images/${splitImageUploaded[0]}${dateNow}.${splitImageUploaded[1]} `;
+      img.src = addedImage;
+      figure.appendChild(img);
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = "éditer";
       figure.appendChild(figcaption);
+      let trashGallery = document.createElement("i");
+      trashGallery.className = "fa-solid fa-trash-can trash";
+      trashGallery.innerHTML = "";
+      figure.appendChild(trashGallery);
+      let arrowGallery = document.createElement("i");
+      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
+      arrowGallery.innerHTML = "";
+      figure.appendChild(arrowGallery);
       galleryOfModal.appendChild(figure);
     }
-/**** Send new work in db****/
-const dateNow = Date.now()
-console.log("date", dateNow)
 
-
+    /**** Send new work in db****/
     function sendNewWork(e) {
       const formData = new FormData();
       formData.append("image", imageUploaded);
+
       formData.append("title", title.value);
       formData.append("category", category.value);
-      console.log("titre",title.value)
-      console.log("catégorie", category.value)
-      console.log("uploaded", imageUploaded)
 
-     if ((title.value === " ") || (category.value === " ")) {
+      if ((title.value === " ") || (category.value === " ")) {
         console.log("vide");
         errorMessage.style.display = "flex"
         errorMessage.innerHTML = " Veuillez complèter tous les champs"
         return;
-      } 
+      }
 
       fetch(url, {
         method: "POST",
@@ -505,20 +496,16 @@ console.log("date", dateNow)
       })
         .then(function (response) {
           if (response.status === 201) {
-            console.log("test ajout", response.status);
-            errorMessage.style.display = "flex";
-            errorMessage.innerHTML = "Envoie des travaux validé !";
-            console.log("date", dateNow)
             addNewWorkGallery();
             addNewWorkInModal();
+            errorMessage.style.display = "flex";
+            errorMessage.innerHTML = "Envoie des travaux validé !";
             category.value = " ";
             title.value = " ";
-          alert("stop");
           }
           else {
             errorMessage.style.display = "flex"
             errorMessage.innerHTML = "pas de connexion serveur, contacter votre administrateur";
-            console.error("Il y a une erreur");
           }
         })
     }
