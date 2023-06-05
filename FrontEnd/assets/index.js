@@ -80,23 +80,43 @@ async function buildWorks() {
   // -------------------------
   // | job creation function |
   // -------------------------
+  function addNewProject(project, container, isModal) {
+    let idPhoto = project.id;
+    let figure = document.createElement("figure");
+    figure.id = idPhoto;
+    figure.className = "figure-gallery";
+    let img = document.createElement("img");
+    img.src = project.img;
+    img.alt = project.caption;
+    figure.appendChild(img);
+    let figcaption = document.createElement("figcaption");
+    figcaption.innerHTML = project.caption;
+    figure.appendChild(figcaption);
+    
+    if (isModal) {
+      let trashGallery = document.createElement("i");
+      trashGallery.className = "fa-solid fa-trash-can trash";
+      trashGallery.innerHTML = "";
+      figure.appendChild(trashGallery);
+      let arrowGallery = document.createElement("i");
+      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
+      arrowGallery.innerHTML = "";
+      figure.appendChild(arrowGallery);
+    }
+    container.appendChild(figure);
+  }
 
-  function createWork() {
-    for (const project of works) {
-      let idPhoto = project.id;
-      let figure = document.createElement("figure");
-      figure.id = idPhoto;
-      figure.className = "figure-gallery";
-      let img = document.createElement("img");
-      img.src = project.imageUrl;
-      figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = project.title;
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);
+  function createWork(container) {
+    for (const work of works) {
+      let project = { 
+        "id": work.id,
+        "img": work.imageUrl,
+        "caption": work.title,
+      }
+      addNewProject(project, container, false);
     }
   }
-  createWork();
+  createWork(gallery);
 
   //  ----------------------------
   //  | filter creation function |
@@ -224,34 +244,18 @@ async function buildWorks() {
 
   /**** Create the gallery for modal ****/
   async function createWorksForGallery() {
-    for (const project of works) {
-      //create galerry
-      let figure = document.createElement("figure");
-      //recover an id to delete photos
-      let idPhoto = project.id;
-      figure.id = idPhoto;
-      figure.className = "figure-gallery";
-      let img = document.createElement("img");
-      img.src = project.imageUrl;
-      figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = "éditer";
-      figure.appendChild(figcaption);
-      let trashGallery = document.createElement("i");
-      trashGallery.className = "fa-solid fa-trash-can trash";
-      trashGallery.innerHTML = "";
-      figure.appendChild(trashGallery);
-      let arrowGallery = document.createElement("i");
-      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
-      arrowGallery.innerHTML = "";
-      figure.appendChild(arrowGallery);
-
-      galleryOfModal.appendChild(figure);
+    for (const work of works) {
+      let project = { 
+        "id": work.id,
+        "img": work.imageUrl,
+        "caption": "éditer"
+      }
+      addNewProject(project, galleryOfModal, true)
 
       // arrow hover
-      img.addEventListener("mouseover", function (e) { arrowGallery.style.display = "flex"; });
+    /*  img.addEventListener("mouseover", function (e) { arrowGallery.style.display = "flex"; });
       img.addEventListener("mouseout", function (e) { arrowGallery.style.display = "none"; });
-      arrowGallery.addEventListener("mouseover", function () { arrowGallery.style.display = "flex"; })
+      arrowGallery.addEventListener("mouseover", function () { arrowGallery.style.display = "flex"; })*/
     }
   }
   createWorksForGallery();
@@ -431,21 +435,10 @@ async function buildWorks() {
           buttonValidatePhoto.style.cursor = "pointer";
         }
       }));
-    
-function addNewProject() {
-  let idPhoto = works.length + 1;
-      let figure = document.createElement("figure");
-      figure.id = idPhoto;
-      figure.className = "figure-gallery";
-      let img = document.createElement("img");
-      img.src = addedImage;
-      figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = figcaptionNewWork;
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure)
-}
+
     function addNewWorkGallery() {
+      workId = works.length + 1;
+      imgForWork = addedImage;
       figcaptionNewWork = title.value;
       addNewProject()
     }
@@ -453,6 +446,8 @@ function addNewProject() {
     // add new work
     function addNewWorkInModal() {
       //figcaptionNewWork = "éditer";
+      //workId = works.length + 1;
+      //imgForWork = addedImage;
       let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
       figure.id = idPhoto;
