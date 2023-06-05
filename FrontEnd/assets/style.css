@@ -256,7 +256,7 @@ li button {
 
 .login-link {
   cursor: pointer;
- }
+}
 
 li img {
   height: 16px;
@@ -363,7 +363,7 @@ main {
   border: 1px solid #1d6154;
   border-radius: 60px;
   padding: 8px 28px 8px 28px;
-  outline:0;
+  outline: 0;
 }
 
 #btn-Tous:focus,
@@ -481,7 +481,7 @@ footer nav ul {
 }
 
 .form {
-  background: #E5E5E5;
+  background: #e5e5e5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -547,9 +547,9 @@ form a {
   border: 1px solid red;
   background-color: #f0ccd8;
 }
- .link {
+.link {
   text-decoration: underline;
- }
+}
 .footer-login {
   width: 100%;
   position: absolute;
@@ -817,7 +817,8 @@ form a {
   background: #ffffff;
 }
 
-.container-add-photo, .container-add-photo2 {
+.container-add-photo,
+.container-add-photo2 {
   width: 420px;
   height: 169px;
   display: flex;
@@ -834,7 +835,7 @@ form a {
   margin: 36px auto 20px;
 }
 
-.container-add-photo2{
+.container-add-photo2 {
   display: none;
 }
 .container-add-photo .fa-sharp {
@@ -873,7 +874,23 @@ form a {
 
 .info-file {
   margin-top: 7px;
- }
+}
+.infoFileNotOk {
+  color: crimson;
+  font-size: 18px;
+  font-weight: 700;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+}
+.infoFileOk {
+  color: #444444;
+  background: none;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0;
+  border-radius: 0;
+}
 
 .form-category {
   margin-top: 11px;
@@ -920,7 +937,7 @@ form a {
 }
 
 #errorMessage {
-  position: absolute ;
+  position: absolute;
   left: 103px;
   bottom: 180px;
   display: none;

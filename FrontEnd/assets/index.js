@@ -150,32 +150,25 @@ async function buildWorks() {
   console.log("token", controlToken)
   // Modifies elements when switching to "edit mode"
   controlToken === null
-    ? (adminNav.style.display = "none")
-    : (adminNav.style.display = "flex");
+    ? (adminNav.style.display = "none") : (adminNav.style.display = "flex");
 
   controlToken === null
-    ? (document.getElementById("login").innerHTML = "login")
-    : (document.getElementById("login").innerHTML = "logout");
+    ? (document.getElementById("login").innerHTML = "login"): (document.getElementById("login").innerHTML = "logout");
 
   controlToken === null
-    ? (btnsFilter.style.display = "flex")
-    : (btnsFilter.style.display = "none");
+    ? (btnsFilter.style.display = "flex"): (btnsFilter.style.display = "none");
 
   controlToken === null
-    ? (mesProjetsMarginH2.style.marginBottom = "30px")
-    : (mesProjetsMarginH2.style.marginBottom = "92px");
+    ? (mesProjetsMarginH2.style.marginBottom = "30px"): (mesProjetsMarginH2.style.marginBottom = "92px");
 
   controlToken === null
-    ? (btnsFilter.style.marginBotton = "")
-    : (btnsFilter.style.marginBotton = "none");
+    ? (btnsFilter.style.marginBotton = ""): (btnsFilter.style.marginBotton = "none");
   controlToken === null
-    ? (header.style.marginTop = "50px")
-    : (header.style.marginTop = "38px");
+    ? (header.style.marginTop = "50px"): (header.style.marginTop = "38px");
 
   modalCallButtons.forEach(function (item) {
     controlToken === null
-      ? (item.style.display = "none")
-      : (item.style.display = "flex");
+      ? (item.style.display = "none"): (item.style.display = "flex");
   });
 
   //  ---------------------------------------------------------
@@ -257,16 +250,9 @@ async function buildWorks() {
       galleryOfModal.appendChild(figure);
 
       // arrow hover
-      img.addEventListener("mouseover", function (e) {
-        arrowGallery.style.display = "flex";
-        //arrowGallery.style.zIndex =  "unset";
-      });
-      img.addEventListener("mouseout", function (e) {
-        arrowGallery.style.display = "none";
-      });
-      arrowGallery.addEventListener("mouseover", function () {
-        arrowGallery.style.display = "flex";
-      })
+      img.addEventListener("mouseover", function (e) { arrowGallery.style.display = "flex"; });
+      img.addEventListener("mouseout", function (e) { arrowGallery.style.display = "none"; });
+      arrowGallery.addEventListener("mouseover", function () { arrowGallery.style.display = "flex"; })
     }
   }
   createWorksForGallery();
@@ -276,8 +262,7 @@ async function buildWorks() {
   const containerAddPhoto2 = document.querySelector(".container-add-photo2");
 
   modalContainer.className === "modal-container active"
-    ? (modalgallery.style.display = "flex")
-    : (modalGallery.style.display = "none");
+    ? (modalgallery.style.display = "flex"): (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) => trigger.addEventListener("click", toggleModal));
   // change the name of the class using toggle
@@ -286,8 +271,7 @@ async function buildWorks() {
     alertModalGallery.style.display = "none";
     // makes the modal appears or disappear depending on the class
     modalContainer.className === "modal-container active"
-      ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");
+      ? (modalGallery.style.display = "flex") : (modalGallery.style.display = "none");
   }
 
   /**** delete image  ****/
@@ -327,29 +311,18 @@ async function buildWorks() {
 
   //how the modal close
 
-  modalGallery.addEventListener("click", function () {
-    alertModalGallery.style.display = "none";
-  });
+  modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none"; });
 
   alertModalGallery.innerHTML = " ";
 
   /**** close the modal by clicking outside ****/
-  modalContainer.addEventListener("click", (e) => {
-    toggleModal();
-  });
+  modalContainer.addEventListener("click", (e) => { toggleModal(); });
 
-  modalContainer.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
+  modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
 
-  modal2Container.addEventListener("click", (e) => {
-    toggleModal2();
-  });
+  modal2Container.addEventListener("click", (e) => { toggleModal2(); });
 
-  modal2Container.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-
-  });
+  modal2Container.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
 
   //  ---------------------
   //  | modal - add photo |
@@ -365,27 +338,20 @@ async function buildWorks() {
     modal2Container.classList.toggle("active");
 
     modalContainer.className === "modal-container active"
-      ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");
+      ? (modalGallery.style.display = "flex"): (modalGallery.style.display = "none");
 
     modal2Container.className === "modal2-container active"
-      ? (addPhotos.style.display = "flex")
-      : (addPhotos.style.display = "none");
+      ? (addPhotos.style.display = "flex"): (addPhotos.style.display = "none");
 
     modal2Container.className === "modal2-container active"
-      ? (modalGallery.style.display = "none")
-      : (modalGallery.style.display = "flex");
+      ? (modalGallery.style.display = "none"): (modalGallery.style.display = "flex");
 
     containerAddPhoto2.innerHTML = ' ';
-    containerAddPhoto2.style.display = "none"
+    containerAddPhoto2.style.display = "none";
     containerAddPhoto.style.display = "flex";
     infoFile.innerHTML = "jpg png : 4 mo max";
-    infoFile.style.color = "#444444";
-    infoFile.style.fontSize = "12px";
-    infoFile.style.fontWeight = "400";
-    infoFile.style.background = "none";
-    infoFile.style.padding = "0";
-    infoFile.style.borderRadius = "0";
+    infoFile.classList.remove("infoFileNotOk")
+    infoFile.classList.add("infoFileOK");
     title.value = " "
     category.value= " "
     buttonValidatePhoto.style.background = "#A7A7A7";
@@ -415,11 +381,11 @@ async function buildWorks() {
   function previewFile() {
     const sizeFile = this.files[0].size;
     const imageUploaded = this.files[0];
-    
+    console.log("type", imageUploaded)
     imageName = imageUploaded.name;
     console.log("imagename", imageName)
-    splitImageUploaded = imageName.split('  ');
-    console.log("spilt0", splitImageUploaded[1]);
+    splitImageUploaded = imageName.split(".");
+    
     // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false
@@ -432,31 +398,31 @@ async function buildWorks() {
     }
     console.log("uploaded", imageUploaded)
     function infoFileNotOk() {
-      infoFile.innerHTML = "Fichier pas accepté";
-      infoFile.style.color = "red";
-      infoFile.style.fontWeight = "700";
-      infoFile.style.fontSize = "18px";
-      infoFile.style.background = "#FFFFFF";
-      infoFile.style.padding = "10px";
-      infoFile.style.borderRadius = "30px";
+      infoFile.innerHTML = "Fichier pas valide";
+      infoFile.classList.remove("infoFileOk");
+      infoFile.classList.add ("infoFileNotOk");
     }
 
     const file = this.files[0];
+    console.log("thisfile[@]",  file)
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
     newFileReader.addEventListener("load", (event) => displayImage(event, file));
 
     function displayImage(event) {
       const figureUpload = document.createElement("figure");
-      figureUpload.id = works.lenth + 10;
+      figureUpload.id = works.lenth + 1;
       const image = document.createElement("img");
       image.src = event.target.result;
+      console.log("eventtargetresult", figureUpload)
       figureUpload.appendChild(image);
       image.style.width = "129px";
       image.style.height = "169px";
       document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
+
+      console.log("image", image)
     }
     
     /**** formData ****/
@@ -475,34 +441,46 @@ async function buildWorks() {
       }
     }));
 
-    function addNewWorkGallery() {
-      let idPhoto = works.length + 10;
+    function addNewWorkGallery(event) {
+      /*let idPhoto = works.length + 10;
       let figure = document.createElement("figure");
       figure.id = idPhoto;
       figure.className = "figure-gallery";
       let img = document.createElement("img");
-      img.src = `http://localhost:5678/images/${imageUploaded.name.split[0]}${imageUploaded.lastModified} `; //==????
+      img.src = `http://localhost:5678/images/${splitImageUploaded[0]}${dateNow}.${splitImageUploaded[1]}`;
       figure.appendChild(img);
+      let figcaption = document.createElement("figcaption");
+      figcaption.innerHTML = title.value;
+      figure.appendChild(figcaption);
+      gallery.appendChild(figure);*/
+      const figureUpload = document.createElement("figure");
+      figureUpload.id = works.lenth + 10;
+      const image = document.createElement("img");
+      image.src = event.target.result;
+      console.log("eventtargetresult", figureUpload)
+      figureUpload.appendChild(image);
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = title.value;
       figure.appendChild(figcaption);
       gallery.appendChild(figure);
     }
-
+// add new work
     function addNewWorkInModal() {
-
       let figure = document.createElement("figure");
       figure.className = "figure-gallery";
       let img = document.createElement("img");
-      img.src = `http://localhost:5678/images/${imageUploaded.name}${imageUploaded.lastModified} `;
-      figure.appendChild(img);
+      img.src = `http://localhost:5678/images/${splitImageUploaded[0]}${dateNow}.${splitImageUploaded[1]} `;
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = "éditer";
       figure.appendChild(figcaption);
       galleryOfModal.appendChild(figure);
     }
+/**** Send new work in db****/
+const dateNow = Date.now()
+console.log("date", dateNow)
 
-    function sendNewWork() {
+
+    function sendNewWork(e) {
       const formData = new FormData();
       formData.append("image", imageUploaded);
       formData.append("title", title.value);
@@ -527,19 +505,19 @@ async function buildWorks() {
       })
         .then(function (response) {
           if (response.status === 201) {
-            console.log("test ajout", response.status)
-            errorMessage.style.display = "flex"
-            errorMessage.innerHTML = "Envoie des travaux validé !"
-
+            console.log("test ajout", response.status);
+            errorMessage.style.display = "flex";
+            errorMessage.innerHTML = "Envoie des travaux validé !";
+            console.log("date", dateNow)
             addNewWorkGallery();
             addNewWorkInModal();
             category.value = " ";
             title.value = " ";
-          alert("stop")
+          alert("stop");
           }
           else {
             errorMessage.style.display = "flex"
-            errorMessage.innerHTML = "pas de connexion serveur, contacter votre administrateur"
+            errorMessage.innerHTML = "pas de connexion serveur, contacter votre administrateur";
             console.error("Il y a une erreur");
           }
         })
