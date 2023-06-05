@@ -419,12 +419,10 @@ async function buildWorks() {
     }
 
     /**** formData ****/
-    const validateButton = document.getElementById("button-validate-photo")
     const errorMessage = document.getElementById("errorMessage")
-    validateButton.getAttribute.disable = true;
-    validateButton.addEventListener("click", function (event) {
-      sendNewWork()
-    })
+    //comment désactiver le bouton
+    buttonValidatePhoto.disable = true;
+    buttonValidatePhoto.addEventListener("click", function (event) { sendNewWork() })
     let controleContenuInput = document.querySelectorAll(".controle-contenu");
     controleContenuInput.forEach((controle) =>
       controle.addEventListener("change", function (e) {
@@ -434,9 +432,23 @@ async function buildWorks() {
         }
       }));
     const dateNow = Date.now()
-
+function addNewProject() {
+  let idPhoto = works.length + 1;
+      let figure = document.createElement("figure");
+      figure.id = idPhoto;
+      figure.className = "figure-gallery";
+      let img = document.createElement("img");
+      img.src = addedImage;
+      figure.appendChild(img);
+      let figcaption = document.createElement("figcaption");
+      figcaption.innerHTML = figcaptionNewWork;
+      figure.appendChild(figcaption);
+      gallery.appendChild(figure);
+}
     function addNewWorkGallery() {
-      let idPhoto = works.length + 1;
+      figcaptionNewWork = title.value;
+      addNewProject();
+      /*let idPhoto = works.length + 1;
       let figure = document.createElement("figure");
       figure.id = idPhoto;
       figure.className = "figure-gallery";
@@ -446,7 +458,7 @@ async function buildWorks() {
       let figcaption = document.createElement("figcaption");
       figcaption.innerHTML = title.value;
       figure.appendChild(figcaption);
-      gallery.appendChild(figure);
+      gallery.appendChild(figure);*/
     }
 
     // add new work

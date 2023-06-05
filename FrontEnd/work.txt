@@ -1,2 +1,4 @@
 image du backend ne s'efface pas
-condition pour passer le bouton en vert lors de 'addition de travail
+condition pour passer le bouton en vert lors de l'addition des travaux
+désactiver un bouton
+obliger de rafraîchir pour effacer un travail
