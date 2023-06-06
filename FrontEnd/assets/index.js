@@ -69,6 +69,7 @@ forCategory();
 async function buildWorks() {
   // array constant
   let works = await getWorks(url);
+  console.log("getworks", works)
   // -------------------------
   // | job creation function |
   // -------------------------
@@ -91,11 +92,12 @@ async function buildWorks() {
       trashGallery.innerHTML = "";
       figure.appendChild(trashGallery);
       let arrowGallery = document.createElement("i");
-      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
+      arrowGallery.className = "arrow fa-solid fa-arrows-up-down-left-right arrow";
       arrowGallery.innerHTML = "";
       figure.appendChild(arrowGallery);
     }
     container.appendChild(figure);
+    
   }
 
   function createWork(container) {
@@ -137,14 +139,14 @@ async function buildWorks() {
   function applyFilter(filterChoice) {
     gallery.innerHTML = "";
     for (const filter of filterChoice) {
-      let figure = document.createElement("figure");
-      let img = document.createElement("img");
-      img.src = filter.imageUrl;
-      figure.appendChild(img);
-      let figcaption = document.createElement("figcaption");
-      figcaption.innerHTML = filter.title;
-      figure.appendChild(figcaption);
-      gallery.appendChild(figure);
+      container = filterChoice;
+      let project = { 
+        "id": filter.id,
+        "img": filter.imageUrl,
+        "caption": filter.title,
+        "alt": filter.title
+      }
+      addNewProject(project, gallery, false);
     }
   }
   //  ---------------------------------------------
@@ -233,6 +235,8 @@ async function buildWorks() {
     }
   }
   createWorksForGallery();
+
+  
   /****  containers for adding photos ****/
   const containerAddPhoto = document.querySelector(".container-add-photo");
   const containerAddPhoto2 = document.querySelector(".container-add-photo2");
