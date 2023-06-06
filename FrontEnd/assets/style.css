@@ -653,7 +653,6 @@ form a {
 }
 
 .modal-container.active .modal-galerie {
-  /*opacity: 1;*/
   transition: opacity 0.3s 0.2s ease-out;
 }
 
