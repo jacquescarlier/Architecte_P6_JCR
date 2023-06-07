@@ -200,8 +200,6 @@ h2 {
 
 .modifier {
   display: none;
-  /*background: #E5E5E5;
-  border: none;*/
   cursor: pointer;
 }
 .modifier .fa-regular {
@@ -497,10 +495,6 @@ footer nav ul {
 .input input[type="submit"] {
   padding: 10px 38px 9px 39px;
 }
-/*
-.input input[type="submit"]:active {
-  background: #000000;
-}*/
 
 .input input[type="password"],
 .input input[type="email"] {
@@ -625,7 +619,6 @@ form a {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
-  transition: visibily 0.5s;
 }
 
 .modal-container.active {
@@ -648,7 +641,6 @@ form a {
   font-weight: 400;
   text-align: center;
   transform: translateX(-50%);
-  transform: opacity 0.3s ease-out;
   padding: 0px 105px;
 }
 
@@ -687,15 +679,6 @@ form a {
   right: 5%;
   font-size: 9px;
   padding: 4px;
-}
-
-.gallery-modal .arrow {
-  display: none;
-  position: absolute;
-  top: 6px;
-  right: 29%;
-  font-size: 11px;
-  padding: 3px;
 }
 
 .gallery-modal .fa-solid {
@@ -773,7 +756,6 @@ form a {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
-  transition: visibily 0.5s;
 }
 
 .modal2-container.active {
@@ -840,7 +822,7 @@ form a {
 .container-add-photo .fa-sharp {
   width: 58px;
   height: 46px;
-  color: B9C5CC;
+  color: #B9C5CC;
   padding: 0;
   font-size: 46px;
   margin-bottom: 20px;

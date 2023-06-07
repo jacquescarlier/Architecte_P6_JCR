@@ -1,15 +1,10 @@
 image du backend ne s'efface pas
 condition pour passer le bouton en vert lors de l'addition des travaux
-désactiver un bouton
-obliger de rafraîchir pour effacer un travailqui a été ajouter
 
+obliger de rafraîchir pour effacer un travailqui a été ajouter => normal
+
+surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
 
 SessionStorage ou localStorage ?
 Pour la sécurité => sessionStorage
 
-
-
- galleryOfModal.appendChild(figure);
- gallery.appendChild(figure);
-
- est il possible de créer une variable dans une fonction avec ces valeurs

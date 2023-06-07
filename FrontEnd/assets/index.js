@@ -35,6 +35,7 @@ async function getCategories(urlCategories) {
 //  ------------------------
 async function forCategory() {
   let category = await getCategories(urlCategories);
+  
   function categoryIdForModal() {
     const select = document.querySelector("#category");
     for (let i = 0; i < category.length; i++) {
@@ -48,7 +49,7 @@ async function forCategory() {
   //  ---------------------------------------------
   //  | Create buttons dynamically whith the API  |
   //  ---------------------------------------------
-  async function createButtons() {
+   function createButtons() {
     for (let i = 0; i < category.length; i++) {
       let newFilterButton = document.createElement("button");
       newFilterButton.type = "button";
@@ -67,9 +68,8 @@ forCategory();
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
 async function buildWorks() {
-  // array constant
+  // object array 
   let works = await getWorks(url);
-
   // -------------------------
   // | job creation function |
   // -------------------------
@@ -114,7 +114,7 @@ async function buildWorks() {
   //  ----------------------------
   //  | filter creation function |
   //  ----------------------------
-  async function createFilter() {
+  function createFilter() {
     let filterChoice = "";
     const btnFilter = document.querySelectorAll(".btn-filter");
     btnFilter.forEach(function (btn) {
@@ -271,7 +271,7 @@ async function buildWorks() {
     trash.addEventListener("click", function (e) {
       let figure = this.parentNode;
       let idPhoto = figure.id;
-      
+
       async function deletePhoto() {
         await fetch(`${url}/${idPhoto}`, {
           method: "DELETE",
@@ -395,7 +395,7 @@ async function buildWorks() {
     newFileReader.addEventListener("load", (event) =>
       displayImage(event, file)
     );
-    let addedImage;
+    //let addedImage;
     function displayImage(event) {
       const figureUpload = document.createElement("figure");
       figureUpload.id = works.length + 1;
