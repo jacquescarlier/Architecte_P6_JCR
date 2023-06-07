@@ -1,10 +1,15 @@
-image du backend ne s'efface pas
-condition pour passer le bouton en vert lors de l'addition des travaux
+! image du backend ne s'efface pas
+! condition pour passer le bouton en vert lors de l'addition des travaux
+obliger de tabuler ou de resélectionner la liste déroulante
 
-obliger de rafraîchir pour effacer un travailqui a été ajouter => normal
+validé === obliger de rafraîchir pour effacer un travail qui a été ajouter => normal
+
+pb lors de l'ajout de travaux d'affilé, 2ème ajout rajoute 2 photos le 1ére et la 2ème
 
 surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
 
 SessionStorage ou localStorage ?
 Pour la sécurité => sessionStorage
 
+! problème sur le suivi des balises <h> avec les h de la modale
+ 1x puis la 2ème fois ajoute la 1ere et la 2ème

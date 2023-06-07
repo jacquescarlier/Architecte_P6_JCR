@@ -35,7 +35,7 @@ async function getCategories(urlCategories) {
 //  ------------------------
 async function forCategory() {
   let category = await getCategories(urlCategories);
-  
+
   function categoryIdForModal() {
     const select = document.querySelector("#category");
     for (let i = 0; i < category.length; i++) {
@@ -49,7 +49,7 @@ async function forCategory() {
   //  ---------------------------------------------
   //  | Create buttons dynamically whith the API  |
   //  ---------------------------------------------
-   function createButtons() {
+  function createButtons() {
     for (let i = 0; i < category.length; i++) {
       let newFilterButton = document.createElement("button");
       newFilterButton.type = "button";
@@ -91,10 +91,6 @@ async function buildWorks() {
       trashGallery.className = "fa-solid fa-trash-can trash";
       trashGallery.innerHTML = "";
       figure.appendChild(trashGallery);
-      let arrowGallery = document.createElement("i");
-      arrowGallery.className = "fa-solid fa-arrows-up-down-left-right arrow";
-      arrowGallery.innerHTML = "";
-      figure.appendChild(arrowGallery);
     }
     container.appendChild(figure);
   }
@@ -159,19 +155,15 @@ async function buildWorks() {
   controlToken === null
     ? (adminNav.style.display = "none")
     : (adminNav.style.display = "flex");
-
   controlToken === null
     ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
-
   controlToken === null
     ? (btnsFilter.style.display = "flex")
     : (btnsFilter.style.display = "none");
-
   controlToken === null
     ? (mesProjetsMarginH2.style.marginBottom = "30px")
     : (mesProjetsMarginH2.style.marginBottom = "92px");
-
   controlToken === null
     ? (btnsFilter.style.marginBotton = "")
     : (btnsFilter.style.marginBotton = "none");
@@ -263,7 +255,6 @@ async function buildWorks() {
       : (modalGallery.style.display = "none");
   }
   /**** delete image  ****/
-
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
 
@@ -296,7 +287,6 @@ async function buildWorks() {
       deletePhoto();
     })
   );
-
   /**** how the modal close ****/
   modalGallery.addEventListener("click", function () {
     alertModalGallery.style.display = "none";
@@ -319,25 +309,7 @@ async function buildWorks() {
   //  | modal - add photo |
   //  ---------------------
   //for close modal
-  modalTrigger2.forEach((trigger) =>
-    trigger.addEventListener("click", toggleModal2)
-  );
-  // conditions of appearance of the modal
-  function toggleModal2() {
-    modal2Container.classList.toggle("active");
-
-    modalContainer.className === "modal-container active"
-      ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");
-
-    modal2Container.className === "modal2-container active"
-      ? (addPhotos.style.display = "flex")
-      : (addPhotos.style.display = "none");
-
-    modal2Container.className === "modal2-container active"
-      ? (modalGallery.style.display = "none")
-      : (modalGallery.style.display = "flex");
-
+  function deleteDisplay() {
     containerAddPhoto2.innerHTML = " ";
     containerAddPhoto2.style.display = "none";
     containerAddPhoto.style.display = "flex";
@@ -349,6 +321,26 @@ async function buildWorks() {
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
   }
+
+  modalTrigger2.forEach((trigger) =>
+    trigger.addEventListener("click", toggleModal2)
+  );
+  // conditions of appearance of the modal
+  function toggleModal2() {
+    modal2Container.classList.toggle("active");
+    modalContainer.className === "modal-container active"
+      ? (modalGallery.style.display = "flex")
+      : (modalGallery.style.display = "none");
+    modal2Container.className === "modal2-container active"
+      ? (addPhotos.style.display = "flex")
+      : (addPhotos.style.display = "none");
+    modal2Container.className === "modal2-container active"
+      ? (modalGallery.style.display = "none")
+      : (modalGallery.style.display = "flex");
+    deleteDisplay();
+    errorMessage.style.display = "none";
+    errorMessage.innerHTML = " ";
+  }
   // toogle funtion to manage the appearance of the modal
   buttonAddPhotos.addEventListener("click", function () {
     toggleModal();
@@ -358,7 +350,6 @@ async function buildWorks() {
   previousArrow.addEventListener("click", function () {
     modalContainer.classList.toggle("active");
     errorMessage.style.display = "none";
-    //const imageSelected = document.getElementById("image-selected");
     toggleModal2();
   });
   /**** add photo  input file part  ****/
@@ -369,16 +360,11 @@ async function buildWorks() {
   function previewFileAndSendNewWork() {
     const sizeFile = this.files[0].size;
     const imageUploaded = this.files[0];
-    // imageName = imageUploaded.name;
-    // fichier avec . et jpeg ou jpg ou png en minuscule ou majuscule
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false par rapport au regex
-    if (
-      this.files.length === 0 ||
-      !fileExtensionRegex.test(this.files[0].name) ||
-      sizeFile > 4194304
+    if ( this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) ||
+      sizeFile > 4194304  //size file max  = 4* 1024 * 1024
     ) {
-      //size file max  = 4* 1024 * 1024
       infoFileNotOk();
       return;
     }
@@ -389,15 +375,16 @@ async function buildWorks() {
       infoFile.classList.add("infoFileNotOk");
     }
 
-    const file = this.files[0];
+    let file = this.files[0];
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
+    console.log("file", file)
     newFileReader.addEventListener("load", (event) =>
       displayImage(event, file)
     );
     //let addedImage;
     function displayImage(event) {
-      const figureUpload = document.createElement("figure");
+      figureUpload = document.createElement("figure");
       figureUpload.id = works.length + 1;
       const image = document.createElement("img");
       image.src = event.target.result;
@@ -412,9 +399,13 @@ async function buildWorks() {
     /**** formData ****/
     const errorMessage = document.getElementById("errorMessage");
     // validation button
-    buttonValidatePhoto.addEventListener("click", function (event) {
+    buttonValidatePhoto.addEventListener("click", function () {
       sendNewWork();
     });
+    let titleInput = document.getElementById("title")
+    titleInput.addEventListener("keypress", function (e) {
+      keyPress = e.key;
+    })
     let controleContenuInput = document.querySelectorAll(".controle-contenu");
     controleContenuInput.forEach((controle) =>
       controle.addEventListener("change", function (e) {
@@ -424,7 +415,6 @@ async function buildWorks() {
         }
       })
     );
-
     // add new work  in gallery
     function addNewWorkGallery() {
       let project = {
@@ -444,7 +434,6 @@ async function buildWorks() {
       };
       addNewProject(project, galleryOfModal, true);
     }
-
     /**** Send new work in API db****/
     function sendNewWork(e) {
       const formData = new FormData();
@@ -453,7 +442,6 @@ async function buildWorks() {
       formData.append("category", category.value);
 
       if (title.value === " " || category.value === " ") {
-        console.log("vide");
         errorMessage.style.display = "flex";
         errorMessage.innerHTML = " Veuillez complèter tous les champs";
         return;
@@ -473,6 +461,8 @@ async function buildWorks() {
           errorMessage.innerHTML = "Envoie des travaux validé !";
           category.value = " ";
           title.value = " ";
+          setTimeout(deleteDisplay, 2000);
+          setTimeout(toggleModal2, 2000);
         } else {
           errorMessage.style.display = "flex";
           errorMessage.innerHTML =
