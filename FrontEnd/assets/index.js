@@ -363,10 +363,10 @@ function deleteDisplay() {
   buttonValidatePhoto.style.background = "#A7A7A7";
   buttonValidatePhoto.style.cursor = "default";
 }
-
+let imageUploaded;
   function previewFileAndSendNewWork() {
     const sizeFile = this.files[0].size;
-    const imageUploaded = this.files[0];
+     imageUploaded = this.files[0];
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false par rapport au regex
     if ( this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) ||
@@ -401,21 +401,23 @@ function deleteDisplay() {
       document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
-    }
+    }}
     /**** formData ****/
     const errorMessage = document.getElementById("errorMessage");
     // validation button
     buttonValidatePhoto.addEventListener("click", function () {
       sendNewWork();
     });
+    let keyPress;
     let titleInput = document.getElementById("title")
     titleInput.addEventListener("keypress", function (e) {
       keyPress = e.key;
     })
     let controleContenuInput = document.querySelectorAll(".controle-contenu");
     controleContenuInput.forEach((controle) =>
-      controle.addEventListener("change", function (e) {
-        if (title.value !== " " && category.value !== " ") {
+     controle.addEventListener("change", function (e) {
+        console.log("key", keyPress)
+        if (title.value !== " "  && category.value !== " ") {
           buttonValidatePhoto.style.background = "#1D6154";
           buttonValidatePhoto.style.cursor = "pointer";
         }
@@ -440,9 +442,12 @@ function deleteDisplay() {
       };
       addNewProject(project, galleryOfModal, true);
     }
+
+    console.log("imageUploaded2", imageUploaded)
     /**** Send new work in API db****/
     function sendNewWork(e) {
       const formData = new FormData();
+      console.log("imageUploaded", imageUploaded)
       formData.append("image", imageUploaded);
       formData.append("title", title.value);
       formData.append("category", category.value);
@@ -475,7 +480,7 @@ function deleteDisplay() {
             "pas de connexion serveur, contacter votre administrateur";
         }
       });
-    }
+   // }
   }
 }
 buildWorks();
