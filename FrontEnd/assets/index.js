@@ -70,10 +70,13 @@ forCategory();
 async function buildWorks() {
   // object array 
   let works = await getWorks(url);
-  // -------------------------
-  // | job creation function |
-  // -------------------------
+  // ----------------------------
+  // |  function to create a job|
+  // ----------------------------
   function addNewProject(project, container, isModal) {
+    //first parameter is a json with the variables
+    // 2nd parameter  is the target container
+    //third parameter is a boolean
     let idPhoto = project.id;
     let figure = document.createElement("figure");
     figure.id = idPhoto;
@@ -85,7 +88,6 @@ async function buildWorks() {
     let figcaption = document.createElement("figcaption");
     figcaption.innerHTML = project.caption;
     figure.appendChild(figcaption);
-
     if (isModal) {
       let trashGallery = document.createElement("i");
       trashGallery.className = "fa-solid fa-trash-can trash";
@@ -94,7 +96,7 @@ async function buildWorks() {
     }
     container.appendChild(figure);
   }
-
+//creation of the gallery
   function createWork(container) {
     for (const work of works) {
       let project = {
@@ -170,7 +172,7 @@ async function buildWorks() {
   controlToken === null
     ? (header.style.marginTop = "50px")
     : (header.style.marginTop = "38px");
-
+//edit buttons
   modalCallButtons.forEach(function (item) {
     controlToken === null
       ? (item.style.display = "none")
@@ -196,9 +198,13 @@ async function buildWorks() {
   //  | parts of the modals |
   //  -----------------------
   // general container & gallery
+  // container first modal
   const modalContainer = document.querySelector(".modal-container");
+  // container for the gallery in the modal
   const modalGallery = document.querySelector(".modal-photo-gallery");
+  //container 2nd modal
   const modal2Container = document.querySelector(".modal2-container");
+  // container to add a job
   const addPhotos = document.querySelector(".add-photo");
   /**** gallery modal ****/
   //all elements that can close or open the modal
@@ -216,12 +222,15 @@ async function buildWorks() {
   const infoFile = document.querySelector(".info-file");
   // arrow previous
   const previousArrow = document.getElementById("previous-arrow");
-  // selected image in the modal added a photo
+  /****  containers for the photo adds ****/
+  const containerAddPhoto = document.querySelector(".container-add-photo");
+  const containerAddPhoto2 = document.querySelector(".container-add-photo2");
+  
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
   /**** Create the gallery for modal ****/
-  async function createWorksForGallery() {
+  async function createWorksForModalGallery() {
     for (const work of works) {
       let project = {
         id: work.id,
@@ -232,11 +241,7 @@ async function buildWorks() {
       addNewProject(project, galleryOfModal, true);
     }
   }
-  createWorksForGallery();
-
-  /****  containers for adding photos ****/
-  const containerAddPhoto = document.querySelector(".container-add-photo");
-  const containerAddPhoto2 = document.querySelector(".container-add-photo2");
+  createWorksForModalGallery();
 
   modalContainer.className === "modal-container active"
     ? (modalgallery.style.display = "flex")
@@ -287,7 +292,7 @@ async function buildWorks() {
       deletePhoto();
     })
   );
-  /**** how the modal close ****/
+  /**** how the modals close ****/
   modalGallery.addEventListener("click", function () {
     alertModalGallery.style.display = "none";
   });
@@ -305,23 +310,10 @@ async function buildWorks() {
   modal2Container.children[1].addEventListener("click", function (e) {
     e.stopPropagation();
   });
+
   //  ---------------------
   //  | modal - add photo |
   //  ---------------------
-  //for close modal
-  function deleteDisplay() {
-    containerAddPhoto2.innerHTML = " ";
-    containerAddPhoto2.style.display = "none";
-    containerAddPhoto.style.display = "flex";
-    infoFile.innerHTML = "jpg png : 4 mo max";
-    infoFile.classList.remove("infoFileNotOk");
-    infoFile.classList.add("infoFileOK");
-    title.value = " ";
-    category.value = " ";
-    buttonValidatePhoto.style.background = "#A7A7A7";
-    buttonValidatePhoto.style.cursor = "default";
-  }
-
   modalTrigger2.forEach((trigger) =>
     trigger.addEventListener("click", toggleModal2)
   );
@@ -341,6 +333,7 @@ async function buildWorks() {
     errorMessage.style.display = "none";
     errorMessage.innerHTML = " ";
   }
+ 
   // toogle funtion to manage the appearance of the modal
   buttonAddPhotos.addEventListener("click", function () {
     toggleModal();
@@ -356,6 +349,20 @@ async function buildWorks() {
   const fileUploadInput = document.querySelector("#my-file");
   infoFile.innerHTML = "jpg png : 4 mo max";
   fileUploadInput.addEventListener("change", previewFileAndSendNewWork);
+
+//function reset after adding work
+function deleteDisplay() {
+  containerAddPhoto2.innerHTML = " ";
+  containerAddPhoto2.style.display = "none";
+  containerAddPhoto.style.display = "flex";
+  infoFile.innerHTML = "jpg png : 4 mo max";
+  infoFile.classList.remove("infoFileNotOk");
+  infoFile.classList.add("infoFileOK");
+  title.value = " ";
+  category.value = " ";
+  buttonValidatePhoto.style.background = "#A7A7A7";
+  buttonValidatePhoto.style.cursor = "default";
+}
 
   function previewFileAndSendNewWork() {
     const sizeFile = this.files[0].size;
@@ -409,7 +416,7 @@ async function buildWorks() {
     let controleContenuInput = document.querySelectorAll(".controle-contenu");
     controleContenuInput.forEach((controle) =>
       controle.addEventListener("change", function (e) {
-        if (title.value != " " && category.value != " ") {
+        if (title.value !== " " && category.value !== " ") {
           buttonValidatePhoto.style.background = "#1D6154";
           buttonValidatePhoto.style.cursor = "pointer";
         }
@@ -440,13 +447,19 @@ async function buildWorks() {
       formData.append("image", imageUploaded);
       formData.append("title", title.value);
       formData.append("category", category.value);
+const titleValue = (value) =>{
+  if (value.length = 0) {
+    errorMessage.style.display = "flex";
+    errorMessage.innerHTML = " Veuillez mettre un titre à l'image";
+  } 
+}
 
       if (title.value === " " || category.value === " ") {
         errorMessage.style.display = "flex";
         errorMessage.innerHTML = " Veuillez complèter tous les champs";
         return;
       }
-
+    
       fetch(url, {
         method: "POST",
         headers: {
