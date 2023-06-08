@@ -434,8 +434,8 @@ async function buildWorks() {
   let controleContenuInput = document.querySelectorAll(".controle-contenu");
   controleContenuInput.forEach((controle) =>
     controle.addEventListener("change", function (e) {
+      console.log("imagename", imageUploaded.name)
       if (imageUploaded.name === "") { return }
-      console.log("imageUploaded", imageUploaded.name)
       if (title.value !== " " && category.value !== " " && addedImage !== " ") {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
