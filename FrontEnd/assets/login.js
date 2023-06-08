@@ -51,7 +51,7 @@ document.getElementById("emailUser").focus()
         .then(function (authResponse) {
             if(authResponse.status === 404){
                 errorInformation.innerHTML =
-                    "Nous n'avons pas trouvé de compte avec cette adresse e-mail";
+                    "Nous n'avons pas trouvé votre compte";
                     errorInformation.classList = "errorInformation";
 
             } else if (authResponse.status === 200) {

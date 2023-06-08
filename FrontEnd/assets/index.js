@@ -385,7 +385,6 @@ function deleteDisplay() {
     let file = this.files[0];
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
-    console.log("file", file)
     newFileReader.addEventListener("load", (event) =>
       displayImage(event, file)
     );
@@ -447,12 +446,6 @@ function deleteDisplay() {
       formData.append("image", imageUploaded);
       formData.append("title", title.value);
       formData.append("category", category.value);
-const titleValue = (value) =>{
-  if (value.length = 0) {
-    errorMessage.style.display = "flex";
-    errorMessage.innerHTML = " Veuillez mettre un titre à l'image";
-  } 
-}
 
       if (title.value === " " || category.value === " ") {
         errorMessage.style.display = "flex";
