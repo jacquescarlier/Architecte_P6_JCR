@@ -96,7 +96,7 @@ async function buildWorks() {
     }
     container.appendChild(figure);
   }
-//creation of the gallery
+  //creation of the gallery
   function createWork(container) {
     for (const work of works) {
       let project = {
@@ -109,6 +109,25 @@ async function buildWorks() {
     }
   }
   createWork(gallery);
+  // add new work  in gallery
+  function addNewWorkGallery() {
+    let project = {
+      id: works.length + 1,
+      img: addedImage,
+      caption: title.value,
+      alt: title.value,
+    };
+    addNewProject(project, gallery, false);
+  }
+  // add new work in modal
+  function addNewWorkInModal() {
+    let project = {
+      id: works.length + 1,
+      img: addedImage,
+      caption: "éditer",
+    };
+    addNewProject(project, galleryOfModal, true);
+  }
   //  ----------------------------
   //  | filter creation function |
   //  ----------------------------
@@ -172,7 +191,7 @@ async function buildWorks() {
   controlToken === null
     ? (header.style.marginTop = "50px")
     : (header.style.marginTop = "38px");
-//edit buttons
+  //edit buttons
   modalCallButtons.forEach(function (item) {
     controlToken === null
       ? (item.style.display = "none")
@@ -225,7 +244,7 @@ async function buildWorks() {
   /****  containers for the photo adds ****/
   const containerAddPhoto = document.querySelector(".container-add-photo");
   const containerAddPhoto2 = document.querySelector(".container-add-photo2");
-  
+
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
@@ -333,7 +352,7 @@ async function buildWorks() {
     errorMessage.style.display = "none";
     errorMessage.innerHTML = " ";
   }
- 
+
   // toogle funtion to manage the appearance of the modal
   buttonAddPhotos.addEventListener("click", function () {
     toggleModal();
@@ -348,39 +367,42 @@ async function buildWorks() {
   /**** add photo  input file part  ****/
   const fileUploadInput = document.querySelector("#my-file");
   infoFile.innerHTML = "jpg png : 4 mo max";
-  fileUploadInput.addEventListener("change", previewFileAndSendNewWork);
+  fileUploadInput.addEventListener("change", previewNewWork);
 
-//function reset after adding work
-function deleteDisplay() {
-  containerAddPhoto2.innerHTML = " ";
-  containerAddPhoto2.style.display = "none";
-  containerAddPhoto.style.display = "flex";
-  infoFile.innerHTML = "jpg png : 4 mo max";
-  infoFile.classList.remove("infoFileNotOk");
-  infoFile.classList.add("infoFileOK");
-  title.value = " ";
-  category.value = " ";
-  buttonValidatePhoto.style.background = "#A7A7A7";
-  buttonValidatePhoto.style.cursor = "default";
-}
-let imageUploaded;
-  function previewFileAndSendNewWork() {
+  //function reset after adding work
+  function deleteDisplay() {
+    containerAddPhoto2.innerHTML = " ";
+    containerAddPhoto2.style.display = "none";
+    containerAddPhoto.style.display = "flex";
+    infoFile.innerHTML = "jpg png : 4 mo max";
+    infoFile.classList.remove("infoFileNotOk");
+    infoFile.classList.add("infoFileOK");
+    title.value = " ";
+    category.value = " ";
+    buttonValidatePhoto.style.background = "#A7A7A7";
+    buttonValidatePhoto.style.cursor = "default";
+  }
+
+  let imageUploaded;
+  function previewNewWork() {
     const sizeFile = this.files[0].size;
-     imageUploaded = this.files[0];
+    imageUploaded = this.files[0];
     const fileExtensionRegex = /\.(jpe?g|png)$/i;
     //.test renvoie true ou false par rapport au regex
-    if ( this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) ||
-      sizeFile > 4194304  //size file max  = 4* 1024 * 1024
+    if (this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) ||
+      sizeFile > 4194304 //size file max  = 4* 1024 * 1024
     ) {
       infoFileNotOk();
       return;
     }
 
     function infoFileNotOk() {
-      infoFile.innerHTML = "Fichier pas valide";
+      infoFile.innerHTML = "Le fichier n'est pas valide";
       infoFile.classList.remove("infoFileOk");
       infoFile.classList.add("infoFileNotOk");
     }
+    // disable add work validation button
+    buttonValidatePhoto.disabled = true
 
     let file = this.files[0];
     const newFileReader = new FileReader();
@@ -388,10 +410,11 @@ let imageUploaded;
     newFileReader.addEventListener("load", (event) =>
       displayImage(event, file)
     );
-    //let addedImage;
+
     function displayImage(event) {
       figureUpload = document.createElement("figure");
       figureUpload.id = works.length + 1;
+      figureUpload.className = "thumbnail"
       const image = document.createElement("img");
       image.src = event.target.result;
       addedImage = event.target.result;
@@ -401,86 +424,68 @@ let imageUploaded;
       document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
-    }}
-    /**** formData ****/
-    const errorMessage = document.getElementById("errorMessage");
-    // validation button
-    buttonValidatePhoto.addEventListener("click", function () {
-      sendNewWork();
-    });
-    let keyPress;
-    let titleInput = document.getElementById("title")
-    titleInput.addEventListener("keypress", function (e) {
-      keyPress = e.key;
-    })
-    let controleContenuInput = document.querySelectorAll(".controle-contenu");
-    controleContenuInput.forEach((controle) =>
-     controle.addEventListener("change", function (e) {
-        console.log("key", keyPress)
-        if (title.value !== " "  && category.value !== " ") {
-          buttonValidatePhoto.style.background = "#1D6154";
-          buttonValidatePhoto.style.cursor = "pointer";
-        }
-      })
-    );
-    // add new work  in gallery
-    function addNewWorkGallery() {
-      let project = {
-        id: works.length + 1,
-        img: addedImage,
-        caption: title.value,
-        alt: title.value,
-      };
-      addNewProject(project, gallery, false);
     }
-    // add new work in modal
-    function addNewWorkInModal() {
-      let project = {
-        id: works.length + 1,
-        img: addedImage,
-        caption: "éditer",
-      };
-      addNewProject(project, galleryOfModal, true);
-    }
-
-    console.log("imageUploaded2", imageUploaded)
-    /**** Send new work in API db****/
-    function sendNewWork(e) {
-      const formData = new FormData();
-      console.log("imageUploaded", imageUploaded)
-      formData.append("image", imageUploaded);
-      formData.append("title", title.value);
-      formData.append("category", category.value);
-
-      if (title.value === " " || category.value === " ") {
-        errorMessage.style.display = "flex";
-        errorMessage.innerHTML = " Veuillez complèter tous les champs";
-        return;
-      }
-    
-      fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${controlToken}`,
-        },
-        body: formData,
-      }).then(function (response) {
-        if (response.status === 201) {
-          addNewWorkGallery();
-          addNewWorkInModal();
-          errorMessage.style.display = "flex";
-          errorMessage.innerHTML = "Envoie des travaux validé !";
-          category.value = " ";
-          title.value = " ";
-          setTimeout(deleteDisplay, 2000);
-          setTimeout(toggleModal2, 2000);
-        } else {
-          errorMessage.style.display = "flex";
-          errorMessage.innerHTML =
-            "pas de connexion serveur, contacter votre administrateur";
-        }
-      });
-   // }
   }
+  const vignette = document.querySelector(".thumbnail")
+  console.log("vignette", vignette)
+    
+
+  /**** formData ****/
+  let controleContenuInput = document.querySelectorAll(".controle-contenu");
+  controleContenuInput.forEach((controle) =>
+    controle.addEventListener("change", function (e) {
+      if (imageUploaded.name === "") { return }
+      console.log("imageUploaded", imageUploaded.name)
+      if (title.value !== " " && category.value !== " " && addedImage !== " ") {
+        buttonValidatePhoto.style.background = "#1D6154";
+        buttonValidatePhoto.style.cursor = "pointer";
+        buttonValidatePhoto.disabled = false;
+      }
+    })
+  );
+
+  /**** Send new work in API db****/
+  function sendNewWork(e) {
+    const formData = new FormData();
+    formData.append("image", imageUploaded);
+    formData.append("title", title.value);
+    formData.append("category", category.value);
+    if (title.value === " " || category.value === " "|| addedImage === "") {
+      errorMessage.style.display = "flex";
+      errorMessage.innerHTML = " Veuillez complèter tous les champs";
+      return;
+    } else {
+
+    }
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${controlToken}`,
+      },
+      body: formData,
+    }).then(function (response) {
+      if (response.status === 201) {
+        addNewWorkGallery();
+        addNewWorkInModal();
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML = "Envoie des travaux validé !";
+        category.value = " ";
+        title.value = " ";
+        buttonValidatePhoto.disabled = true;
+        setTimeout(deleteDisplay, 1000);
+        setTimeout(toggleModal2, 1500);
+      } else {
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML =
+          "pas de connexion serveur, contacter votre administrateur";
+      }
+    });
+  }
+
+  // validation button
+  buttonValidatePhoto.addEventListener("click", function () {
+    sendNewWork();
+  });
 }
 buildWorks();
