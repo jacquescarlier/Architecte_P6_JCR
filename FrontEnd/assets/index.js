@@ -70,6 +70,7 @@ forCategory();
 async function buildWorks() {
   // object array 
   let works = await getWorks(url);
+  
   // ----------------------------
   // |  function to create a job|
   // ----------------------------

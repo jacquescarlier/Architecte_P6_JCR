@@ -1,6 +1,6 @@
 ! image du backend ne s'efface pas
 
---> pb fonction function buildWorks() qui englobe une grande partiedu code.
+--> pb fonction function buildWorks() qui englobe une grande partie du code.
 
 
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
