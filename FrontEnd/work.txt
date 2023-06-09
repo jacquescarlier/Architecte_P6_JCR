@@ -1,9 +1,13 @@
 ! image du backend ne s'efface pas
 
+--> pb fonction function buildWorks() qui englobe une grande partiedu code.
+
+
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
 obliger de tabuler ou de resélectionner la liste déroulante
 bouton de validation et champ de la form en 'disabled'. Lors de l'ajout de l'image l'input text est' enabled'
 Lorsque le texte est dans la l'input text la liste de choix est accessible mais il faut cliquer 2 fois dedans et le bouton devient vert avant mon choix !!!!
+solutionné en sélectionnant "category.options.selectedIndex" qui correspond aux index de la liste de choix.
 
 
 validé === obliger de rafraîchir pour effacer un travail qui a été ajouter => normal
@@ -21,8 +25,6 @@ tout ce qui peut etre fait en html doit être créé en html(idem pour css). Jav
 Cela se taduira par de meilleures performances, accessibilité, référencement et généralement plus facile à faire.
 
 ! problème sur le suivi des balises <h> avec les h de la modale
- 1x puis la 2ème fois ajoute la 1ere et la 2ème
- balise de la modal passé en <h2>
+09/06/23 validateur css et html ok balise modal passé en <h2>
 
---> pb fonction function buildWorks() qui englobe une grande partie du code.
- 09/06/23 validateur css et html ok balise modal passé en <h2>
+ 
