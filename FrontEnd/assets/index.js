@@ -422,7 +422,6 @@ async function buildWorks() {
     function imageDisplay(event) {
       figureUpload = document.createElement("figure");
       figureUpload.id = works.length + 1;
-      //figureUpload.className = "thumbnail"
       const image = document.createElement("img");
       image.src = event.target.result;
       addedImage = event.target.result;
@@ -443,7 +442,7 @@ async function buildWorks() {
         selectCategory.disabled = false;
         selectCategory.focus();
       }
-      if (title.value !== " " && category.value !== " ") {
+      if (title.value !== " " && category.options.selectedIndex !== 0) {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
         buttonValidatePhoto.disabled = false;
