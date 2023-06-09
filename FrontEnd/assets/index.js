@@ -244,7 +244,8 @@ async function buildWorks() {
   /****  containers for the photo adds ****/
   const containerAddPhoto = document.querySelector(".container-add-photo");
   const containerAddPhoto2 = document.querySelector(".container-add-photo2");
-
+  // disable add work validation button
+  buttonValidatePhoto.disabled = true;
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
@@ -348,7 +349,7 @@ async function buildWorks() {
     modal2Container.className === "modal2-container active"
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
-    deleteDisplay();
+    resetContainerAddPhoto();
     errorMessage.style.display = "none";
     errorMessage.innerHTML = " ";
   }
@@ -370,7 +371,7 @@ async function buildWorks() {
   fileUploadInput.addEventListener("change", previewNewWork);
 
   //function reset after adding work
-  function deleteDisplay() {
+  function resetContainerAddPhoto() {
     containerAddPhoto2.innerHTML = " ";
     containerAddPhoto2.style.display = "none";
     containerAddPhoto.style.display = "flex";
@@ -381,7 +382,15 @@ async function buildWorks() {
     category.value = " ";
     buttonValidatePhoto.style.background = "#A7A7A7";
     buttonValidatePhoto.style.cursor = "default";
+    inputTitle.disabled = true;
+    selectCategory.disabled = true;
+    buttonValidatePhoto.disabled = true;
   }
+
+  const inputTitle = document.getElementById("title");
+  const selectCategory = document.getElementById("category")
+  inputTitle.disabled = true;
+  selectCategory.disabled = true;
 
   let imageUploaded;
   function previewNewWork() {
@@ -401,8 +410,6 @@ async function buildWorks() {
       infoFile.classList.remove("infoFileOk");
       infoFile.classList.add("infoFileNotOk");
     }
-    // disable add work validation button
-    buttonValidatePhoto.disabled = true
 
     let file = this.files[0];
     const newFileReader = new FileReader();
@@ -424,33 +431,31 @@ async function buildWorks() {
       document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
+      inputTitle.disabled = false;
     }
   }
-  const vignette = document.querySelector(".thumbnail")
-  console.log("vignette", vignette)
-    
-
   /**** formData ****/
-  let controleContenuInput = document.querySelectorAll(".controle-contenu");
-  controleContenuInput.forEach((controle) =>
+  let controleContenuForm = document.querySelectorAll(".controle-contenu");
+  controleContenuForm.forEach((controle) =>
     controle.addEventListener("change", function (e) {
-      console.log("imagename", imageUploaded.name)
-      if (imageUploaded.name === "") { return }
-      if (title.value !== " " && category.value !== " " && addedImage !== " ") {
+      if (title.value !== "") {
+        selectCategory.disabled = false;
+        selectCategory.focus();
+      }
+      if (title.value !== " " && category.value !== " ") {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
         buttonValidatePhoto.disabled = false;
       }
     })
   );
-
   /**** Send new work in API db****/
   function sendNewWork(e) {
     const formData = new FormData();
     formData.append("image", imageUploaded);
     formData.append("title", title.value);
     formData.append("category", category.value);
-    if (title.value === " " || category.value === " "|| addedImage === "") {
+    if (title.value === " " || category.value === " " || addedImage === "") {
       errorMessage.style.display = "flex";
       errorMessage.innerHTML = " Veuillez complèter tous les champs";
       return;
@@ -473,9 +478,10 @@ async function buildWorks() {
         category.value = " ";
         title.value = " ";
         buttonValidatePhoto.disabled = true;
-        setTimeout(deleteDisplay, 1000);
+        setTimeout(resetContainerAddPhoto, 1000);
         setTimeout(toggleModal2, 1500);
       } else {
+        buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
         errorMessage.innerHTML =
           "pas de connexion serveur, contacter votre administrateur";
