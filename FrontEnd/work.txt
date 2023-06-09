@@ -1,18 +1,27 @@
 ! image du backend ne s'efface pas
+
 ! condition pour passer le bouton en vert lors de l'addition des travaux
 obliger de tabuler ou de resélectionner la liste déroulante
+bouton de validation et champ de la form en 'disabled'. Lors de l'ajout de l'image l'input text est' enabled'
+Lorsque le texte est dans la l'input text la liste de choix est accessible mais il faut cliquer 2 fois dedans et le bouton devient vert avant mon choix !!!!
+
 
 validé === obliger de rafraîchir pour effacer un travail qui a été ajouter => normal
 
-réglé le 08/06/23 pb lors de l'ajout de travaux d'affilé, 2ème ajout rajoute 2 photos le 1ére et la 2ème
+réglé le 08/06/23 -> pb lors de l'ajout de travaux d'affilé, 2ème ajout rajoute 2 photos le 1ére et la 2ème
 
-surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
+ok -> surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
 Mettre scrollbar
 
 SessionStorage ou localStorage ?
 Pour la sécurité => sessionStorage
 
+html, css vs js !!
+tout ce qui peut etre fait en html doit être créé en html(idem pour css). Java Script est un complément à html et css. Il augmente et complète les fonctionnalités des 2 langages.
+Cela se taduira par de meilleures performances, accessibilité, référencement et généralement plus facile à faire.
+
 ! problème sur le suivi des balises <h> avec les h de la modale
  1x puis la 2ème fois ajoute la 1ere et la 2ème
 
+--> pb fonction function buildWorks() qui englobe une grande partiedu code.
  09/06/23 validateur css et html ok balise modal passé en <h2>

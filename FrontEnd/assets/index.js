@@ -174,28 +174,28 @@ async function buildWorks() {
   let controlToken = sessionStorage.getItem("token");
   // Modifies elements when switching to "edit mode"
   controlToken === null
-    ? (adminNav.style.display = "none")
-    : (adminNav.style.display = "flex");
+    ? adminNav.remove()
+    : adminNav.style.display = "flex";
   controlToken === null
     ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
   controlToken === null
-    ? (btnsFilter.style.display = "flex")
-    : (btnsFilter.style.display = "none");
+    ? btnsFilter.style.display = "flex"
+    : btnsFilter.remove();
   controlToken === null
     ? (mesProjetsMarginH2.style.marginBottom = "30px")
     : (mesProjetsMarginH2.style.marginBottom = "92px");
   controlToken === null
-    ? (btnsFilter.style.marginBotton = "")
-    : (btnsFilter.style.marginBotton = "none");
+    ? btnsFilter.style.marginBotton = ""
+    : btnsFilter.style.marginBotton = "none";
   controlToken === null
-    ? (header.style.marginTop = "50px")
-    : (header.style.marginTop = "38px");
+    ? header.style.marginTop = "50px"
+    : header.style.marginTop = "38px";
   //edit buttons
   modalCallButtons.forEach(function (item) {
     controlToken === null
-      ? (item.style.display = "none")
-      : (item.style.display = "flex");
+      ? item.remove()
+      : item.style.display = "flex";
   });
   //  ---------------------------------------------------------
   //  | Management of the action of the "login/logout" button |
@@ -365,7 +365,7 @@ async function buildWorks() {
     errorMessage.style.display = "none";
     toggleModal2();
   });
-  /**** add photo  input file part  ****/
+  /**** input file part  ****/
   const fileUploadInput = document.querySelector("#my-file");
   infoFile.innerHTML = "jpg png : 4 mo max";
   fileUploadInput.addEventListener("change", previewNewWork);
@@ -386,13 +386,14 @@ async function buildWorks() {
     selectCategory.disabled = true;
     buttonValidatePhoto.disabled = true;
   }
-
+  //title field in the form of the add work modal
   const inputTitle = document.getElementById("title");
   const selectCategory = document.getElementById("category")
   inputTitle.disabled = true;
   selectCategory.disabled = true;
-
+  //job image preview function
   let imageUploaded;
+
   function previewNewWork() {
     const sizeFile = this.files[0].size;
     imageUploaded = this.files[0];
@@ -415,13 +416,13 @@ async function buildWorks() {
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
     newFileReader.addEventListener("load", (event) =>
-      displayImage(event, file)
+      imageDisplay(event, file)
     );
-
-    function displayImage(event) {
+    //image display function
+    function imageDisplay(event) {
       figureUpload = document.createElement("figure");
       figureUpload.id = works.length + 1;
-      figureUpload.className = "thumbnail"
+      //figureUpload.className = "thumbnail"
       const image = document.createElement("img");
       image.src = event.target.result;
       addedImage = event.target.result;
@@ -459,9 +460,7 @@ async function buildWorks() {
       errorMessage.style.display = "flex";
       errorMessage.innerHTML = " Veuillez complèter tous les champs";
       return;
-    } else {
-
-    }
+    } 
 
     fetch(url, {
       method: "POST",
@@ -488,7 +487,6 @@ async function buildWorks() {
       }
     });
   }
-
   // validation button
   buttonValidatePhoto.addEventListener("click", function () {
     sendNewWork();
