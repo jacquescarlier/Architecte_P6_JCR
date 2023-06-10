@@ -455,12 +455,7 @@ async function buildWorks() {
     formData.append("image", imageUploaded);
     formData.append("title", title.value);
     formData.append("category", category.value);
-   /* if (title.value === " " || category.value === " " || addedImage === "") {
-      errorMessage.style.display = "flex";
-      errorMessage.innerHTML = " Veuillez complèter tous les champs";
-      return;
-    }*/
-
+  
     fetch(url, {
       method: "POST",
       headers: {
