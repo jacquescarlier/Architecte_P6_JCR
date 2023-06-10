@@ -70,7 +70,7 @@ forCategory();
 async function buildWorks() {
   // object array 
   let works = await getWorks(url);
-  
+
   // ----------------------------
   // |  function to create a job|
   // ----------------------------
@@ -106,10 +106,10 @@ async function buildWorks() {
         caption: work.title,
         alt: work.title,
       };
-      addNewProject(project, container, false);
+      addNewProject(project, gallery, false);
     }
   }
-  createWork(gallery);
+  createWork();
   // add new work  in gallery
   function addNewWorkGallery() {
     let project = {
@@ -227,14 +227,14 @@ async function buildWorks() {
   // container to add a job
   const addPhotos = document.querySelector(".add-photo");
   /**** gallery modal ****/
-  //all elements that can close or open the modal
+  //all elements that can close or open the modal 1
   const modalTrigger = document.querySelectorAll(".modal-trigger");
   // button to open 2nd modal
   const buttonAddPhotos = document.getElementById("button-add-modal");
   // gallery container
   const galleryOfModal = document.querySelector(".gallery-modal");
   /**** modal add photo ****/
-  //all elements that can close or open the modal
+  //all elements that can close or open the modal 2
   const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
   //validate button
   const buttonValidatePhoto = document.getElementById("button-validate-photo");
@@ -330,8 +330,7 @@ async function buildWorks() {
   });
   modal2Container.children[1].addEventListener("click", function (e) {
     e.stopPropagation();
-  });
-
+  })
   //  ---------------------
   //  | modal - add photo |
   //  ---------------------
@@ -447,7 +446,7 @@ async function buildWorks() {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
         buttonValidatePhoto.disabled = false;
-      }
+      } 
     })
   );
   /**** Send new work in API db****/
@@ -456,11 +455,11 @@ async function buildWorks() {
     formData.append("image", imageUploaded);
     formData.append("title", title.value);
     formData.append("category", category.value);
-    if (title.value === " " || category.value === " " || addedImage === "") {
+   /* if (title.value === " " || category.value === " " || addedImage === "") {
       errorMessage.style.display = "flex";
       errorMessage.innerHTML = " Veuillez complèter tous les champs";
       return;
-    } 
+    }*/
 
     fetch(url, {
       method: "POST",
@@ -479,13 +478,17 @@ async function buildWorks() {
         buttonValidatePhoto.disabled = true;
         setTimeout(resetContainerAddPhoto, 1000);
         setTimeout(toggleModal2, 1500);
-      } else {
+      } else if (response.status === 400) {
+        buttonValidatePhoto.disabled = true;
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML =
+          "Veuillez compléter tous les champs";
+      } else  {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
         errorMessage.innerHTML =
           "pas de connexion serveur, contacter votre administrateur";
-      }
-    });
+    }});
   }
   // validation button
   buttonValidatePhoto.addEventListener("click", function () {
