@@ -3,6 +3,8 @@
 --> pb fonction function buildWorks() qui englobe une grande partie du code.
 
 
+--> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
+
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
 obliger de tabuler ou de resélectionner la liste déroulante
 bouton de validation et champ de la form en 'disabled'. Lors de l'ajout de l'image l'input text est' enabled'
