@@ -139,21 +139,21 @@ async function buildWorks() {
       btn.addEventListener("click", function (e) {
         if (e.target.name === "Tous") {
           filterChoice = works;
-          applyFilter(filterChoice);
+          displayFilter(filterChoice);
         } else {
           filterChoice = works.filter(
             (obj) => obj.category.name === e.target.name
           );
-          applyFilter(filterChoice);
+          displayFilter(filterChoice);
         }
       });
     });
   }
   createFilter();
   // ------------------
-  // |  Apply filter  |
+  // |  display filter  |
   // ------------------
-  function applyFilter(filterChoice) {
+  function displayFilter(filterChoice) {
     gallery.innerHTML = "";
     for (const filter of filterChoice) {
       container = filterChoice;
@@ -174,24 +174,14 @@ async function buildWorks() {
 
   let controlToken = sessionStorage.getItem("token");
   // Modifies elements when switching to "edit mode"
-  controlToken === null
-    ? adminNav.remove()
-    : adminNav.style.display = "flex";
-  controlToken === null
-    ? (document.getElementById("login").innerHTML = "login")
+  controlToken === null ? adminNav.remove() : adminNav.style.display = "flex";
+  controlToken === null ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
-  controlToken === null
-    ? btnsFilter.style.display = "flex"
-    : btnsFilter.remove();
-  controlToken === null
-    ? (mesProjetsMarginH2.style.marginBottom = "30px")
+  controlToken === null ? btnsFilter.style.display = "flex" : btnsFilter.remove();
+  controlToken === null ? (mesProjetsMarginH2.style.marginBottom = "30px")
     : (mesProjetsMarginH2.style.marginBottom = "92px");
-  controlToken === null
-    ? btnsFilter.style.marginBotton = ""
-    : btnsFilter.style.marginBotton = "none";
-  controlToken === null
-    ? header.style.marginTop = "50px"
-    : header.style.marginTop = "38px";
+  controlToken === null ? btnsFilter.style.marginBotton = "" : btnsFilter.style.marginBotton = "none";
+  controlToken === null ? header.style.marginTop = "50px" : header.style.marginTop = "38px";
   //edit buttons
   modalCallButtons.forEach(function (item) {
     controlToken === null
@@ -407,7 +397,7 @@ async function buildWorks() {
     }
 
     function infoFileNotOk() {
-      infoFile.innerHTML = "Le fichier n'est pas valide";
+      infoFile.innerHTML = "Attention de choisir un fichier valide.";
       infoFile.classList.remove("infoFileOk");
       infoFile.classList.add("infoFileNotOk");
     }
@@ -446,7 +436,7 @@ async function buildWorks() {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
         buttonValidatePhoto.disabled = false;
-      } 
+      }
     })
   );
   /**** Send new work in API db****/
@@ -455,7 +445,7 @@ async function buildWorks() {
     formData.append("image", imageUploaded);
     formData.append("title", title.value);
     formData.append("category", category.value);
-  
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -477,13 +467,16 @@ async function buildWorks() {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
         errorMessage.innerHTML =
-          "Veuillez compléter tous les champs";
-      } else  {
+          "Veuillez compléter tous les champs.";
+        category.value = " ";
+        title.value = " ";
+      } else {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
         errorMessage.innerHTML =
-          "pas de connexion serveur, contacter votre administrateur";
-    }});
+          "pas de connexion serveur, contacter votre administrateur.";
+      }
+    });
   }
   // validation button
   buttonValidatePhoto.addEventListener("click", function () {
