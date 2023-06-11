@@ -11,6 +11,34 @@ const adminNav = document.getElementById("admin-nav");
 const modalCallButtons = document.querySelectorAll(".modifier");
 // login or logout button depending on the token
 const loginLogout = document.getElementById("login");
+// general container & gallery modal
+// container first modal
+const modalContainer = document.querySelector(".modal-container");
+// container for the gallery in the modal
+const modalGallery = document.querySelector(".modal-photo-gallery");
+//container 2nd modal
+const modal2Container = document.querySelector(".modal2-container");
+// container to add a job
+const addPhotos = document.querySelector(".add-photo");
+/**** gallery modal ****/
+//all elements that can close or open the modal 1
+const modalTrigger = document.querySelectorAll(".modal-trigger");
+// button to open 2nd modal
+const buttonAddPhotos = document.getElementById("button-add-modal");
+// gallery container
+const galleryOfModal = document.querySelector(".gallery-modal");
+/**** modal add photo ****/
+//all elements that can close or open the modal 2
+const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
+//validate button
+const buttonValidatePhoto = document.getElementById("button-validate-photo");
+// messages for image size or error when selecting
+const infoFile = document.querySelector(".info-file");
+// arrow previous
+const previousArrow = document.getElementById("previous-arrow");
+/****  containers for the photo adds ****/
+const containerAddPhoto = document.querySelector(".container-add-photo");
+const containerAddPhoto2 = document.querySelector(".container-add-photo2");
 
 // ---------------------------------------------
 // | Check the connection with the API "works" |
@@ -49,7 +77,7 @@ async function forCategory() {
   //  ---------------------------------------------
   //  | Create buttons dynamically whith the API  |
   //  ---------------------------------------------
-  function createButtons() {
+   function createButtons() {
     for (let i = 0; i < category.length; i++) {
       let newFilterButton = document.createElement("button");
       newFilterButton.type = "button";
@@ -98,7 +126,7 @@ async function buildWorks() {
     container.appendChild(figure);
   }
   //creation of the gallery
-  function createWork(container) {
+  function createWork() {
     for (const work of works) {
       let project = {
         id: work.id,
@@ -110,6 +138,19 @@ async function buildWorks() {
     }
   }
   createWork();
+/**** Create the gallery for modal ****/
+  async function createWorksForModalGallery() {
+    for (const work of works) {
+      let project = {
+        id: work.id,
+        img: work.imageUrl,
+        caption: "éditer",
+        alt: work.title,
+      };
+      addNewProject(project, galleryOfModal, true);
+    }
+  }
+  createWorksForModalGallery();
   // add new work  in gallery
   function addNewWorkGallery() {
     let project = {
@@ -184,10 +225,7 @@ async function buildWorks() {
   controlToken === null ? header.style.marginTop = "50px" : header.style.marginTop = "38px";
   //edit buttons
   modalCallButtons.forEach(function (item) {
-    controlToken === null
-      ? item.remove()
-      : item.style.display = "flex";
-  });
+    controlToken === null ? item.remove() : item.style.display = "flex"; });
   //  ---------------------------------------------------------
   //  | Management of the action of the "login/logout" button |
   //  ---------------------------------------------------------
@@ -207,53 +245,11 @@ async function buildWorks() {
   //  -----------------------
   //  | parts of the modals |
   //  -----------------------
-  // general container & gallery
-  // container first modal
-  const modalContainer = document.querySelector(".modal-container");
-  // container for the gallery in the modal
-  const modalGallery = document.querySelector(".modal-photo-gallery");
-  //container 2nd modal
-  const modal2Container = document.querySelector(".modal2-container");
-  // container to add a job
-  const addPhotos = document.querySelector(".add-photo");
-  /**** gallery modal ****/
-  //all elements that can close or open the modal 1
-  const modalTrigger = document.querySelectorAll(".modal-trigger");
-  // button to open 2nd modal
-  const buttonAddPhotos = document.getElementById("button-add-modal");
-  // gallery container
-  const galleryOfModal = document.querySelector(".gallery-modal");
-  /**** modal add photo ****/
-  //all elements that can close or open the modal 2
-  const modalTrigger2 = document.querySelectorAll(".modal-trigger2");
-  //validate button
-  const buttonValidatePhoto = document.getElementById("button-validate-photo");
-  // messages for image size or error when selecting
-  const infoFile = document.querySelector(".info-file");
-  // arrow previous
-  const previousArrow = document.getElementById("previous-arrow");
-  /****  containers for the photo adds ****/
-  const containerAddPhoto = document.querySelector(".container-add-photo");
-  const containerAddPhoto2 = document.querySelector(".container-add-photo2");
   // disable add work validation button
   buttonValidatePhoto.disabled = true;
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
-  /**** Create the gallery for modal ****/
-  async function createWorksForModalGallery() {
-    for (const work of works) {
-      let project = {
-        id: work.id,
-        img: work.imageUrl,
-        caption: "éditer",
-        alt: work.title,
-      };
-      addNewProject(project, galleryOfModal, true);
-    }
-  }
-  createWorksForModalGallery();
-
   modalContainer.className === "modal-container active"
     ? (modalgallery.style.display = "flex")
     : (modalGallery.style.display = "none");
@@ -304,29 +300,17 @@ async function buildWorks() {
     })
   );
   /**** how the modals close ****/
-  modalGallery.addEventListener("click", function () {
-    alertModalGallery.style.display = "none";
-  });
+  modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none"; });
   alertModalGallery.innerHTML = " ";
   /**** close the modal by clicking outside ****/
-  modalContainer.addEventListener("click", (e) => {
-    toggleModal();
-  });
-  modalContainer.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-  });
-  modal2Container.addEventListener("click", (e) => {
-    toggleModal2();
-  });
-  modal2Container.children[1].addEventListener("click", function (e) {
-    e.stopPropagation();
-  })
+  modalContainer.addEventListener("click", (e) => { toggleModal(); });
+  modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
+  modal2Container.addEventListener("click", (e) => { toggleModal2(); });
+  modal2Container.children[1].addEventListener("click", function (e) { e.stopPropagation(); })
   //  ---------------------
   //  | modal - add photo |
   //  ---------------------
-  modalTrigger2.forEach((trigger) =>
-    trigger.addEventListener("click", toggleModal2)
-  );
+  modalTrigger2.forEach((trigger) => trigger.addEventListener("click", toggleModal2));
   // conditions of appearance of the modal
   function toggleModal2() {
     modal2Container.classList.toggle("active");
@@ -340,8 +324,7 @@ async function buildWorks() {
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");
     resetContainerAddPhoto();
-    errorMessage.style.display = "none";
-    errorMessage.innerHTML = " ";
+    errorMessageRemove()
   }
 
   // toogle funtion to manage the appearance of the modal
@@ -352,7 +335,7 @@ async function buildWorks() {
   /****modal - add photo Arrow previous ****/
   previousArrow.addEventListener("click", function () {
     modalContainer.classList.toggle("active");
-    errorMessage.style.display = "none";
+    errorMessageRemove();
     toggleModal2();
   });
   /**** input file part  ****/
@@ -383,6 +366,11 @@ async function buildWorks() {
   selectCategory.disabled = true;
   //job image preview function
   let imageUploaded;
+  // function reset "error message"
+  function errorMessageRemove() {
+    errorMessage.style.display = "none";
+    errorMessage.innerHTML = " ";
+  }
 
   function previewNewWork() {
     const sizeFile = this.files[0].size;
@@ -395,7 +383,7 @@ async function buildWorks() {
       infoFileNotOk();
       return;
     }
-
+    // Message if file too large or not jpeg, jpg or png
     function infoFileNotOk() {
       infoFile.innerHTML = "Choisissez un fichier valide.";
       infoFile.classList.remove("infoFileOk");
@@ -406,7 +394,7 @@ async function buildWorks() {
     const newFileReader = new FileReader();
     newFileReader.readAsDataURL(file);
     newFileReader.addEventListener("load", (event) =>
-      imageDisplay(event, file)
+      imageDisplay(event)
     );
     //image display function
     function imageDisplay(event) {
@@ -432,7 +420,8 @@ async function buildWorks() {
         selectCategory.disabled = false;
         selectCategory.focus();
       }
-      if (title.value !== " " && category.options.selectedIndex !== 0) {
+      console.log("select", category.options.selectedIndex)
+      if (title.value !== " " && category.options.selectedIndex !== -1) {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";
         buttonValidatePhoto.disabled = false;
@@ -466,15 +455,17 @@ async function buildWorks() {
       } else if (response.status === 400) {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML =
-          "Veuillez compléter tous les champs.";
+        errorMessage.innerHTML = "Veuillez compléter tous les champs.";
         category.value = " ";
         title.value = " ";
+        buttonValidatePhoto.style.background = "#A7A7A7";
+        buttonValidatePhoto.style.cursor = "default";
+        buttonValidatePhoto.disabled = true;
+        setTimeout(errorMessageRemove, 3000);
       } else {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML =
-          "Erreur avec le serveur, contacter votre administrateur.";
+        errorMessage.innerHTML = "Erreur connexion API, contacter votre administrateur.";
       }
     });
   }

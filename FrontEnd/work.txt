@@ -1,8 +1,8 @@
 ! image du backend ne s'efface pas
 
---> pb fonction function buildWorks() qui englobe une grande partie du code.
+--> pb fonction buildWorks() qui englobe une grande partie du code.
 
-
+--> ligne 400 function imageDisplay
 --> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
 
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
