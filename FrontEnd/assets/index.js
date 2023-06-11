@@ -397,7 +397,7 @@ async function buildWorks() {
     }
 
     function infoFileNotOk() {
-      infoFile.innerHTML = "Attention de choisir un fichier valide.";
+      infoFile.innerHTML = "Choisissez un fichier valide.";
       infoFile.classList.remove("infoFileOk");
       infoFile.classList.add("infoFileNotOk");
     }
@@ -457,7 +457,7 @@ async function buildWorks() {
         addNewWorkGallery();
         addNewWorkInModal();
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML = "Envoie des travaux validé !";
+        errorMessage.innerHTML = "Ajout validé !";
         category.value = " ";
         title.value = " ";
         buttonValidatePhoto.disabled = true;
@@ -474,7 +474,7 @@ async function buildWorks() {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
         errorMessage.innerHTML =
-          "pas de connexion serveur, contacter votre administrateur.";
+          "Erreur avec le serveur, contacter votre administrateur.";
       }
     });
   }

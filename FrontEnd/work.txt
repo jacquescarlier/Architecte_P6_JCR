@@ -16,8 +16,9 @@ validé === obliger de rafraîchir pour effacer un travail qui a été ajouter =
 
 réglé le 08/06/23 -> pb lors de l'ajout de travaux d'affilé, 2ème ajout rajoute 2 photos le 1ére et la 2ème
 
-ok -> surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
-Mettre scrollbar
+ok -> scrollbar si plus de 15 image, obtenu par rapport à la taille du container de la galerie
+ surveiller taille galerie modal sur la maquette 3éme ligne avec ou pas éditer visible
+Mettre scrollbar 
 
 SessionStorage ou localStorage ?
 Pour la sécurité => sessionStorage
