@@ -844,7 +844,7 @@ form a {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  background: #e8f1f6;
+  background: #e8f1f7;
   border-radius: 3px;
   font-family: "Work Sans", sans-serif;
   font-size: 10px;
@@ -895,6 +895,7 @@ form a {
 
 .info-file {
   margin-top: 7px;
+  font-family: "work sans", sans-serif;
 }
 
 .infoFileNotOk {
@@ -903,13 +904,13 @@ form a {
   font-weight: 700;
   background: #ffffff;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .infoFileOk {
   color: #444444;
   background: none;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
   padding: 0;
   border-radius: 0;
@@ -977,10 +978,10 @@ form a {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #f0ccd8;
-  color: #d65353;
+  background: #1d6154;
+  color: #e5e5e5;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   width: 420px;
   height: 32px;
 }

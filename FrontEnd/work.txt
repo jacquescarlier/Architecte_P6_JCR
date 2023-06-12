@@ -1,9 +1,14 @@
+--> à voir, pb affichage si erreur connexion API
+--> pb fonction buildWorks() qui englobe une grande partie du code.
+
+--> ligne 400 function imageDisplay posibilité de passé par la fonction "addNewProject" ou pas ?
+--> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
+
 ! image du backend ne s'efface pas
 
---> pb fonction buildWorks() qui englobe une grande partie du code.
---> pb affichage erreur connexion API
---> ligne 400 function imageDisplay
---> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
+
+! problème sur le suivi des balises <h> avec les h de la modale
+09/06/23 validateur css et html ok balise modal passé de <h1> en <h2>
 
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
 obliger de tabuler ou de resélectionner la liste déroulante
@@ -27,7 +32,5 @@ html, css vs js !!
 tout ce qui peut etre fait en html doit être créé en html(idem pour css). Java Script est un complément à html et css. Il augmente et complète les fonctionnalités des 2 langages.
 Cela se taduira par de meilleures performances, accessibilité, référencement et généralement plus facile à faire.
 
-! problème sur le suivi des balises <h> avec les h de la modale
-09/06/23 validateur css et html ok balise modal passé de <h1> en <h2>
 
  

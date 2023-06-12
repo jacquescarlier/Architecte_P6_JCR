@@ -1,7 +1,6 @@
 /**** API call ****/
 let url = "http://localhost:5678/api/works";
 let urlCategories = "http://localhost:5678/api/categories";
-
 /**** Constante ****/
 // const gallery container
 const gallery = document.querySelector(".gallery");
@@ -47,10 +46,8 @@ const errorApi = document.querySelector(".errorApi")
 async function getWorks(url) {
   const response = await fetch(url);
   if (response.ok) {
-    console.log("ok")
     return await response.json();
   } else {
-    console.log("erreur")
     errorApi.style.display = "flex";
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
@@ -206,7 +203,7 @@ async function buildWorks() {
       addNewProject(project, gallery, false);
     }
   }
-  
+
   //  ---------------------------------------------
   //  | setting up element according to the token |
   //  ---------------------------------------------
@@ -291,7 +288,7 @@ async function buildWorks() {
           } else {
             resStatus = response.status;
             alertModalGallery.innerHTML =
-              "impossible d'effacé le fichier, statut du serveur :  " +
+              "Impossible d'effacer le fichier, problème d'accès à l'API :  " +
               resStatus;
             alertModalGallery.style.display = "flex";
           }
@@ -446,12 +443,12 @@ async function buildWorks() {
         addNewWorkGallery();
         addNewWorkInModal();
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML = "Ajout validé !";
+        errorMessage.innerHTML = `Votre projet ${title.value} est ajouté !`;
         category.value = " ";
         title.value = " ";
         buttonValidatePhoto.disabled = true;
-        setTimeout(resetContainerAddPhoto, 1000);
-        setTimeout(toggleModal2, 1500);
+        setTimeout(resetContainerAddPhoto, 2000);
+        setTimeout(toggleModal2,2000);
       } else if (response.status === 400) {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
@@ -465,7 +462,7 @@ async function buildWorks() {
       } else {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML = "Erreur connexion API, contacter votre administrateur.";
+        errorMessage.innerHTML = "Problème de connexion à l'API, contacter votre administrateur.";
       }
     });
   }
