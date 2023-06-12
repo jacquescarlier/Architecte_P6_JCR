@@ -1,7 +1,7 @@
 ! image du backend ne s'efface pas
 
 --> pb fonction buildWorks() qui englobe une grande partie du code.
-
+--> pb affichage erreur connexion API
 --> ligne 400 function imageDisplay
 --> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
 
@@ -28,6 +28,6 @@ tout ce qui peut etre fait en html doit être créé en html(idem pour css). Jav
 Cela se taduira par de meilleures performances, accessibilité, référencement et généralement plus facile à faire.
 
 ! problème sur le suivi des balises <h> avec les h de la modale
-09/06/23 validateur css et html ok balise modal passé en <h2>
+09/06/23 validateur css et html ok balise modal passé de <h1> en <h2>
 
  

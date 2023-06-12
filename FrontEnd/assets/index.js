@@ -39,15 +39,19 @@ const previousArrow = document.getElementById("previous-arrow");
 /****  containers for the photo adds ****/
 const containerAddPhoto = document.querySelector(".container-add-photo");
 const containerAddPhoto2 = document.querySelector(".container-add-photo2");
-
+const errorApi = document.querySelector(".errorApi")
 // ---------------------------------------------
 // | Check the connection with the API "works" |
 // ---------------------------------------------
+// retrieve the resource located at url.
 async function getWorks(url) {
   const response = await fetch(url);
   if (response.ok) {
+    console.log("ok")
     return await response.json();
   } else {
+    console.log("erreur")
+    errorApi.style.display = "flex";
     return Promise.reject(`Erreur HTTP fetch 1 => ${response.status}`);
   }
 }
@@ -58,26 +62,11 @@ async function getCategories(urlCategories) {
   const response = await fetch(urlCategories);
   if (response.ok) return await response.json();
 }
-//  ------------------------
-//  | CategoryId for modal |
-//  ------------------------
+
 async function forCategory() {
   let category = await getCategories(urlCategories);
-
-  function categoryIdForModal() {
-    const select = document.querySelector("#category");
-    for (let i = 0; i < category.length; i++) {
-      let option = document.createElement("option");
-      option.value = category[i].id;
-      option.innerHTML = category[i].name;
-      select.appendChild(option);
-    }
-  }
-  categoryIdForModal();
-  //  ---------------------------------------------
-  //  | Create buttons dynamically whith the API  |
-  //  ---------------------------------------------
-   function createButtons() {
+  /**** Create buttons dynamically whith the API ****/
+  function createButtons() {
     for (let i = 0; i < category.length; i++) {
       let newFilterButton = document.createElement("button");
       newFilterButton.type = "button";
@@ -90,41 +79,51 @@ async function forCategory() {
     }
   }
   createButtons();
+  /**** Category dropdown in add job modal*****/
+  function categoryIdForModal() {
+    const select = document.querySelector("#category");
+    for (let i = 0; i < category.length; i++) {
+      let option = document.createElement("option");
+      option.value = category[i].id;
+      option.innerHTML = category[i].name;
+      select.appendChild(option);
+    }
+  }
+  categoryIdForModal();
 }
 forCategory();
+// ----------------------------
+// |  function to create a job|
+// ----------------------------
+function addNewProject(project, container, isModal) {
+  //first parameter is a json with the variables
+  // 2nd parameter  is the target container
+  //third parameter is a boolean
+  let idPhoto = project.id;
+  let figure = document.createElement("figure");
+  figure.id = idPhoto;
+  figure.className = "figure-gallery";
+  let img = document.createElement("img");
+  img.src = project.img;
+  img.alt = project.alt;
+  figure.appendChild(img);
+  let figcaption = document.createElement("figcaption");
+  figcaption.innerHTML = project.caption;
+  figure.appendChild(figcaption);
+  if (isModal) {
+    let trashGallery = document.createElement("i");
+    trashGallery.className = "fa-solid fa-trash-can trash";
+    trashGallery.innerHTML = "";
+    figure.appendChild(trashGallery);
+  }
+  container.appendChild(figure);
+}
 //  --------------------------------------------
 //  |    Creation of the gallery & the filter  |
 //  --------------------------------------------
 async function buildWorks() {
   // object array 
   let works = await getWorks(url);
-
-  // ----------------------------
-  // |  function to create a job|
-  // ----------------------------
-  function addNewProject(project, container, isModal) {
-    //first parameter is a json with the variables
-    // 2nd parameter  is the target container
-    //third parameter is a boolean
-    let idPhoto = project.id;
-    let figure = document.createElement("figure");
-    figure.id = idPhoto;
-    figure.className = "figure-gallery";
-    let img = document.createElement("img");
-    img.src = project.img;
-    img.alt = project.alt;
-    figure.appendChild(img);
-    let figcaption = document.createElement("figcaption");
-    figcaption.innerHTML = project.caption;
-    figure.appendChild(figcaption);
-    if (isModal) {
-      let trashGallery = document.createElement("i");
-      trashGallery.className = "fa-solid fa-trash-can trash";
-      trashGallery.innerHTML = "";
-      figure.appendChild(trashGallery);
-    }
-    container.appendChild(figure);
-  }
   //creation of the gallery
   function createWork() {
     for (const work of works) {
@@ -138,7 +137,7 @@ async function buildWorks() {
     }
   }
   createWork();
-/**** Create the gallery for modal ****/
+  /**** Create the gallery for modal ****/
   async function createWorksForModalGallery() {
     for (const work of works) {
       let project = {
@@ -207,6 +206,7 @@ async function buildWorks() {
       addNewProject(project, gallery, false);
     }
   }
+  
   //  ---------------------------------------------
   //  | setting up element according to the token |
   //  ---------------------------------------------
@@ -218,14 +218,15 @@ async function buildWorks() {
   controlToken === null ? adminNav.remove() : adminNav.style.display = "flex";
   controlToken === null ? (document.getElementById("login").innerHTML = "login")
     : (document.getElementById("login").innerHTML = "logout");
-  controlToken === null ? btnsFilter.style.display = "flex" : btnsFilter.remove();
+  controlToken === null ? btnsFilter.style.display = "flex" : btnsFilter.style.display = "none";
   controlToken === null ? (mesProjetsMarginH2.style.marginBottom = "30px")
     : (mesProjetsMarginH2.style.marginBottom = "92px");
   controlToken === null ? btnsFilter.style.marginBotton = "" : btnsFilter.style.marginBotton = "none";
   controlToken === null ? header.style.marginTop = "50px" : header.style.marginTop = "38px";
   //edit buttons
   modalCallButtons.forEach(function (item) {
-    controlToken === null ? item.remove() : item.style.display = "flex"; });
+    controlToken === null ? item.remove() : item.style.display = "flex";
+  });
   //  ---------------------------------------------------------
   //  | Management of the action of the "login/logout" button |
   //  ---------------------------------------------------------
@@ -364,14 +365,14 @@ async function buildWorks() {
   const selectCategory = document.getElementById("category")
   inputTitle.disabled = true;
   selectCategory.disabled = true;
-  //job image preview function
+
   let imageUploaded;
   // function reset "error message"
   function errorMessageRemove() {
     errorMessage.style.display = "none";
     errorMessage.innerHTML = " ";
   }
-
+  //job image preview function
   function previewNewWork() {
     const sizeFile = this.files[0].size;
     imageUploaded = this.files[0];
@@ -420,7 +421,6 @@ async function buildWorks() {
         selectCategory.disabled = false;
         selectCategory.focus();
       }
-      console.log("select", category.options.selectedIndex)
       if (title.value !== " " && category.options.selectedIndex !== -1) {
         buttonValidatePhoto.style.background = "#1D6154";
         buttonValidatePhoto.style.cursor = "pointer";

@@ -344,6 +344,17 @@ main {
 #portfolio h2 {
   text-align: center;
 }
+.errorApi {
+  color: #444444;
+  display: none;
+  font-family: "Work sans";
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  padding: 5px;
+  background-color: #b1663c;
+  
+}
 
 .mes-projets {
   display: flex;
