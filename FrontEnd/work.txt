@@ -1,14 +1,16 @@
 --> à voir, pb affichage si erreur connexion API
 --> pb fonction buildWorks() qui englobe une grande partie du code.
 
---> ligne 400 function imageDisplay posibilité de passé par la fonction "addNewProject" ou pas ?
---> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
 
+--> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
+--> ID final des photos ??? idPhotos + 1 lors de la création mais après prennent d'autre valeurs ?
 ! image du backend ne s'efface pas
 
 
 ! problème sur le suivi des balises <h> avec les h de la modale
 09/06/23 validateur css et html ok balise modal passé de <h1> en <h2>
+
+ok le 12/06/23--> ligne 400 function imageDisplay posibilité de passé par la fonction "addNewProject" ou pas ?
 
 valide le 09/06/23 => condition pour passer le bouton en vert lors de l'addition des travaux
 obliger de tabuler ou de resélectionner la liste déroulante
