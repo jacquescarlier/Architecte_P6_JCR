@@ -364,12 +364,12 @@ async function buildWorks() {
   selectCategory.disabled = true;
 
   let imageUploaded;
-  // function reset "error message"
+  /**** function reset "error message" ****/
   function errorMessageRemove() {
     errorMessage.style.display = "none";
     errorMessage.innerHTML = " ";
   }
-  //job image preview function
+  /**** job image preview function ****/
   function previewNewWork() {
     const sizeFile = this.files[0].size;
     imageUploaded = this.files[0];
@@ -388,23 +388,20 @@ async function buildWorks() {
       infoFile.classList.add("infoFileNotOk");
     }
 
-    let file = this.files[0];
     const newFileReader = new FileReader();
-    newFileReader.readAsDataURL(file);
+    newFileReader.readAsDataURL(imageUploaded);
     newFileReader.addEventListener("load", (event) =>
       imageDisplay(event)
     );
-    //image display function
+   
     function imageDisplay(event) {
-      figureUpload = document.createElement("figure");
-      figureUpload.id = works.length + 1;
-      const image = document.createElement("img");
-      image.src = event.target.result;
+      let project = {
+        id: works.length + 1,
+        img: event.target.result,
+        caption: "",
+      };
+      addNewProject(project, containerAddPhoto2, false);
       addedImage = event.target.result;
-      figureUpload.appendChild(image);
-      image.style.width = "129px";
-      image.style.height = "169px";
-      document.querySelector(".container-add-photo2").appendChild(figureUpload);
       containerAddPhoto2.style.display = "flex";
       containerAddPhoto.style.display = "none";
       inputTitle.disabled = false;
