@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -105,17 +106,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -123,10 +128,12 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 /** end reset css**/
 
 /* Général */
@@ -202,6 +209,7 @@ h2 {
   display: none;
   cursor: pointer;
 }
+
 .modifier .fa-regular {
   border: none;
   margin-right: 5px;
@@ -224,7 +232,7 @@ h1 {
   color: #b1663c;
 }
 
-h1 > span {
+h1>span {
   font-family: "Work Sans", sans-serif;
   font-size: 10px;
   font-weight: 400;
@@ -239,12 +247,14 @@ nav ul {
   list-style-type: none;
   margin-top: 10px;
 }
+
 nav li {
   font-size: 16px;
   font-weight: 400;
   margin-left: 40px;
   padding-bottom: 14px;
 }
+
 li button {
   border: none;
   background: #e5e5e5;
@@ -297,6 +307,7 @@ main {
   flex-flow: row wrap;
   gap: 15px;
 }
+
 #introduction img {
   display: flex;
   justify-content: left;
@@ -308,6 +319,7 @@ main {
   flex: 1;
   padding: 0;
 }
+
 #introduction h2 {
   text-align: left;
   margin-bottom: 0.6em;
@@ -350,6 +362,7 @@ main {
   padding-bottom: 50px;
   width: 100%;
 }
+
 .btn-filter {
   font-family: "Syne", sans-serif;
   font-size: 16px;
@@ -359,6 +372,7 @@ main {
   color: #1d6154;
   outline: none;
 }
+
 #btn-Tous {
   border: 1px solid #1d6154;
   border-radius: 60px;
@@ -406,6 +420,7 @@ main {
   width: 100%;
   object-fit: contain;
 }
+
 .gallery figcaption {
   font-family: "Work Sans", sans-serif;
   font-size: 13px;
@@ -420,8 +435,15 @@ main {
   margin: auto;
   margin-top: 57px;
 }
-#contact > * {
+
+#contact>* {
   text-align: center;
+}
+
+#contact p {
+  font-family: 'Work sans';
+  font-size: 16px;
+  font-weight: 400;
 }
 
 #contact form {
@@ -437,11 +459,12 @@ main {
 }
 
 #contact label {
-  font-family: "work-sans";
+  font-family: "work sans";
   font-size: 14px;
   font-weight: 500;
   margin: 38px 0 7px 0;
 }
+
 #contact textarea {
   border: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -453,7 +476,6 @@ input[type="submit"] {
   border: none;
   border-radius: 60px;
   color: white;
-  font-size: 14px;
   font-family: "Syne";
   font-weight: 700;
   margin: 2.5em auto;
@@ -493,6 +515,7 @@ footer nav ul {
   margin: 2px 0px 30px 0px;
   padding: 5px;
 }
+
 .input input[type="submit"] {
   padding: 10px 38px 9px 39px;
 }
@@ -520,6 +543,7 @@ label {
 ::placeholder {
   background: #ffffff;
 }
+
 .input h2 {
   color: #1d6154;
   font-family: "syne";
@@ -542,17 +566,21 @@ form a {
   border: 1px solid red;
   background-color: #f0ccd8;
 }
+
 .link {
   text-decoration: underline;
 }
+
 .footer-login {
   width: 100%;
   position: absolute;
   bottom: 0;
 }
+
 #submit-connecter {
   cursor: pointer;
 }
+
 /*  -------------------- */
 /*  |  fenêtres modal  | */
 /*  -------------------- */
@@ -566,6 +594,7 @@ form a {
   background: rgba(0, 0, 0, 0.3);
   transition: opacity 0.3s 0.2s ease-out;
 }
+
 .modal-container.active .modal-overlay {
   opacity: 1;
   transition: opacity 0.3s ease-out;
@@ -817,6 +846,7 @@ form a {
 .container-add-photo2 {
   display: none;
 }
+
 .container-add-photo .fa-sharp {
   width: 58px;
   height: 46px;
@@ -833,6 +863,7 @@ form a {
   width: 173px;
   height: 36px;
 }
+
 .input-file-trigger {
   margin-top: 21px;
   display: block;
@@ -854,6 +885,7 @@ form a {
 .info-file {
   margin-top: 7px;
 }
+
 .infoFileNotOk {
   color: crimson;
   font-size: 18px;
@@ -862,6 +894,7 @@ form a {
   padding: 10px;
   border-radius: 10px;
 }
+
 .infoFileOk {
   color: #444444;
   background: none;
@@ -889,7 +922,9 @@ form a {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
   margin: 10px auto 0px;
 }
-#title, #category{
+
+#title,
+#category {
   font-family: "Work Sans", sans-serif;
   font-size: 14px;
   font-weight: 400;
