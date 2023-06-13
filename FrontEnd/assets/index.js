@@ -1,4 +1,4 @@
-/**** API call ****/
+/**** API ****/
 let url = "http://localhost:5678/api/works";
 let urlCategories = "http://localhost:5678/api/categories";
 /**** Constante ****/
@@ -267,7 +267,7 @@ async function buildWorks() {
   /**** delete image  ****/
   let trashButton = document.querySelectorAll(".fa-trash-can");
   let alertModalGallery = document.querySelector(".alert-modal");
-
+  
   trashButton.forEach((trash) =>
     trash.addEventListener("click", function (e) {
       let figure = this.parentNode;
@@ -285,12 +285,18 @@ async function buildWorks() {
             let figureDelete = figure.id;
             const figureToDelete = document.getElementById(figureDelete);
             figureToDelete.remove();
+          } else if (response.status === 401) {
+            resStatus = response.status;
+            alertModalGallery.style.display = "flex";
+            alertModalGallery.innerHTML =
+              "Vous n'avez pas les autorisations pour effacer le fichier, statut " +
+              resStatus;
           } else {
             resStatus = response.status;
-            alertModalGallery.innerHTML =
-              "Impossible d'effacer le fichier, problème d'accès à l'API :  " +
-              resStatus;
             alertModalGallery.style.display = "flex";
+            alertModalGallery.innerHTML =
+              "Impossible d'effacer le fichier, problème d'accès à l'API." +
+              resStatus;
           }
         });
       }
@@ -394,19 +400,19 @@ async function buildWorks() {
       imageDisplay(event)
     );
   }
-    function imageDisplay(event) {
-      let project = {
-        id: works.length + 1,
-        img: event.target.result,
-        caption: "",
-      };
-      addNewProject(project, containerAddPhoto2, false);
-      addedImage = event.target.result;
-      containerAddPhoto2.style.display = "flex";
-      containerAddPhoto.style.display = "none";
-      inputTitle.disabled = false;
-    }
- // }
+  function imageDisplay(event) {
+    let project = {
+      id: works.length + 1,
+      img: event.target.result,
+      caption: "",
+    };
+    addNewProject(project, containerAddPhoto2, false);
+    addedImage = event.target.result;
+    containerAddPhoto2.style.display = "flex";
+    containerAddPhoto.style.display = "none";
+    inputTitle.disabled = false;
+  }
+  // }
   /**** formData ****/
   let controleContenuForm = document.querySelectorAll(".controle-contenu");
   controleContenuForm.forEach((controle) =>
@@ -445,7 +451,7 @@ async function buildWorks() {
         title.value = " ";
         buttonValidatePhoto.disabled = true;
         setTimeout(resetContainerAddPhoto, 2000);
-        setTimeout(toggleModal2,2000);
+        setTimeout(toggleModal2, 2000);
       } else if (response.status === 400) {
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";

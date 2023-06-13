@@ -5,7 +5,9 @@
 --> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
 --> ID final des photos ??? idPhotos + 1 lors de la création mais après prennent d'autre valeurs ?
 ! image du backend ne s'efface pas
-
+ ? durée de vie d'un token
+ 1/ la durée de la session dans mon cas.
+ 2/ en heures ? => 24h00 dans le projet actuel (users.controller.js)
 
 ! problème sur le suivi des balises <h> avec les h de la modale
 09/06/23 validateur css et html ok balise modal passé de <h1> en <h2>
@@ -19,7 +21,7 @@ Lorsque le texte est dans la l'input text la liste de choix est accessible mais 
 solutionné en sélectionnant "category.options.selectedIndex" qui correspond aux index de la liste de choix.
 
 
-validé === obliger de rafraîchir pour effacer un travail qui a été ajouter => normal
+validé 05/06 === obliger de rafraîchir pour effacer un travail qui a été ajouter => normal
 
 réglé le 08/06/23 -> pb lors de l'ajout de travaux d'affilé, 2ème ajout rajoute 2 photos le 1ére et la 2ème
 

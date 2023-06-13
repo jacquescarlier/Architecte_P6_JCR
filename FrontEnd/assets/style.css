@@ -205,16 +205,6 @@ h2 {
   height: 38px;
 }
 
-.modifier {
-  display: none;
-  cursor: pointer;
-}
-
-.modifier .fa-regular {
-  border: none;
-  margin-right: 5px;
-}
-
 /* header */
 
 header {
@@ -287,6 +277,16 @@ main {
   flex-flow: row wrap;
 }
 
+
+.modifier {
+  display: none;
+  cursor: pointer;
+}
+
+.modifier .fa-regular {
+  border: none;
+  margin-right: 5px;
+}
 /* Section Indrotuction */
 
 #introduction {
@@ -735,21 +735,22 @@ form a {
 }
 
 .alert-modal {
+  width: 320px;
+  height: 100px;
+  color: #b3b3b3;
+  background: #1d6154;
+  border-radius: 10px;
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 15;
-  width: 320px;
-  height: 100px;
   font-family: "Work Sans", sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: #3d3d3d;
-  background: #b3b3b3;
   padding: 10px;
   position: absolute;
   top: 10px;
   left: 50%;
+  z-index: 15;
   transform: translateX(-50%);
 }
 

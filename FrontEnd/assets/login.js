@@ -16,7 +16,7 @@ document.getElementById("emailUser").focus()
     
     if (!email.match(/^[\w_\-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
         document.getElementById("errorInformation").innerHTML =
-            "Entrer un E-mail  ou un E-mail valide!"
+            "Entrer un E-mail valide!"
             errorInformation.classList = "errorInformation";
         return;
     }
