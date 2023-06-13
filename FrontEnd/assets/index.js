@@ -393,7 +393,7 @@ async function buildWorks() {
     newFileReader.addEventListener("load", (event) =>
       imageDisplay(event)
     );
-   
+  }
     function imageDisplay(event) {
       let project = {
         id: works.length + 1,
@@ -406,7 +406,7 @@ async function buildWorks() {
       containerAddPhoto.style.display = "none";
       inputTitle.disabled = false;
     }
-  }
+ // }
   /**** formData ****/
   let controleContenuForm = document.querySelectorAll(".controle-contenu");
   controleContenuForm.forEach((controle) =>

@@ -1,7 +1,7 @@
---> à voir, pb affichage si erreur connexion API
+--> à voir, pb affichage si erreur connexion API (OK si changement dans les noms)
 --> pb fonction buildWorks() qui englobe une grande partie du code.
 
-
+--> boutons modifier les 3 sont actifs ou un seul ?
 --> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
 --> ID final des photos ??? idPhotos + 1 lors de la création mais après prennent d'autre valeurs ?
 ! image du backend ne s'efface pas

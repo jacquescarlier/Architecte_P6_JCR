@@ -348,7 +348,7 @@ main {
 .errorApi {
   color: #444444;
   display: none;
-  font-family: "Work sans";
+  font-family: "Work sans", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 600;
@@ -453,7 +453,7 @@ main {
 }
 
 #contact p {
-  font-family: 'Work sans';
+  font-family: 'Work sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
 }
@@ -471,7 +471,7 @@ main {
 }
 
 #contact label {
-  font-family: "work sans";
+  font-family: "work sans", sans-serif;
   font-size: 14px;
   font-weight: 500;
   margin: 38px 0 7px 0;
@@ -488,7 +488,7 @@ input[type="submit"] {
   border: none;
   border-radius: 60px;
   color: white;
-  font-family: "Syne";
+  font-family: "Syne", sans-serif;
   font-weight: 700;
   margin: 2.5em auto;
   text-align: center;
@@ -558,7 +558,7 @@ label {
 
 .input h2 {
   color: #1d6154;
-  font-family: "syne";
+  font-family: "syne", sans-serif;
   font-size: 30px;
   font-weight: 700;
   text-align: center;
@@ -762,7 +762,7 @@ form a {
   background: #1d6154;
   border-radius: 60px;
   color: #ffffff;
-  font-family: "Syne";
+  font-family: "Syne", sans-serif;
   font-size: 14px;
   font-weight: 700;
   padding: 10px 48px 9px 48px;
@@ -967,7 +967,7 @@ form a {
   /*pointer-events: none;*/
   width: 237px;
   height: 36px;
-  font-family: "Syne";
+  font-family: "Syne", sans-serif;
   font-size: 14px;
   font-weight: 700;
   background: #cbd6dc;
