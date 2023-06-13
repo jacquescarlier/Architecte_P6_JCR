@@ -93,7 +93,7 @@ forCategory();
 // |  function to create a job|
 // ----------------------------
 function addNewProject(project, container, isModal) {
-  //first parameter is a json with the variables
+  //first parameter is a object with the variables
   // 2nd parameter  is the target container
   //third parameter is a boolean
   let idPhoto = project.id;
@@ -248,9 +248,6 @@ async function buildWorks() {
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
-  modalContainer.className === "modal-container active"
-    ? (modalgallery.style.display = "flex")
-    : (modalGallery.style.display = "none");
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) =>
     trigger.addEventListener("click", toggleModal)
@@ -262,7 +259,7 @@ async function buildWorks() {
     // makes the modal appears or disappear depending on the class
     modalContainer.className === "modal-container active"
       ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");
+      : (addPhotos.style.display = "none");
   }
   /**** delete image  ****/
   let trashButton = document.querySelectorAll(".fa-trash-can");
@@ -318,9 +315,9 @@ async function buildWorks() {
   // conditions of appearance of the modal
   function toggleModal2() {
     modal2Container.classList.toggle("active");
-    modalContainer.className === "modal-container active"
+   /* modalContainer.className === "modal-container active"
       ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");
+      : (modalGallery.style.display = "none");*/
     modal2Container.className === "modal2-container active"
       ? (addPhotos.style.display = "flex")
       : (addPhotos.style.display = "none");

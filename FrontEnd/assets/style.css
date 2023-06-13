@@ -287,6 +287,7 @@ main {
   border: none;
   margin-right: 5px;
 }
+
 /* Section Indrotuction */
 
 #introduction {
@@ -441,7 +442,6 @@ main {
 }
 
 /* Form  section contact*/
-
 #contact {
   width: 50%;
   margin: auto;
@@ -500,7 +500,6 @@ input[type="submit"] {
 }
 
 /* Footer*/
-
 footer nav ul {
   margin-right: 7.4%;
   display: flex;
@@ -508,7 +507,6 @@ footer nav ul {
 }
 
 /*Partie login*/
-
 .login-page {
   font-weight: 700;
 }
@@ -596,7 +594,6 @@ form a {
 /*  -------------------- */
 /*  |  fenêtres modal  | */
 /*  -------------------- */
-
 /**** commun ****/
 .modal-overlay {
   opacity: 0;
@@ -634,7 +631,6 @@ form a {
 }
 
 /* croix de fermeture des modale*/
-
 .close-modal,
 .close-modal2 {
   padding: 0px;
@@ -653,7 +649,6 @@ form a {
 }
 
 /**** Modal gallery ****/
-
 .modal-container {
   visibility: hidden;
   position: fixed;
@@ -788,7 +783,6 @@ form a {
 }
 
 /***** Modal add photo ****/
-
 .modal2-container {
   visibility: hidden;
   position: fixed;
@@ -875,7 +869,6 @@ form a {
 }
 
 /* input title part */
-
 .input-file-container {
   position: relative;
   width: 173px;
