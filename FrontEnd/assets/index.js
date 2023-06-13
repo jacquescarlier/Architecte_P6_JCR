@@ -248,6 +248,7 @@ async function buildWorks() {
   //  ---------------------
   //  | modal 1 - gallery |
   //  ---------------------
+
   //list of  elements listened to under the class "trigger"
   modalTrigger.forEach((trigger) =>
     trigger.addEventListener("click", toggleModal)
@@ -315,12 +316,9 @@ async function buildWorks() {
   // conditions of appearance of the modal
   function toggleModal2() {
     modal2Container.classList.toggle("active");
-   /* modalContainer.className === "modal-container active"
-      ? (modalGallery.style.display = "flex")
-      : (modalGallery.style.display = "none");*/
     modal2Container.className === "modal2-container active"
       ? (addPhotos.style.display = "flex")
-      : (addPhotos.style.display = "none");
+      : (modalGallery.style.display = "none");
     modal2Container.className === "modal2-container active"
       ? (modalGallery.style.display = "none")
       : (modalGallery.style.display = "flex");

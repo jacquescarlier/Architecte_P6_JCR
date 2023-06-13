@@ -1,10 +1,15 @@
---> à voir, pb affichage si erreur connexion API (OK si changement dans les noms)
---> pb fonction buildWorks() qui englobe une grande partie du code.
 
+--> pb fonction buildWorks() qui englobe une grande partie du code.
+--> bouton previous à retravailler
 --> boutons modifier les 3 sont actifs ou un seul ?
 --> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
---> ID final des photos ??? idPhotos + 1 lors de la création mais après prennent d'autre valeurs ?
+
 ! image du backend ne s'efface pas
+ 
+ 
+ 
+ --> à voir, pb affichage si erreur connexion API (OK si changement dans les noms)
+ 
  ? durée de vie d'un token
  1/ la durée de la session dans mon cas.
  2/ en heures ? => 24h00 dans le projet actuel (users.controller.js)
