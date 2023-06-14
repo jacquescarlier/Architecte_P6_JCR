@@ -1,11 +1,11 @@
 
 --> pb fonction buildWorks() qui englobe une grande partie du code.
---> bouton previous à retravailler
+
 --> boutons modifier les 3 sont actifs ou un seul ?
---> fonctionnalité obsolète ?? en-tête Expect-Ct <!DOCTYPE html> ??????
+--> !DOCTYPE html>fonctionnalité obsolète ?? en-tête Expect-Ct < ??????
 
 ! image du backend ne s'efface pas
- 
+ok 14/06 --> bouton previous à retravailler, fonctionne .....
  
  
  --> à voir, pb affichage si erreur connexion API (OK si changement dans les noms)
