@@ -124,8 +124,11 @@ function addNewProject(project, container, isModal) {
 async function buildWorks() {
   // object array 
   works = await getWorks(url);
+  // create gallery
   createWork();
+  //create modal gallery
   createWorksForModalGallery();
+  // create filter
   createFilter();
   /**** delete image  ****/
   trashButton = document.querySelectorAll(".fa-trash-can");
@@ -135,7 +138,7 @@ async function buildWorks() {
       let figure = this.parentNode;
       let idPhoto = figure.id;
 
-      async function deletePhoto() {
+      async function deleteProject() {
         await fetch(`${url}/${idPhoto}`, {
           method: "DELETE",
           headers: {
@@ -162,7 +165,7 @@ async function buildWorks() {
           }
         });
       }
-      deletePhoto();
+      deleteProject();
     })
   );
 }
@@ -232,10 +235,9 @@ function createFilter() {
     });
   });
 }
-// createFilter();
-// ------------------
+// --------------------
 // |  display filter  |
-// ------------------
+// --------------------
 function displayFilter(filterChoice) {
   gallery.innerHTML = "";
   for (const filter of filterChoice) {
@@ -249,7 +251,6 @@ function displayFilter(filterChoice) {
     addNewProject(project, gallery, false);
   }
 }
-
 //  ---------------------------------------------
 //  | setting up element according to the token |
 //  ---------------------------------------------
@@ -330,7 +331,6 @@ function toggleModal2() {
   resetContainerAddPhoto();
   errorMessageRemove()
 }
-
 // toogle funtion to manage the appearance of the modal
 buttonAddPhotos.addEventListener("click", function () {
   toggleModal();
@@ -355,12 +355,17 @@ const inputTitle = document.getElementById("title");
 const selectCategory = document.getElementById("category")
 inputTitle.disabled = true;
 selectCategory.disabled = true;
-
 let imageUploaded;
 /**** function reset "error message" ****/
 function errorMessageRemove() {
   errorMessage.style.display = "none";
   errorMessage.innerHTML = " ";
+}
+ // Message if file too large or not jpeg, jpg or png
+ function infoFileNotOk() {
+  infoFile.innerHTML = "Choisissez un fichier valide.";
+  infoFile.classList.remove("infoFileOk");
+  infoFile.classList.add("infoFileNotOk");
 }
 /**** job image preview function ****/
 function previewNewWork() {
@@ -374,13 +379,6 @@ function previewNewWork() {
     infoFileNotOk();
     return;
   }
-  // Message if file too large or not jpeg, jpg or png
-  function infoFileNotOk() {
-    infoFile.innerHTML = "Choisissez un fichier valide.";
-    infoFile.classList.remove("infoFileOk");
-    infoFile.classList.add("infoFileNotOk");
-  }
-
   const newFileReader = new FileReader();
   newFileReader.readAsDataURL(imageUploaded);
   newFileReader.addEventListener("load", (event) =>
@@ -403,8 +401,8 @@ function imageDisplay(event) {
 //  -----------------
 //  | formData part |
 //  -----------------
-let controleContenuForm = document.querySelectorAll(".controle-contenu");
-controleContenuForm.forEach((controle) =>
+let validateContentForm = document.querySelectorAll(".controle-contenu");
+validateContentForm.forEach((controle) =>
   controle.addEventListener("change", function (e) {
     if (title.value !== "") {
       selectCategory.disabled = false;
@@ -430,7 +428,8 @@ function sendNewWork(e) {
       Authorization: `Bearer ${controlToken}`,
     },
     body: formData,
-  }).then(function (response) {
+  })
+  .then(function (response) {
     // answer O.K send project
     if (response.status === 201) {
       addNewWorkGallery();
