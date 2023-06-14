@@ -92,44 +92,18 @@ async function workByCategory() {
   creationDropdownList();
 }
 workByCategory();
-// ----------------------------
-// |  function to create a job|
-// ----------------------------
-function addNewProject(project, container, isModal) {
-  //first parameter is a object with the variables
-  // 2nd parameter  is the target container
-  //third parameter is a boolean
-  let idPhoto = project.id;
-  let figure = document.createElement("figure");
-  figure.id = idPhoto;
-  figure.className = "figure-gallery";
-  let img = document.createElement("img");
-  img.src = project.img;
-  img.alt = project.alt;
-  figure.appendChild(img);
-  let figcaption = document.createElement("figcaption");
-  figcaption.innerHTML = project.caption;
-  figure.appendChild(figcaption);
-  if (isModal) {
-    let trashGallery = document.createElement("i");
-    trashGallery.className = "fa-solid fa-trash-can trash";
-    trashGallery.innerHTML = "";
-    figure.appendChild(trashGallery);
-  }
-  container.appendChild(figure);
-}
 //  --------------------------------------------
 //  |    Creation of galleries & filters  |
 //  --------------------------------------------
 async function buildWorks() {
   // object array 
   works = await getWorks(url);
+  // create filter
+  createFilter();
   // create gallery
   createWork();
   //create modal gallery
   createWorksForModalGallery();
-  // create filter
-  createFilter();
   /**** delete image  ****/
   trashButton = document.querySelectorAll(".fa-trash-can");
 
@@ -172,6 +146,32 @@ async function buildWorks() {
 buildWorks();
 
 /**** function to create jobs ****/
+// ----------------------------
+// |  function to create a job|
+// ----------------------------
+function addNewProject(project, container, isModal) {
+  //first parameter is a object with the variables
+  // 2nd parameter  is the target container
+  //third parameter is a boolean
+  let idPhoto = project.id;
+  let figure = document.createElement("figure");
+  figure.id = idPhoto;
+  figure.className = "figure-gallery";
+  let img = document.createElement("img");
+  img.src = project.img;
+  img.alt = project.alt;
+  figure.appendChild(img);
+  let figcaption = document.createElement("figcaption");
+  figcaption.innerHTML = project.caption;
+  figure.appendChild(figcaption);
+  if (isModal) {
+    let trashGallery = document.createElement("i");
+    trashGallery.className = "fa-solid fa-trash-can trash";
+    trashGallery.innerHTML = "";
+    figure.appendChild(trashGallery);
+  }
+  container.appendChild(figure);
+}
 //creation of the gallery
 function createWork() {
   for (const work of works) {
