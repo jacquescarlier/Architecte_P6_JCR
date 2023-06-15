@@ -308,7 +308,7 @@ function toggleModal() {
 /**** how the modals close ****/
 modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none"; });
 alertModalGallery.innerHTML = " ";
-/**** close the modal by clicking outside ****/
+/**** modal close by clicking outside and not inside ****/
 modalContainer.addEventListener("click", (e) => { toggleModal(); });
 modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
 modal2Container.addEventListener("click", (e) => { toggleModal2(); });
@@ -367,7 +367,7 @@ function previewNewWork() {
   const fileExtensionRegex = /\.(jpe?g|png)$/i;
 
   if (!fileExtensionRegex.test(this.files[0].name)) {
-    infoFile.innerHTML = "Le fichier n'est pas au format jpg ou png";
+    infoFile.innerHTML = "Le fichier n'est pas au format jp(e)g ou png";
     infoFileNotOk();
     return;
   }
@@ -377,9 +377,9 @@ function previewNewWork() {
     infoFileNotOk();
     return;
   }
-  const newFileReader = new FileReader();
-  newFileReader.readAsDataURL(imageUploaded);
-  newFileReader.addEventListener("load", (event) =>
+  const newImageUploaded = new FileReader();
+  newImageUploaded.readAsDataURL(imageUploaded);
+  newImageUploaded.addEventListener("load", (event) =>
     imageDisplay(event)
   );
 }
