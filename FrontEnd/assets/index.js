@@ -357,7 +357,6 @@ function errorMessageRemove() {
 }
 // Message if file too large or not jpeg, jpg or png
 function infoFileNotOk() {
-  infoFile.innerHTML = "Choisissez un fichier valide.";
   infoFile.classList.remove("infoFileOk");
   infoFile.classList.add("infoFileNotOk");
 }
@@ -366,10 +365,15 @@ function previewNewWork() {
   const sizeFile = this.files[0].size;
   imageUploaded = this.files[0];
   const fileExtensionRegex = /\.(jpe?g|png)$/i;
-  //.test renvoie true ou false par rapport au regex
-  if (this.files.length === 0 || !fileExtensionRegex.test(this.files[0].name) ||
-    sizeFile > 4194304 //size file max  = 4* 1024 * 1024
-  ) {
+
+  if (!fileExtensionRegex.test(this.files[0].name)) {
+    infoFile.innerHTML = "Le fichier n'est pas au format jpg ou png";
+    infoFileNotOk();
+    return;
+  }
+
+  if (sizeFile > 4194304) {
+    infoFile.innerHTML = "Le fichier fait plus de 4 mo";
     infoFileNotOk();
     return;
   }
