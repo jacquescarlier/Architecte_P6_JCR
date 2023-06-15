@@ -253,10 +253,6 @@ li button {
   font-weight: 400;
 }
 
-.login-link {
-  cursor: pointer;
-}
-
 li img {
   height: 16px;
   width: 16px;
@@ -577,7 +573,7 @@ form a {
   background-color: #f0ccd8;
 }
 
-.link {
+.forgot-password-link {
   text-decoration: underline;
 }
 
