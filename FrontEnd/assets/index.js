@@ -79,7 +79,7 @@ async function workByCategory() {
     }
   }
   createButtons();
-  /**** Category dropdown in add job modal*****/
+  /**** Category dropdown in add job modal *****/
   function creationDropdownList() {
     const select = document.querySelector("#category");
     for (let i = 0; i < category.length; i++) {
@@ -92,9 +92,9 @@ async function workByCategory() {
   creationDropdownList();
 }
 workByCategory();
-//  --------------------------------------------
+//  ---------------------------------------
 //  |    Creation of galleries & filters  |
-//  --------------------------------------------
+//  ---------------------------------------
 async function buildWorks() {
   // object array 
   works = await getWorks(url);
@@ -145,14 +145,11 @@ async function buildWorks() {
 }
 buildWorks();
 
-/**** function to create jobs ****/
-// ----------------------------
-// |  function to create a job|
-// ----------------------------
+//  ----------------------------
+//  |  function to create jobs |
+//  ----------------------------
+/**** function to create a job ****/
 function addNewProject(project, container, isModal) {
-  //first parameter is a object with the variables
-  // 2nd parameter  is the target container
-  //third parameter is a boolean
   let idPhoto = project.id;
   let figure = document.createElement("figure");
   figure.id = idPhoto;
@@ -172,7 +169,7 @@ function addNewProject(project, container, isModal) {
   }
   container.appendChild(figure);
 }
-//creation of the gallery
+/**** creation of the gallery ****/
 function createWork() {
   for (const work of works) {
     let project = {
@@ -196,7 +193,7 @@ async function createWorksForModalGallery() {
     addNewProject(project, galleryOfModal, true);
   }
 }
-// add new work  in gallery
+/**** add new work  in gallery ****/
 function addNewWorkGallery() {
   let project = {
     id: works.length + 1,
@@ -235,9 +232,9 @@ function createFilter() {
     });
   });
 }
-// --------------------
-// |  display filter  |
-// --------------------
+//  --------------------
+//  |  display filter  |
+//  --------------------
 function displayFilter(filterChoice) {
   gallery.innerHTML = "";
   for (const filter of filterChoice) {
@@ -295,7 +292,6 @@ buttonValidatePhoto.disabled = true;
 //  ---------------------
 //  | modal 1 - gallery |
 //  ---------------------
-
 //list of  elements listened to under the class "trigger"
 modalTrigger.forEach((trigger) =>
   trigger.addEventListener("click", toggleModal)
@@ -309,7 +305,6 @@ function toggleModal() {
     ? (modalGallery.style.display = "flex")
     : (addPhotos.style.display = "none");
 }
-
 /**** how the modals close ****/
 modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none"; });
 alertModalGallery.innerHTML = " ";
@@ -349,7 +344,6 @@ previousArrow.addEventListener("click", function () {
 const fileUploadInput = document.querySelector("#my-file");
 infoFile.innerHTML = "jpg png : 4 mo max";
 fileUploadInput.addEventListener("change", previewNewWork);
-
 //title field in the form of the add work modal
 const inputTitle = document.getElementById("title");
 const selectCategory = document.getElementById("category")
@@ -361,8 +355,8 @@ function errorMessageRemove() {
   errorMessage.style.display = "none";
   errorMessage.innerHTML = " ";
 }
- // Message if file too large or not jpeg, jpg or png
- function infoFileNotOk() {
+// Message if file too large or not jpeg, jpg or png
+function infoFileNotOk() {
   infoFile.innerHTML = "Choisissez un fichier valide.";
   infoFile.classList.remove("infoFileOk");
   infoFile.classList.add("infoFileNotOk");
@@ -429,42 +423,41 @@ function sendNewWork(e) {
     },
     body: formData,
   })
-  .then(function (response) {
-    // answer O.K send project
-    if (response.status === 201) {
-      addNewWorkGallery();
-      addNewWorkInModal();
-      errorMessage.style.display = "flex";
-      errorMessage.innerHTML = `Votre projet ${title.value} est ajouté !`;
-      category.value = " ";
-      title.value = " ";
-      buttonValidatePhoto.disabled = true;
-      setTimeout(resetContainerAddPhoto, 2000);
-      setTimeout(toggleModal2, 2000);
-    } else if (response.status === 400) {
-      // response 400, not all fields are filled in
-      buttonValidatePhoto.disabled = true;
-      errorMessage.style.display = "flex";
-      errorMessage.innerHTML = "Veuillez compléter tous les champs.";
-      category.value = " ";
-      title.value = " ";
-      buttonValidatePhoto.style.background = "#A7A7A7";
-      buttonValidatePhoto.style.cursor = "default";
-      buttonValidatePhoto.disabled = true;
-      setTimeout(errorMessageRemove, 3000);
-    } else {
-      // other answers
-      buttonValidatePhoto.disabled = true;
-      errorMessage.style.display = "flex";
-      errorMessage.innerHTML = "Problème de connexion à l'API, contacter votre administrateur.";
-    }
-  });
+    .then(function (response) {
+      // answer O.K send project
+      if (response.status === 201) {
+        addNewWorkGallery();
+        addNewWorkInModal();
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML = `Votre projet ${title.value} est ajouté !`;
+        category.value = " ";
+        title.value = " ";
+        buttonValidatePhoto.disabled = true;
+        setTimeout(resetContainerAddPhoto, 2000);
+        setTimeout(toggleModal2, 2000);
+      } else if (response.status === 400) {
+        // response 400, not all fields are filled in
+        buttonValidatePhoto.disabled = true;
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML = "Veuillez compléter tous les champs.";
+        category.value = " ";
+        title.value = " ";
+        buttonValidatePhoto.style.background = "#A7A7A7";
+        buttonValidatePhoto.style.cursor = "default";
+        buttonValidatePhoto.disabled = true;
+        setTimeout(errorMessageRemove, 3000);
+      } else {
+        // other answers
+        buttonValidatePhoto.disabled = true;
+        errorMessage.style.display = "flex";
+        errorMessage.innerHTML = "Problème de connexion à l'API, contacter votre administrateur.";
+      }
+    });
 }
 // validation button
 buttonValidatePhoto.addEventListener("click", function () {
   sendNewWork();
 });
-
 //function reset after adding work
 function resetContainerAddPhoto() {
   containerAddPhoto2.innerHTML = " ";
