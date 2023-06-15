@@ -275,6 +275,7 @@ modalCallButtons.forEach(function (item) {
 loginLogout.addEventListener("click", function () {
   logInLogOut();
 });
+
 // redirect function to a page according to the token
 function logInLogOut() {
   if (controlToken === null) {
@@ -289,35 +290,37 @@ function logInLogOut() {
 //  -----------------------
 // disable add work validation button
 buttonValidatePhoto.disabled = true;
-//  ---------------------
-//  | modal 1 - gallery |
-//  ---------------------
-//list of  elements listened to under the class "trigger"
+
+/**** list of  elements listened to under the class "trigger" in modal 1 ****/
 modalTrigger.forEach((trigger) =>
   trigger.addEventListener("click", toggleModal)
 );
-// change the name of the class using toggle
+
+/**** change the name of the class using toggle in modal 1 ****/
 function toggleModal() {
   modalContainer.classList.toggle("active");
   alertModalGallery.style.display = "none";
-  // makes the modal appears or disappear depending on the class
+
+/**** makes the modal appears or disappear depending on the class in modal 1 ****/
   modalContainer.className === "modal-container active"
     ? (modalGallery.style.display = "flex")
     : (addPhotos.style.display = "none");
 }
+
 /**** how the modals close ****/
 modalGallery.addEventListener("click", function () { alertModalGallery.style.display = "none"; });
 alertModalGallery.innerHTML = " ";
-/**** modal close by clicking outside and not inside ****/
+
+/**** modal close by clicking outside and not inside in modal 1 & 2 ****/
 modalContainer.addEventListener("click", (e) => { toggleModal(); });
 modalContainer.children[1].addEventListener("click", function (e) { e.stopPropagation(); });
 modal2Container.addEventListener("click", (e) => { toggleModal2(); });
 modal2Container.children[1].addEventListener("click", function (e) { e.stopPropagation(); })
-//  ---------------------
-//  | modal - add photo |
-//  ---------------------
+
+/**** list of  elements listened to under the class "trigger" in modal 2 ****/
 modalTrigger2.forEach((trigger) => trigger.addEventListener("click", toggleModal2));
-// conditions of appearance of the modal
+
+/**** conditions of appearance of the modal ****/
 function toggleModal2() {
   modal2Container.classList.toggle("active");
   modal2Container.className === "modal2-container active"
@@ -326,11 +329,13 @@ function toggleModal2() {
   resetContainerAddPhoto();
   errorMessageRemove()
 }
-// toogle funtion to manage the appearance of the modal
+
+/**** toogle funtion to manage the appearance of the modal ****/
 buttonAddPhotos.addEventListener("click", function () {
   toggleModal();
   toggleModal2();
 });
+
 /****modal - add photo Arrow previous ****/
 previousArrow.addEventListener("click", function () {
   modalContainer.classList.toggle("active");
@@ -340,6 +345,7 @@ previousArrow.addEventListener("click", function () {
     ? (modalGallery.style.display = "flex")
     : (addPhotos.style.display = "none");
 });
+
 /**** input file part  ****/
 const fileUploadInput = document.querySelector("#my-file");
 infoFile.innerHTML = "jpg png : 4 mo max";
@@ -350,6 +356,7 @@ const selectCategory = document.getElementById("category")
 inputTitle.disabled = true;
 selectCategory.disabled = true;
 let imageUploaded;
+
 /**** function reset "error message" ****/
 function errorMessageRemove() {
   errorMessage.style.display = "none";
@@ -360,6 +367,7 @@ function infoFileNotOk() {
   infoFile.classList.remove("infoFileOk");
   infoFile.classList.add("infoFileNotOk");
 }
+
 /**** job image preview function ****/
 function previewNewWork() {
   const sizeFile = this.files[0].size;
@@ -371,19 +379,19 @@ function previewNewWork() {
     infoFileNotOk();
     return;
   }
-
   if (sizeFile > 4194304) {
     infoFile.innerHTML = "Le fichier fait plus de 4 mo";
     infoFileNotOk();
     return;
   }
+
   const newImageUploaded = new FileReader();
   newImageUploaded.readAsDataURL(imageUploaded);
   newImageUploaded.addEventListener("load", (event) =>
     imageDisplay(event)
   );
 }
-// function to create preview in add work
+/**** function to create preview in add work ****/
 function imageDisplay(event) {
   let project = {
     id: works.length + 1,
@@ -413,6 +421,7 @@ validateContentForm.forEach((controle) =>
     }
   })
 );
+
 /**** Send new work in API db****/
 function sendNewWork(e) {
   const formData = new FormData();
@@ -458,11 +467,12 @@ function sendNewWork(e) {
       }
     });
 }
-// validation button
+/**** validation button ****/
 buttonValidatePhoto.addEventListener("click", function () {
   sendNewWork();
 });
-//function reset after adding work
+
+/**** function reset after adding work ****/
 function resetContainerAddPhoto() {
   containerAddPhoto2.innerHTML = " ";
   containerAddPhoto2.style.display = "none";
