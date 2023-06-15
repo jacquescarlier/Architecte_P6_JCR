@@ -301,7 +301,7 @@ function toggleModal() {
   modalContainer.classList.toggle("active");
   alertModalGallery.style.display = "none";
 
-/**** makes the modal appears or disappear depending on the class in modal 1 ****/
+  /**** makes the modal appears or disappear depending on the class in modal 1 ****/
   modalContainer.className === "modal-container active"
     ? (modalGallery.style.display = "flex")
     : (addPhotos.style.display = "none");
