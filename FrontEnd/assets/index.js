@@ -214,9 +214,8 @@ function addNewWorkInModal() {
 }
 //  ----------------------------
 //  | filter creation function |
-//  ----------------------------
+let filterChoice;
 function createFilter() {
-  let filterChoice = "";
   const btnFilter = document.querySelectorAll(".btn-filter");
   btnFilter.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
@@ -225,10 +224,9 @@ function createFilter() {
         filterChoice = works;
         displayFilter(filterChoice);
       } else {
-        filterChoice = works.filter(
-          
-          (obj) => obj.category.name === e.target.name
-        );
+        filterChoice = works.filter((obj) => obj.category.name === e.target.name);
+        console.log("obj", works.filter((work) => work.category.name=== "Objets"))
+        console.log("filterChoice", filterChoice)
         displayFilter(filterChoice);
       }
     });

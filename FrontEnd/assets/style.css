@@ -707,15 +707,12 @@ form a {
   position: absolute;
   top: 6px;
   right: 5%;
+  border-radius: 2px;
   font-size: 9px;
   padding: 4px;
-}
-
-.gallery-modal .fa-solid {
   height: 17px;
   width: 17px;
   background-color: #000000;
-  border-radius: 2px;
   color: #ffffff;
 }
 
