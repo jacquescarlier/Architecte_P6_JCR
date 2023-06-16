@@ -221,10 +221,12 @@ function createFilter() {
   btnFilter.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       if (e.target.name === "Tous") {
+        console.log(e.target)
         filterChoice = works;
         displayFilter(filterChoice);
       } else {
         filterChoice = works.filter(
+          
           (obj) => obj.category.name === e.target.name
         );
         displayFilter(filterChoice);
@@ -342,12 +344,12 @@ previousArrow.addEventListener("click", function () {
   errorMessageRemove();
   toggleModal2();
   modalContainer.className === "modal-container active"
-    ? (modalGallery.style.display = "flex")
-    : (addPhotos.style.display = "none");
+    ? modalGallery.style.display = "flex"
+    : addPhotos.style.display = "none";
 });
 
 /**** input file part  ****/
-const fileUploadInput = document.querySelector("#my-file");
+let fileUploadInput = document.querySelector("#my-file");
 infoFile.innerHTML = "jpg png : 4 mo max";
 fileUploadInput.addEventListener("change", previewNewWork);
 //title field in the form of the add work modal
@@ -390,6 +392,7 @@ function previewNewWork() {
   newImageUploaded.addEventListener("load", (event) =>
     imageDisplay(event)
   );
+  fileUploadInput.value = "";
 }
 /**** function to create preview in add work ****/
 function imageDisplay(event) {
