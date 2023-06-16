@@ -220,13 +220,10 @@ function createFilter() {
   btnFilter.forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       if (e.target.name === "Tous") {
-        console.log(e.target)
         filterChoice = works;
         displayFilter(filterChoice);
       } else {
         filterChoice = works.filter((obj) => obj.category.name === e.target.name);
-        console.log("obj", works.filter((work) => work.category.name=== "Objets"))
-        console.log("filterChoice", filterChoice)
         displayFilter(filterChoice);
       }
     });
@@ -366,6 +363,7 @@ function errorMessageRemove() {
 function infoFileNotOk() {
   infoFile.classList.remove("infoFileOk");
   infoFile.classList.add("infoFileNotOk");
+  fileUploadInput.value = "";
 }
 
 /**** job image preview function ****/
@@ -379,7 +377,7 @@ function previewNewWork() {
     infoFileNotOk();
     return;
   }
-  if (sizeFile > 4194304) {
+  if (sizeFile > 4194304) {//4*1024*1024 octets
     infoFile.innerHTML = "Le fichier fait plus de 4 mo";
     infoFileNotOk();
     return;
