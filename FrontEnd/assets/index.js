@@ -39,7 +39,7 @@ const previousArrow = document.getElementById("previous-arrow");
 const containerAddPhoto = document.querySelector(".container-add-photo");
 const containerAddPhoto2 = document.querySelector(".container-add-photo2");
 const errorApi = document.querySelector(".errorApi");
-let works = []
+let works = [];
 let trashButton;
 let alertModalGallery = document.querySelector(".alert-modal");
 // ---------------------------------------------

@@ -7,14 +7,12 @@ const errorInformation = document.getElementById("errorInformation");
 errorInformation.classList.remove = "errorInformation";
 // focus in input
 document.getElementById("emailUser").focus()
-
 /**** added event listening on the connect button ****/
  submitSeConnecter.addEventListener("click", (e) => {
     e.preventDefault();
     let email = document.getElementById("emailUser").value;
     let password = document.getElementById("password").value;
-    
-    if (!email.match(/^[\w_\-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
+    if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/i)) {
         document.getElementById("errorInformation").innerHTML =
             "Entrer un E-mail valide!"
             errorInformation.classList = "errorInformation";
@@ -24,14 +22,12 @@ document.getElementById("emailUser").focus()
         document.getElementById("errorInformation").innerHTML =
             "Entrer un mot de passe !"
             errorInformation.classList = "errorInformation";
-            
         return;
     }
     //  ------------------
     //  | API connection |
     //  ------------------
     fetch(urlLogin, {
-
         method: "POST",
         headers: {
             accept: "application/json",
@@ -47,7 +43,6 @@ document.getElementById("emailUser").focus()
                 errorInformation.innerHTML =
                     "Nous n'avons pas trouvé votre compte";
                     errorInformation.classList = "errorInformation";
-
             } else if (authResponse.status === 200) {
                 return authResponse.json();
             } else {
