@@ -38,9 +38,9 @@ const previousArrow = document.getElementById("previous-arrow");
 /****  containers for the photo adds ****/
 const containerAddPhoto = document.querySelector(".container-add-photo");
 const containerAddPhoto2 = document.querySelector(".container-add-photo2");
-const errorApi = document.querySelector(".errorApi")
+const errorApi = document.querySelector(".errorApi");
 let works = []
-let trashButton
+let trashButton;
 let alertModalGallery = document.querySelector(".alert-modal");
 // ---------------------------------------------
 // | Check the connection with the API "works" |
@@ -462,7 +462,7 @@ function sendNewWork(e) {
         // other answers
         buttonValidatePhoto.disabled = true;
         errorMessage.style.display = "flex";
-        errorMessage.innerHTML = "Problème de connexion à l'API, contacter votre administrateur.";
+        errorMessage.innerHTML = "Problème de connexion avec l'API, contacter votre administrateur.";
       }
     });
 }
