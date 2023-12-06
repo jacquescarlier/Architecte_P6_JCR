@@ -1,4 +1,4 @@
-# **Portfolio de l'architecte d'intérieur Sophie Bluel**
+# **Portfolio de Sophie Bluel**
 ## P6_OC
 ##  **Jacques_Carlier**
 ###  _Mai_2023_
