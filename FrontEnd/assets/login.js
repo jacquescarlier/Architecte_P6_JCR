@@ -1,6 +1,7 @@
 // constante url login
 let urlLogin = "http://localhost:5678/api/users/login";
 const submitSeConnecter = document.getElementById("submit-connecter");
+console.log("seconnecter", submitSeConnecter)
 //constante pour le message d'erreur
 const errorInformation = document.getElementById("errorInformation");
 //style reset for errorInformation

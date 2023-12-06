@@ -420,10 +420,10 @@ validateContentForm.forEach((controle) =>
     }
   })
 );
-
 /**** Send new work in API db****/
 function sendNewWork(e) {
   const formData = new FormData();
+
   formData.append("image", imageUploaded);
   formData.append("title", title.value);
   formData.append("category", category.value);
